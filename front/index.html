@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>principal - MiSitio</title>
+    <link rel="stylesheet" href="/front/styles/estilos.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">principal</a>
+            <a href="nosotros.html" class="nav-link active">nosotros</a>
+            <a href="preguntasFrecuentes.html" class="nav-link">preguntas frecuentes</a>
+            <a href="contactanos.html" class="nav-link">contactanos</a>
+        </div>
+        <div class="nav-right">
+            <span id="userName" class="user-name"></span>
+            <button id="loginBtn" class="icon-btn" title="Login">
+                <span class="login-icon">👤</span>
+            </button>
+            <button id="registrarBtn" class="icon-btn" title="Registrarse">
+                <span class="login-icon">👤➕</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+    </footer>
+
+    <!-- Modal de login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalLogin">&times;</span>
+            <h2>👤 Iniciar Sesión</h2>
+            <form id="formLogin">
+                <input type="text" id="login" placeholder="Usuario" required autocomplete="username">
+                <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password">
+                
+                <!--CAPTCHA-->
+                <div class="captcha-container">
+                    <label id="captchaQuestion" class="captcha-question">Cargando CAPTCHA...</label>
+                    <div id="captchaGrid" class="captcha-grid"></div>
+                    <button type="button" id="refreshCaptcha" class="refresh-btn" title="Recargar CAPTCHA">🔄 Nuevo CAPTCHA</button>
+                </div>
+                
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <p class="modal-footer">
+                ¿No tienes cuenta? <a href="#" id="linkRegistro">Regístrate aquí</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal de registro -->
+    <div id="registroModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModalRegistro">&times;</span>
+            <h2>👤➕ Crear Cuenta Nueva</h2>
+            <form id="formRegistro">
+                <input type="text" id="regNombre" placeholder="Nombre completo" required>
+                <input type="text" id="regNombreCuenta" placeholder="Nombre de usuario" required>
+                <input type="email" id="regCorreo" placeholder="Correo electrónico" required>
+                <input type="password" id="regContrasena" placeholder="Contraseña (mínimo 6 caracteres)" required>
+                <input type="password" id="regContrasena2" placeholder="Confirmar contraseña" required>
+                
+                <select id="regPais" required>
+                    <option value="">Selecciona tu país</option>
+                    <option value="México">México</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                    <option value="España">España</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Perú">Perú</option>
+                </select>
+                
+                <button type="submit">👤➕ Registrarse</button>
+            </form>
+            <p class="modal-footer">
+                ¿Ya tienes cuenta? <a href="#" id="linkLogin">Inicia sesión aquí</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="app.js"></script>
+</body>
+</html>
