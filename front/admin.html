@@ -44,39 +44,92 @@
         <!-- Sección: Gestión de Productos -->
         <div id="section-productos" class="admin-section active">
             <h2>📦 Gestión de Productos</h2>
-            <p class="section-description">Aquí podrás agregar, editar y eliminar productos (próximamente)</p>
+            <p class="section-description">Administra el catálogo de productos de la tienda</p>
             
-            <div class="coming-soon">
-                <span class="icon">🚧</span>
-                <h3>Funcionalidad en desarrollo</h3>
-                <p>Esta sección estará disponible en la siguiente fase del proyecto</p>
+            <button id="btnNuevoProducto" class="btn btn-primary">
+                ➕ Agregar Nuevo Producto
+            </button>
+            
+            <div id="tablaProductosContainer" style="margin-top: 20px;">
+                <!-- Aquí se cargará la tabla de productos -->
             </div>
         </div>
 
         <!-- Sección: Reportes de Ventas -->
         <div id="section-ventas" class="admin-section">
             <h2>📊 Reportes de Ventas</h2>
-            <p class="section-description">Visualiza las estadísticas de ventas (próximamente)</p>
+            <p class="section-description">Visualiza las estadísticas de ventas</p>
             
             <div class="coming-soon">
                 <span class="icon">🚧</span>
                 <h3>Funcionalidad en desarrollo</h3>
-                <p>Esta sección estará disponible en la siguiente fase del proyecto</p>
+                <p>Esta sección estará disponible cuando implementes el sistema de órdenes</p>
             </div>
         </div>
 
         <!-- Sección: Inventario -->
         <div id="section-inventario" class="admin-section">
             <h2>📋 Inventario</h2>
-            <p class="section-description">Consulta el inventario disponible (próximamente)</p>
+            <p class="section-description">Consulta el inventario disponible por categoría</p>
             
-            <div class="coming-soon">
-                <span class="icon">🚧</span>
-                <h3>Funcionalidad en desarrollo</h3>
-                <p>Esta sección estará disponible en la siguiente fase del proyecto</p>
+            <div id="inventarioContainer">
+                <!-- Aquí se cargarán las estadísticas del inventario -->
             </div>
         </div>
     </main>
+
+    <!-- Modal para Crear/Editar Producto -->
+    <div id="modalProducto" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" id="closeModalProducto">&times;</span>
+            <h2 id="tituloModal">📦 Agregar Nuevo Producto</h2>
+            <form id="formProducto">
+                <input type="hidden" id="productoId">
+                
+                <div class="form-group">
+                    <label for="productoNombre">Nombre del Producto *</label>
+                    <input type="text" id="productoNombre" required placeholder="Ej: LEGO Technic Bugatti">
+                </div>
+                
+                <div class="form-group">
+                    <label for="productoDescripcion">Descripción *</label>
+                    <textarea id="productoDescripcion" required placeholder="Descripción detallada del producto"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productoPrecio">Precio (USD) *</label>
+                        <input type="number" id="productoPrecio" step="0.01" min="0" required placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productoDisponibilidad">Disponibilidad (unidades) *</label>
+                        <input type="number" id="productoDisponibilidad" min="0" required placeholder="0">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productoCategoria">Categoría *</label>
+                    <select id="productoCategoria" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Technic">Technic</option>
+                        <option value="Ideas">Ideas</option>
+                        <option value="Icons">Icons</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productoImagen">URL de la Imagen</label>
+                    <input type="url" id="productoImagen" placeholder="https://ejemplo.com/imagen.jpg">
+                    <small>Si no agregas una URL, se usará una imagen por defecto</small>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    💾 Guardar Producto
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="admin.js"></script>
