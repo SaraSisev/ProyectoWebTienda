@@ -8,6 +8,7 @@ dotenv.config();
 
 // Importar rutas
 import authRoutes from './routes/authRoutes.js';
+import productRoutes from './routes/productRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/auth', authRoutes);
+app.use('/api', productRoutes)
 
 // Ruta de prueba
 app.get('/', (req, res) => {
