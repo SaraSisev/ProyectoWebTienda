@@ -252,28 +252,38 @@ formLogin.addEventListener('submit', async (e) => {
     const data = await response.json();
 
     if (data.success) {
-      // Login exitoso
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('userName', data.usuario.nombre);
-      localStorage.setItem('userRole', data.usuario.rol);
-      localStorage.setItem('userId', data.usuario.id);
+  // Login exitoso
+  localStorage.setItem('token', data.token);
+  localStorage.setItem('userName', data.usuario.nombre);
+  localStorage.setItem('userRole', data.usuario.rol);
+  localStorage.setItem('userId', data.usuario.id);
 
-      Swal.fire({
-        icon: 'success',
-        title: '¡Bienvenido!',
-        text: `Hola ${data.usuario.nombre}`,
-        timer: 2000,
-        showConfirmButton: false
-      });
+  // ✨ NUEVO: Verificar si es admin
+  if (data.usuario.rol === 'admin') {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Bienvenido Administrador!',
+      text: `Hola ${data.usuario.nombre}, serás redirigido al panel de administrador`,
+      timer: 2000,
+      showConfirmButton: false
+    }).then(() => {
+      // Redirigir a panel de admin
+      window.location.href = 'admin.html';
+    });
+  } else {
+    // Usuario normal
+    Swal.fire({
+      icon: 'success',
+      title: '¡Bienvenido!',
+      text: `Hola ${data.usuario.nombre}`,
+      timer: 2000,
+      showConfirmButton: false
+    });
 
-    // Actualizar UI con la nueva función
-    updateUILoggedIn(data.usuario.nombre);  // ← CAMBIO AQUÍ
-
-
-      // Cerrar modal
-      loginModal.style.display = 'none';
-      resetLoginForm();
-
+    updateUILoggedIn(data.usuario.nombre);
+    loginModal.style.display = 'none';
+    resetLoginForm();
+  }
     } else {
       // Error en login
       console.log('[LOGIN] Error:', data);

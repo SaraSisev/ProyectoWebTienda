@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador</title>
+    <link rel="stylesheet" href="/front/styles/estilos.css">
+    <link rel="stylesheet" href="/front/styles/admin.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">🏠 Volver a inicio</a>
+        </div>
+        <div class="nav-right">
+            <span id="userName" class="user-name"></span>
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión">
+                <span class="login-icon">🚪</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1>🛠️ Panel de Administrador</h1>
+            <p>Bienvenido al panel de control</p>
+        </div>
+
+        <!-- Menú de opciones -->
+        <div class="admin-menu">
+            <button class="admin-menu-btn active" data-section="productos">
+                📦 Gestión de Productos
+            </button>
+            <button class="admin-menu-btn" data-section="ventas">
+                📊 Reportes de Ventas
+            </button>
+            <button class="admin-menu-btn" data-section="inventario">
+                📋 Inventario
+            </button>
+        </div>
+
+        <!-- Sección: Gestión de Productos -->
+        <div id="section-productos" class="admin-section active">
+            <h2>📦 Gestión de Productos</h2>
+            <p class="section-description">Aquí podrás agregar, editar y eliminar productos (próximamente)</p>
+            
+            <div class="coming-soon">
+                <span class="icon">🚧</span>
+                <h3>Funcionalidad en desarrollo</h3>
+                <p>Esta sección estará disponible en la siguiente fase del proyecto</p>
+            </div>
+        </div>
+
+        <!-- Sección: Reportes de Ventas -->
+        <div id="section-ventas" class="admin-section">
+            <h2>📊 Reportes de Ventas</h2>
+            <p class="section-description">Visualiza las estadísticas de ventas (próximamente)</p>
+            
+            <div class="coming-soon">
+                <span class="icon">🚧</span>
+                <h3>Funcionalidad en desarrollo</h3>
+                <p>Esta sección estará disponible en la siguiente fase del proyecto</p>
+            </div>
+        </div>
+
+        <!-- Sección: Inventario -->
+        <div id="section-inventario" class="admin-section">
+            <h2>📋 Inventario</h2>
+            <p class="section-description">Consulta el inventario disponible (próximamente)</p>
+            
+            <div class="coming-soon">
+                <span class="icon">🚧</span>
+                <h3>Funcionalidad en desarrollo</h3>
+                <p>Esta sección estará disponible en la siguiente fase del proyecto</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
