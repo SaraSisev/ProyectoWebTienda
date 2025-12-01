@@ -10,7 +10,15 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "mysql": "^2.18.1"
-  }
+    "express": "^5.2.0",
+    "mysql": "^2.18.1",
+    "nodemailer": "^7.0.11"
+  },
+  "name": "back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
