@@ -8,6 +8,7 @@ dotenv.config();
 
 // Importar rutas
 import authRoutes from './routes/authRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +28,10 @@ app.get('/', (req, res) => {
     port: PORT 
   });
 });
+
+//Ruta contacto
+console.log("🔧 MONTANDO RUTA CONTACTO");
+app.use('/api/contact', contactRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {

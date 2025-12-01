@@ -1,5 +1,7 @@
 // controller/authController.js
 import crypto from 'crypto';
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 import { findUserByEmail, findUserByUsername, createUser, updateLoginAttempts, resetLoginAttempts, blockUser } from '../model/userModel.js';
 import { validateCaptcha } from './captchaController.js';
 
@@ -287,3 +289,38 @@ function generateSimpleToken(payload) {
   
   return `${header}.${body}.${signature}`;
 }
+
+// Formulario contacto 
+export const enviarMensajeContacto = async (req, res) => {
+  const { nombre, correo, mensaje } = req.body;
+  console.log('[CONTACTO RECIBIDO]', { nombre, correo, mensaje });
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"${process.env.COMPANY_NAME}" <${process.env.EMAIL_USER}>`,
+      to: correo,
+      subject: 'Confirmación de contacto - TiendaLego',
+      html: `
+        <h2>${process.env.COMPANY_NAME}</h2>
+        <p><strong>${process.env.COMPANY_SLOGAN}</strong></p>
+        <hr>
+        <p>Hola ${nombre},</p>
+        <p>Gracias por contactarnos. Recibimos tu mensaje:</p>
+        <blockquote>${mensaje}</blockquote>
+      `
+    });
+
+    res.json({ success: true, message: 'Mensaje enviado correctamente' });
+  } catch (error) {
+    console.error('[CONTACTO ERROR]', error);
+    res.json({ success: false, message: 'Error al enviar el mensaje' });
+  }
+};
