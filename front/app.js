@@ -35,10 +35,9 @@ function checkSession() {
   const userName = localStorage.getItem('userName');
   
   if (token && userName) {
-    document.getElementById('userName').textContent = `Hola, ${userName}`;
-    document.getElementById('userName').style.display = 'inline';
+    updateUILoggedIn(userName);
   } else {
-    document.getElementById('userName').style.display = 'none';
+    updateUILoggedOut();
   }
 }
 
@@ -267,9 +266,9 @@ formLogin.addEventListener('submit', async (e) => {
         showConfirmButton: false
       });
 
-      // Actualizar UI
-      document.getElementById('userName').textContent = `Hola, ${data.usuario.nombre}`;
-      document.getElementById('userName').style.display = 'inline';
+    // Actualizar UI con la nueva función
+    updateUILoggedIn(data.usuario.nombre);  // ← CAMBIO AQUÍ
+
 
       // Cerrar modal
       loginModal.style.display = 'none';
@@ -420,3 +419,73 @@ confirmButtonColor: '#667eea'
 });
 }
 });
+
+// ============================================
+// LOGOUT
+// ============================================
+
+const logoutBtn = document.getElementById('logoutBtn');
+const authButtons = document.getElementById('auth-buttons');
+
+if (logoutBtn) {
+  logoutBtn.addEventListener('click', () => {
+    Swal.fire({
+      title: '¿Cerrar sesión?',
+      text: '¿Estás seguro de que deseas salir?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#667eea',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, cerrar sesión',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logout();
+      }
+    });
+  });
+}
+
+function logout() {
+  // Limpiar localStorage
+  localStorage.removeItem('token');
+  localStorage.removeItem('userName');
+  localStorage.removeItem('userRole');
+  localStorage.removeItem('userId');
+  
+  // Mostrar mensaje
+  Swal.fire({
+    icon: 'success',
+    title: 'Sesión cerrada',
+    text: 'Has cerrado sesión exitosamente',
+    timer: 1500,
+    showConfirmButton: false
+  });
+  
+  // Actualizar UI
+  updateUILoggedOut();
+}
+
+function updateUILoggedOut() {
+  // Ocultar nombre de usuario
+  document.getElementById('userName').textContent = '';
+  document.getElementById('userName').style.display = 'none';
+  
+  // Mostrar botones de login/registro
+  authButtons.style.display = 'flex';
+  
+  // Ocultar botón de logout
+  logoutBtn.style.display = 'none';
+}
+
+function updateUILoggedIn(userName) {
+  // Mostrar nombre de usuario
+  document.getElementById('userName').textContent = `Hola, ${userName}`;
+  document.getElementById('userName').style.display = 'inline';
+  
+  // Ocultar botones de login/registro
+  authButtons.style.display = 'none';
+  
+  // Mostrar botón de logout
+  logoutBtn.style.display = 'inline-block';
+}

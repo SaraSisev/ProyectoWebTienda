@@ -16,11 +16,20 @@
         </div>
         <div class="nav-right">
             <span id="userName" class="user-name"></span>
-            <button id="loginBtn" class="icon-btn" title="Login">
-                <span class="login-icon">👤</span>
-            </button>
-            <button id="registrarBtn" class="icon-btn" title="Registrarse">
-                <span class="login-icon">👤➕</span>
+            
+            <!-- Botones cuando NO hay sesión -->
+            <div id="auth-buttons">
+                <button id="loginBtn" class="icon-btn" title="Login">
+                    <span class="login-icon">👤</span>
+                </button>
+                <button id="registrarBtn" class="icon-btn" title="Registrarse">
+                    <span class="login-icon">👤➕</span>
+                </button>
+            </div>
+            
+            <!-- Botón cuando SÍ hay sesión -->
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
+                <span class="login-icon">🚪</span>
             </button>
         </div>
     </nav>
