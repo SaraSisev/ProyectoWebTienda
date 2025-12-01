@@ -1,0 +1,74 @@
+// model/userModel.js
+import mysql from 'mysql';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || '',
+  database: process.env.DB_NAME || 'ecommerce_db',
+  port: process.env.DB_PORT || 3306
+});
+
+const query = (sql, params) => {
+  return new Promise((resolve, reject) => {
+    pool.query(sql, params, (error, results) => {
+      if (error) return reject(error);
+      resolve(results);
+    });
+  });
+};
+
+// Buscar usuario por email
+export const findUserByEmail = async (email) => {
+  const sql = 'SELECT * FROM usuarios WHERE correo = ?';
+  const results = await query(sql, [email]);
+  return results[0];
+};
+
+// Buscar usuario por nombre de cuenta
+export const findUserByUsername = async (username) => {
+  const sql = 'SELECT * FROM usuarios WHERE nombrecuenta = ?';
+  const results = await query(sql, [username]);
+  return results[0];
+};
+
+// Crear nuevo usuario
+export const createUser = async (userData) => {
+  const sql = `
+    INSERT INTO usuarios (nombre, nombrecuenta, correo, contrasena, pais) 
+    VALUES (?, ?, ?, ?, ?)
+  `;
+  const params = [
+    userData.nombre,
+    userData.nombrecuenta,
+    userData.correo,
+    userData.contrasena,
+    userData.pais
+  ];
+  
+  const result = await query(sql, params);
+  return result.insertId;
+};
+
+// Actualizar intentos fallidos
+export const updateLoginAttempts = async (userId, attempts) => {
+  const sql = 'UPDATE usuarios SET intentos_fallidos = ? WHERE id = ?';
+  await query(sql, [attempts, userId]);
+};
+
+// Resetear intentos fallidos
+export const resetLoginAttempts = async (userId) => {
+  const sql = 'UPDATE usuarios SET intentos_fallidos = 0, bloqueado_hasta = NULL WHERE id = ?';
+  await query(sql, [userId]);
+};
+
+// Bloquear usuario
+export const blockUser = async (userId, blockedUntil) => {
+  const sql = 'UPDATE usuarios SET bloqueado_hasta = ?, intentos_fallidos = 0 WHERE id = ?';
+  await query(sql, [blockedUntil, userId]);
+};
+
+export default pool;

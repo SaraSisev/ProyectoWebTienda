@@ -1,0 +1,258 @@
+/* Estilos para el modal (si no los tienes ya) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.modal-content form input,
+.modal-content form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.modal-content form input:focus,
+.modal-content form select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.modal-content form button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.modal-content form button[type="submit"]:hover {
+    transform: translateY(-2px);
+}
+
+.modal-footer {
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+}
+
+.modal-footer a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.modal-footer a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   ESTILOS PARA CAPTCHA
+   ============================================ */
+
+.captcha-container {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.captcha-question {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+  display: block;
+  font-size: 14px;
+  text-align: center;
+}
+
+.captcha-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.captcha-image-container {
+  position: relative;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  aspect-ratio: 1;
+  background: #f0f0f0;
+}
+
+.captcha-image-container:hover {
+  transform: scale(1.05);
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.captcha-image-container.selected {
+  border-color: #4CAF50;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+  transform: scale(1.05);
+}
+
+.captcha-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.captcha-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.captcha-image-container.selected .captcha-overlay {
+  opacity: 1;
+  background: rgba(76, 175, 80, 0.4);
+}
+
+.captcha-image-container.selected .captcha-overlay::after {
+  content: "✓";
+  color: white;
+  font-weight: bold;
+  font-size: 60px;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.refresh-btn {
+  width: 100%;
+  padding: 12px;
+  background: #f5f5f5;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.refresh-btn:hover {
+  background: #e0e0e0;
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+.refresh-btn:active {
+  transform: translateY(0);
+}
+
+.captcha-loading, 
+.captcha-error {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.captcha-error {
+  color: #c00;
+  font-weight: bold;
+}
+
+/* Animación de carga */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.captcha-loading {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .captcha-grid {
+    gap: 8px;
+  }
+  
+  .captcha-image-container {
+    border-width: 2px;
+  }
+  
+  .captcha-question {
+    font-size: 13px;
+  }
+  
+  .captcha-overlay::after {
+    font-size: 40px !important;
+  }
+}
