@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctanos - TiendaLego</title>
+  <!-- Asegúrate de que esta ruta exista -->
+  <link rel="stylesheet" href="styles/estilos.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+  <script src="contact.js" defer></script>
+</head>
+<body>
+
+  <!-- Navbar simple -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-logo">Principal</a>
+      <a href="nosotros.html" class="nav-link">Nosotros</a>
+      <a href="preguntasFrecuentes.html" class="nav-link">Preguntas frecuentes</a>
+      <a href="contactanos.html" class="nav-link active">Contáctanos</a>
+    </div>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <h1>Formulario de Contacto</h1>
+
+    <form id="contactForm" novalidate>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" name="correo" required>
+
+      <label for="mensaje">Mensaje:</label>
+      <textarea id="mensaje" name="mensaje" required></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </main>
+
+</body>
+</html>
