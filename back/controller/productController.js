@@ -35,7 +35,7 @@ export const obtenerProductosPorCategoria = async (req, res) => {
   try {
     const { categoria } = req.params;
     
-    const categoriasValidas = ['Technic', 'Ideas', 'Icons'];
+    const categoriasValidas = ['Technic', 'Ideas', 'Marcas'];
     if (!categoriasValidas.includes(categoria)) {
       return res.status(400).json({
         success: false,
@@ -104,7 +104,7 @@ export const crearProducto = async (req, res) => {
       });
     }
     
-    const categoriasValidas = ['Technic', 'Ideas', 'Icons'];
+    const categoriasValidas = ['Technic', 'Ideas', 'Marcas'];
     if (!categoriasValidas.includes(categoria)) {
       return res.status(400).json({
         success: false,
@@ -145,7 +145,7 @@ export const crearProducto = async (req, res) => {
 }
 
     const productData = {
-      imagen: imagenBuffer || 'https://via.placeholder.com/300x300?text=Sin+Imagen',
+      imagen: imagenBuffer || null,
       nombre: nombre.trim(),
       descripcion: descripcion.trim(),
       precio: parseFloat(precio),
@@ -215,7 +215,7 @@ export const actualizarProducto = async (req, res) => {
       });
     }
     
-    const categoriasValidas = ['Technic', 'Ideas', 'Icons'];
+    const categoriasValidas = ['Technic', 'Ideas', 'Marcas'];
     if (!categoriasValidas.includes(categoria)) {
       return res.status(400).json({
         success: false,
