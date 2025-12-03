@@ -38,15 +38,16 @@ export const findUserByUsername = async (username) => {
 // Crear nuevo usuario
 export const createUser = async (userData) => {
   const sql = `
-    INSERT INTO usuarios (nombre, nombrecuenta, correo, contrasena, pais) 
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO usuarios (nombre, nombrecuenta, correo, contrasena, pais, cupon) 
+    VALUES (?, ?, ?, ?, ?, ?)
   `;
   const params = [
     userData.nombre,
     userData.nombrecuenta,
     userData.correo,
     userData.contrasena,
-    userData.pais
+    userData.pais,
+    userData.cupon 
   ];
   
   const result = await query(sql, params);
@@ -72,3 +73,22 @@ export const blockUser = async (userId, blockedUntil) => {
 };
 
 export default pool;
+
+// Guardar código de recuperación
+export const saveRecoveryCode = async (email, code, expirationDate) => {
+  const sql = 'UPDATE usuarios SET codigo_recuperacion = ?, codigo_expiracion = ? WHERE correo = ?';
+  await query(sql, [code, expirationDate, email]);
+};
+
+// Buscar usuario por código de recuperación
+export const findUserByRecoveryCode = async (code) => {
+  const sql = 'SELECT * FROM usuarios WHERE codigo_recuperacion = ? AND codigo_expiracion > NOW()';
+  const results = await query(sql, [code]);
+  return results[0];
+};
+
+// Actualizar contraseña y limpiar código
+export const updatePasswordAndClearCode = async (userId, newPassword) => {
+  const sql = 'UPDATE usuarios SET contrasena = ?, codigo_recuperacion = NULL, codigo_expiracion = NULL WHERE id = ?';
+  await query(sql, [newPassword, userId]);
+};

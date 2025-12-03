@@ -35,7 +35,7 @@ export const obtenerProductosPorCategoria = async (req, res) => {
   try {
     const { categoria } = req.params;
     
-    const categoriasValidas = ['Technic', 'Ideas', 'Icons'];
+    const categoriasValidas = ['Technic', 'Ideas', 'Marcas'];
     if (!categoriasValidas.includes(categoria)) {
       return res.status(400).json({
         success: false,
@@ -104,7 +104,7 @@ export const crearProducto = async (req, res) => {
       });
     }
     
-    const categoriasValidas = ['Technic', 'Ideas', 'Icons'];
+    const categoriasValidas = ['Technic', 'Ideas', 'Marcas'];
     if (!categoriasValidas.includes(categoria)) {
       return res.status(400).json({
         success: false,
@@ -127,8 +127,25 @@ export const crearProducto = async (req, res) => {
       });
     }
     
+    //parte que decodifica la base 64 que manda el front 
+    // Convertir Base64 a buffer si existe imagen
+    let imagenBuffer = null;
+
+    if (imagen && imagen.startsWith('data:image')) {
+      try {
+        const base64Data = imagen.split(',')[1];
+        imagenBuffer = Buffer.from(base64Data, 'base64');
+      } catch (err) {
+        console.error('Error al decodificar imagen Base64:', err);
+        return res.status(400).json({
+          success: false,
+          message: 'Formato de imagen inválido'
+        });
+      }
+}
+
     const productData = {
-      imagen: imagen || 'https://via.placeholder.com/300x300?text=Sin+Imagen',
+      imagen: imagenBuffer || null,
       nombre: nombre.trim(),
       descripcion: descripcion.trim(),
       precio: parseFloat(precio),
@@ -161,7 +178,23 @@ export const actualizarProducto = async (req, res) => {
   try {
     const { id } = req.params;
     const { imagen, nombre, descripcion, precio, disponibilidad, categoria } = req.body;
-    
+
+    // Convertir Base64 a buffer si la imagen fue enviada
+    let imagenBuffer = null;
+
+    if (imagen && imagen.startsWith('data:image')) {
+      try {
+        const base64Data = imagen.split(',')[1];
+        imagenBuffer = Buffer.from(base64Data, 'base64');
+      } catch (err) {
+        console.error('Error al decodificar imagen Base64:', err);
+        return res.status(400).json({
+          success: false,
+          message: 'Formato de imagen inválido'
+        });
+      }
+    }
+
     console.log('[ACTUALIZAR PRODUCTO] ID:', id);
     console.log('[ACTUALIZAR PRODUCTO] Datos recibidos:', req.body);
     
@@ -182,7 +215,7 @@ export const actualizarProducto = async (req, res) => {
       });
     }
     
-    const categoriasValidas = ['Technic', 'Ideas', 'Icons'];
+    const categoriasValidas = ['Technic', 'Ideas', 'Marcas'];
     if (!categoriasValidas.includes(categoria)) {
       return res.status(400).json({
         success: false,
@@ -206,7 +239,7 @@ export const actualizarProducto = async (req, res) => {
     }
     
     const productData = {
-      imagen: imagen || productoExistente.imagen,
+      imagen: imagenBuffer || productoExistente.imagen,
       nombre: nombre.trim(),
       descripcion: descripcion.trim(),
       precio: parseFloat(precio),

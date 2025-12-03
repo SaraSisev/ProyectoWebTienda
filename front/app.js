@@ -480,6 +480,140 @@ function logout() {
   updateUILoggedOut();
 }
 
+// RECUPERACIÓN DE CONTRASEÑA
+const linkOlvideContrasena = document.getElementById('linkOlvideContrasena');
+
+if (linkOlvideContrasena) {
+    linkOlvideContrasena.addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        // Paso 1: Solicitar correo
+        const { value: correo } = await Swal.fire({
+            title: '🔑 Recuperar Contraseña',
+            text: 'Ingresa tu correo electrónico',
+            input: 'email',
+            inputPlaceholder: 'tu@correo.com',
+            showCancelButton: true,
+            confirmButtonText: 'Enviar Código',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#667eea',
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'Debes ingresar un correo';
+                }
+            }
+        });
+
+        if (!correo) return;
+
+        // Enviar solicitud
+        Swal.fire({
+            title: 'Enviando código...',
+            allowOutsideClick: false,
+            didOpen: () => { Swal.showLoading(); }
+        });
+
+        try {
+            const response = await fetch(`${API_URL}/auth/recuperacion/solicitar`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ correo })
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message,
+                    confirmButtonColor: '#667eea'
+                });
+                return;
+            }
+
+            // Paso 2: Solicitar código y nueva contraseña
+            const { value: formValues } = await Swal.fire({
+                title: '📧 Código Enviado',
+                html: `
+                    <p style="margin-bottom: 20px;">Revisa tu correo e ingresa el código de 6 dígitos</p>
+                    <input id="swal-codigo" class="swal2-input" placeholder="Código (ej: 123456)" 
+                           maxlength="6" pattern="[0-9]{6}" style="font-size: 24px; text-align: center; letter-spacing: 5px;">
+                    <input id="swal-nueva" class="swal2-input" type="password" placeholder="Nueva contraseña (mín. 6 caracteres)">
+                    <input id="swal-confirmar" class="swal2-input" type="password" placeholder="Confirmar contraseña">
+                `,
+                focusConfirm: false,
+                showCancelButton: true,
+                confirmButtonText: 'Restablecer',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#667eea',
+                preConfirm: () => {
+                    const codigo = document.getElementById('swal-codigo').value;
+                    const nueva = document.getElementById('swal-nueva').value;
+                    const confirmar = document.getElementById('swal-confirmar').value;
+
+                    if (!codigo || codigo.length !== 6) {
+                        Swal.showValidationMessage('El código debe tener 6 dígitos');
+                        return false;
+                    }
+                    if (!nueva || nueva.length < 6) {
+                        Swal.showValidationMessage('La contraseña debe tener al menos 6 caracteres');
+                        return false;
+                    }
+                    if (nueva !== confirmar) {
+                        Swal.showValidationMessage('Las contraseñas no coinciden');
+                        return false;
+                    }
+
+                    return { codigo, nuevaContrasena: nueva, confirmarContrasena: confirmar };
+                }
+            });
+
+            if (!formValues) return;
+
+            // Paso 3: Enviar código y nueva contraseña
+            Swal.fire({
+                title: 'Restableciendo...',
+                allowOutsideClick: false,
+                didOpen: () => { Swal.showLoading(); }
+            });
+
+            const responseReset = await fetch(`${API_URL}/auth/recuperacion/restablecer`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formValues)
+            });
+
+            const dataReset = await responseReset.json();
+
+            if (dataReset.success) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '✅ ¡Contraseña Restablecida!',
+                    text: 'Ya puedes iniciar sesión con tu nueva contraseña',
+                    confirmButtonColor: '#667eea'
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: dataReset.message,
+                    confirmButtonColor: '#667eea'
+                });
+            }
+
+        } catch (error) {
+            console.error('[ERROR]', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'No se pudo procesar la solicitud',
+                confirmButtonColor: '#667eea'
+            });
+        }
+    });
+}
+
 function updateUILoggedOut() {
   // Ocultar nombre de usuario
   document.getElementById('userName').textContent = '';
