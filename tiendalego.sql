@@ -2,10 +2,11 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 03, 2025 at 02:36 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-12-2025 a las 02:40:11
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,18 +19,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `tiendalego`
+-- Base de datos: `tiendalego`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
-  `imagen` varchar(255) NOT NULL,
+  `imagen` longblob NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `descripcion` text NOT NULL,
   `precio` decimal(10,2) NOT NULL,
@@ -38,16 +39,17 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `productos`
+-- Volcado de datos para la tabla `productos`
 --
 
 INSERT INTO `productos` (`id`, `imagen`, `nombre`, `descripcion`, `precio`, `disponibilidad`, `categoria`) VALUES
-(0, 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2Fchivas.femenil%2F&psig=AOvVaw06YUsgvAW5MYDz9BtjRE4U&ust=1764699755284000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCID_gdyAnZEDFQAAAAAdAAAAABAE', 'chivas alv', 'kikin', 5.00, 10, 'Technic');
+(0, 0x68747470733a2f2f7669612e706c616365686f6c6465722e636f6d2f333030783330303f746578743d53696e2b496d6167656e, 'calis', 'sjsjsj', 80.00, 4, 'Technic');
+
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -66,7 +68,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `nombrecuenta`, `correo`, `productoscomprados`, `rol`, `intentos_fallidos`, `bloqueado_hasta`, `contrasena`, `codigo_recuperacion`, `codigo_expiracion`, `pais`) VALUES
@@ -74,27 +76,27 @@ INSERT INTO `usuarios` (`id`, `nombre`, `nombrecuenta`, `correo`, `productoscomp
 (6, 'admin', 'admin', 'juanmanuelfriascortes@gmail.com', 0, 'admin', 0, NULL, '09b8dbdfb9b7b547a77cb3ff45dae7dd:f2ae76ad9a73886789d1f79821d0df006eb94c7d265f183fe3d665d141039633248f94ce32a48ff0da9a3a7af705ed3d47dc3f294a1d8c9921c12fcc9fc32a30', NULL, NULL, 'México');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
