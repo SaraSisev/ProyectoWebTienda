@@ -2,7 +2,17 @@
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { findUserByEmail, findUserByUsername, createUser, updateLoginAttempts, resetLoginAttempts, blockUser } from '../model/userModel.js';
+import { 
+  findUserByEmail, 
+  findUserByUsername, 
+  createUser, 
+  updateLoginAttempts, 
+  resetLoginAttempts, 
+  blockUser,
+  saveRecoveryCode,
+  findUserByRecoveryCode,
+  updatePasswordAndClearCode
+} from '../model/userModel.js';
 import { validateCaptcha } from './captchaController.js';
 
 // Función para verificar contraseña con múltiples formatos
@@ -322,5 +332,178 @@ export const enviarMensajeContacto = async (req, res) => {
   } catch (error) {
     console.error('[CONTACTO ERROR]', error);
     res.json({ success: false, message: 'Error al enviar el mensaje' });
+  }
+};
+
+// SOLICITAR RECUPERACIÓN CON CÓDIGO
+export const solicitarRecuperacion = async (req, res) => {
+  try {
+    const { correo } = req.body;
+    console.log('[RECUPERACIÓN] Solicitud para:', correo);
+
+    if (!correo) {
+      return res.status(400).json({
+        success: false,
+        message: 'El correo electrónico es obligatorio'
+      });
+    }
+
+    const user = await findUserByEmail(correo);
+    
+    if (!user) {
+      // Por seguridad, no revelar si existe el correo
+      return res.status(200).json({
+        success: true,
+        message: 'Si el correo existe, recibirás un código de recuperación'
+      });
+    }
+
+    // Generar código de 6 dígitos
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    
+    // Código válido por 15 minutos
+    const expirationDate = new Date(Date.now() + 15 * 60 * 1000);
+    
+    await saveRecoveryCode(correo, code, expirationDate);
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    await transporter.sendMail({
+      from: `"${process.env.COMPANY_NAME}" <${process.env.EMAIL_USER}>`,
+      to: correo,
+      subject: 'Código de Recuperación - TiendaLego',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center;">
+            <h1 style="color: white; margin: 0;">🔐 Recuperación de Contraseña</h1>
+          </div>
+          
+          <div style="padding: 30px; background-color: #f9f9f9;">
+            <h2 style="color: #333;">Hola ${user.nombre},</h2>
+            
+            <p style="color: #666; line-height: 1.6;">
+              Recibimos una solicitud para restablecer tu contraseña. 
+              Usa el siguiente código de verificación:
+            </p>
+            
+            <div style="text-align: center; margin: 30px 0;">
+              <div style="background: white; 
+                          border: 3px dashed #667eea; 
+                          display: inline-block; 
+                          padding: 20px 40px; 
+                          border-radius: 10px;">
+                <p style="margin: 0; color: #999; font-size: 14px;">Tu código es:</p>
+                <h1 style="margin: 10px 0; 
+                           color: #667eea; 
+                           font-size: 48px; 
+                           letter-spacing: 8px;">
+                  ${code}
+                </h1>
+              </div>
+            </div>
+            
+            <div style="background-color: #fff3cd; 
+                        border-left: 4px solid #ffc107; 
+                        padding: 15px; 
+                        margin: 20px 0;">
+              <p style="margin: 0; color: #856404;">
+                ⚠️ <strong>Este código expirará en 15 minutos.</strong>
+              </p>
+            </div>
+            
+            <p style="color: #999; font-size: 12px; margin-top: 30px;">
+              Si no solicitaste este código, ignora este correo.
+            </p>
+          </div>
+          
+          <div style="background-color: #333; padding: 20px; text-align: center;">
+            <p style="color: #999; margin: 0; font-size: 12px;">
+              © ${new Date().getFullYear()} ${process.env.COMPANY_NAME}<br>
+              ${process.env.COMPANY_SLOGAN}
+            </p>
+          </div>
+        </div>
+      `
+    });
+
+    console.log('[RECUPERACIÓN] Código enviado:', code);
+
+    res.status(200).json({
+      success: true,
+      message: 'Si el correo existe, recibirás un código de recuperación'
+    });
+
+  } catch (error) {
+    console.error('[RECUPERACIÓN ERROR]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al procesar la solicitud'
+    });
+  }
+};
+
+// VERIFICAR CÓDIGO Y RESTABLECER CONTRASEÑA
+export const restablecerConCodigo = async (req, res) => {
+  try {
+    const { codigo, nuevaContrasena, confirmarContrasena } = req.body;
+
+    console.log('[RESTABLECER] Código recibido');
+
+    if (!codigo || !nuevaContrasena || !confirmarContrasena) {
+      return res.status(400).json({
+        success: false,
+        message: 'Todos los campos son obligatorios'
+      });
+    }
+
+    if (nuevaContrasena !== confirmarContrasena) {
+      return res.status(400).json({
+        success: false,
+        message: 'Las contraseñas no coinciden'
+      });
+    }
+
+    if (nuevaContrasena.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'La contraseña debe tener al menos 6 caracteres'
+      });
+    }
+
+    // Buscar usuario por código
+    const user = await findUserByRecoveryCode(codigo);
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Código inválido o expirado'
+      });
+    }
+
+    // Hashear nueva contraseña
+    const hashedPassword = hashPassword(nuevaContrasena);
+
+    // Actualizar contraseña
+    await updatePasswordAndClearCode(user.id, hashedPassword);
+
+    console.log('[RESTABLECER] Contraseña actualizada para:', user.nombrecuenta);
+
+    res.status(200).json({
+      success: true,
+      message: 'Contraseña restablecida exitosamente'
+    });
+
+  } catch (error) {
+    console.error('[RESTABLECER ERROR]', error);
+    res.status(500).json({
+      success: false,
+      message: 'Error al restablecer contraseña'
+    });
   }
 };
