@@ -266,7 +266,7 @@ async function urlToBase64(url){
 
     return new Promise((resolve) => {
         const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result.split(',')[1]);
+        reader.onloadend = () => resolve(reader.result);
         reader.readAsDataURL(blob);
     });
 }
