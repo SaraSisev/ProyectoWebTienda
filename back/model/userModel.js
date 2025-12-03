@@ -38,15 +38,16 @@ export const findUserByUsername = async (username) => {
 // Crear nuevo usuario
 export const createUser = async (userData) => {
   const sql = `
-    INSERT INTO usuarios (nombre, nombrecuenta, correo, contrasena, pais) 
-    VALUES (?, ?, ?, ?, ?)
+    INSERT INTO usuarios (nombre, nombrecuenta, correo, contrasena, pais, cupon) 
+    VALUES (?, ?, ?, ?, ?, ?)
   `;
   const params = [
     userData.nombre,
     userData.nombrecuenta,
     userData.correo,
     userData.contrasena,
-    userData.pais
+    userData.pais,
+    userData.cupon 
   ];
   
   const result = await query(sql, params);
