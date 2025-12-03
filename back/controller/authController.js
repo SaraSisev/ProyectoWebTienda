@@ -15,6 +15,51 @@ import {
 } from '../model/userModel.js';
 import { validateCaptcha } from './captchaController.js';
 
+// Generar cupon 
+const generateCoupon = () => {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let coupon = "";
+  for (let i = 0; i < 10; i++) {
+    coupon += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return coupon;
+};
+
+const sendWelcomeEmail = async (email, nombre, cupon) => {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  });
+
+  const mailOptions = {
+    from: `"${process.env.COMPANY_NAME}" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: `Bienvenido a ${process.env.COMPANY_NAME}!`,
+    html: `
+      <div style="font-family: Arial; padding:20px; border-radius:10px; background:#f5f5f5">
+        <h2 style="color:#333">¡Hola ${nombre}!</h2>
+        <p>Gracias por registrarte en <strong>${process.env.COMPANY_NAME}</strong>.</p>
+        
+        <img src="${process.env.COMPANY_LOGO}" alt="Logo" width="150" />
+
+        <p><i>${process.env.COMPANY_SLOGAN}</i></p>
+
+        <h3 style="margin-top:20px">🎟️Tu cupón de bienvenida:</h3>
+        <div style="background:#222; color:#fff; padding:10px 20px; width:fit-content; border-radius:5px; font-size:20px;">
+          <strong>${cupon}</strong>
+        </div>
+
+        <p style="margin-top:20px">Úsalo en tu próxima compra</p>
+      </div>
+    `
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
 // Función para verificar contraseña con múltiples formatos
 const verifyPassword = (password, storedHash) => {
   console.log('[VERIFY PASSWORD] Iniciando verificación...');
@@ -108,17 +153,25 @@ export const registrarUsuario = async (req, res) => {
     const hashedPassword = hashPassword(contrasena);
     console.log('[REGISTRO] Contraseña hasheada:', hashedPassword.substring(0, 30) + '...');
 
+    // Generar cupon unico para cada usuario
+    const cupon = generateCoupon();
+    console.log('[REGISTRO] Cupón generado:', cupon);
+
     // Crear el usuario
     const userData = {
       nombre,
       nombrecuenta,
       correo,
       contrasena: hashedPassword,
-      pais
+      pais,
+      cupon
     };
 
     const userId = await createUser(userData);
     console.log('[REGISTRO] Usuario creado con ID:', userId);
+
+    // Enviar correo de bienvenida
+    await sendWelcomeEmail(correo, nombre, cupon);
 
     res.status(201).json({
       success: true,

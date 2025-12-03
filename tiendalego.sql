@@ -3,10 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-12-2025 a las 02:40:11
+-- Tiempo de generación: 03-12-2025 a las 04:19:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +44,6 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `imagen`, `nombre`, `descripcion`, `precio`, `disponibilidad`, `categoria`) VALUES
 (0, 0x68747470733a2f2f7669612e706c616365686f6c6465722e636f6d2f333030783330303f746578743d53696e2b496d6167656e, 'calis', 'sjsjsj', 80.00, 4, 'Technic');
 
-
 -- --------------------------------------------------------
 
 --
@@ -62,28 +60,21 @@ CREATE TABLE `usuarios` (
   `intentos_fallidos` int(11) DEFAULT 0,
   `bloqueado_hasta` datetime DEFAULT NULL,
   `contrasena` varchar(255) DEFAULT NULL,
-  `codigo_recuperacion` varchar(6) DEFAULT NULL,
-  `codigo_expiracion` datetime DEFAULT NULL,
-  `pais` varchar(100) NOT NULL
+  `pais` varchar(100) NOT NULL,
+  `cupon` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nombre`, `nombrecuenta`, `correo`, `productoscomprados`, `rol`, `intentos_fallidos`, `bloqueado_hasta`, `contrasena`, `codigo_recuperacion`, `codigo_expiracion`, `pais`) VALUES
-(5, 'kikin', 'kikin', 'al369829@edu.uaa.mx', 0, 'usuario', 0, NULL, '7099ef0dc0963aacc2e5a32194160b3b:9a6741060472cc4c83fece13d231f7ae5f981e675c73d4ea49686507420435214b8db4f2f3c58100223164ab0abd3e388434710bbb95b125015bbc2af1069ac6', NULL, NULL, 'México'),
-(6, 'admin', 'admin', 'juanmanuelfriascortes@gmail.com', 0, 'admin', 0, NULL, '09b8dbdfb9b7b547a77cb3ff45dae7dd:f2ae76ad9a73886789d1f79821d0df006eb94c7d265f183fe3d665d141039633248f94ce32a48ff0da9a3a7af705ed3d47dc3f294a1d8c9921c12fcc9fc32a30', NULL, NULL, 'México');
+INSERT INTO `usuarios` (`id`, `nombre`, `nombrecuenta`, `correo`, `productoscomprados`, `rol`, `intentos_fallidos`, `bloqueado_hasta`, `contrasena`, `pais`, `cupon`) VALUES
+(5, 'kikin', 'kikin', 'al369829@edu.uaa.mx', 0, 'usuario', 0, NULL, 'dc00382c0e659736958006411807bbe0:4a75b1b543ec8fbd983df6b5d816b70024f749210e64a765a507f901402994391178c6745aca73a01c9a7c23bdc3f8dc026f6e94999218ca1ca835d14528b494', 'México', NULL),
+(9, 'Miguel de Jesus Zavala Romo', 'Miguel Zavala', 'zaromiguel3305@gmail.com', 0, 'usuario', 0, NULL, '3edd237fd7cc669690464e4d3ae13431:ee32e90cdc4447fc2544eca7f32b58a4c6422f235c4c42b10ed5f023dbd76bac3039e0e25d62e6a033670ead6d6cbd57a292d04666642de4490e5362816a5539', 'México', 'P8KZW5YL89');
 
 --
 -- Índices para tablas volcadas
 --
-
---
--- Indices de la tabla `productos`
---
-ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -99,7 +90,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
