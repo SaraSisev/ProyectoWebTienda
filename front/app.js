@@ -624,6 +624,11 @@ function updateUILoggedOut() {
   
   // Ocultar botón de logout
   logoutBtn.style.display = 'none';
+  //ocultar contador de wishlist
+  const badge = document.getElementById('wishlist-count');
+  if(badge){
+    badge.style.display = 'none';
+  }
 }
 
 function updateUILoggedIn(userName) {
@@ -636,7 +641,12 @@ function updateUILoggedIn(userName) {
   
   // Mostrar botón de logout
   logoutBtn.style.display = 'inline-block';
+  //actualizar contador de wishlist
+  if(typeof actualizarContadorCarrito == 'function'){
+    actualizarContadorWishlist();
+  }
 }
+
 
 // ============================================
 // Contactanos

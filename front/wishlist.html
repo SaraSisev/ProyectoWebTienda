@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Lista de Deseos - TiendaLego</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+    <link rel="stylesheet" href="styles/wishlist.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">TiendaLego</a>
+            <a href="index.html" class="nav-link">Productos</a>
+            <a href="nosotros.html" class="nav-link">Nosotros</a>
+            <a href="preguntasFrecuentes.html" class="nav-link">Preguntas Frecuentes</a>
+            <a href="contactanos.html" class="nav-link">Contáctanos</a>
+        </div>
+        <div class="nav-right">
+            <a href="wishlist.html" class="wishlist-icon" title="Lista de Deseos">
+                ❤️
+                <span id="wishlist-count" class="wishlist-count">0</span>
+            </a>
+            
+            <span id="userName" class="user-name"></span>
+            
+            <div id="auth-buttons">
+                <button id="loginBtn" class="icon-btn" title="Login">
+                    <span class="login-icon">👤</span>
+                </button>
+                <button id="registrarBtn" class="icon-btn" title="Registrarse">
+                    <span class="login-icon">👤➕</span>
+                </button>
+            </div>
+            
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
+                <span class="login-icon">🚪</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="wishlist-container">
+            <div class="wishlist-header">
+                <span class="heart-icon">❤️</span>
+                <h1>Mi Lista de Deseos</h1>
+            </div>
+            
+            <div id="wishlist-container">
+                <div style="text-align:center; padding:40px;">
+                    <p style="font-size:18px; color:#666;">⏳ Cargando tu lista de deseos...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="logo.png" alt="TiendaLego">
+            </div>
+            <nav class="footer-nav">
+                <a href="nosotros.html">Sobre Nosotros</a>
+                <a href="preguntasFrecuentes.html">Preguntas Frecuentes</a>
+                <a href="contactanos.html">Contacto</a>
+                <a href="#">Política de Privacidad</a>
+            </nav>
+            <div class="footer-info">
+                <p>TiendaLego - Proyecto Académico</p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">🦆</a>
+                    <a href="#">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="wishlist.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
