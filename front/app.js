@@ -716,3 +716,231 @@ function contacto(formContacto){
     });
   }
 }
+
+// ============================================
+// Pago, Formulario, cupon, pdf
+// ============================================
+
+// Abrir modal de checkout
+document.getElementById("btnCheckout").addEventListener("click", () => {
+    document.getElementById("checkoutModal").style.display = "block";
+});
+
+// Cerrar modal
+document.getElementById("cerrarCheckout").addEventListener("click", () => {
+    document.getElementById("checkoutModal").style.display = "none";
+});
+
+// Cambiar método de pago
+document.getElementById("pago-metodo").addEventListener("change", (e) => {
+    const metodo = e.target.value;
+    
+    // Ocultar todos los formularios
+    document.querySelectorAll(".metodo").forEach(m => m.classList.add("oculto"));
+
+    if (metodo === "tarjeta") {
+        document.getElementById("form-tarjeta").classList.remove("oculto");
+    } else if (metodo === "transferencia") {
+        document.getElementById("form-transferencia").classList.remove("oculto");
+    } else if (metodo === "oxxo") {
+        // Generar código OXXO aleatorio
+        const code = Math.floor(Math.random() * 9000000000000000 + 1000000000000000);
+        const formattedCode = code.toString().match(/.{1,4}/g).join(" ");
+        document.getElementById("oxxo-code").textContent = formattedCode;
+        document.getElementById("form-oxxo").classList.remove("oculto");
+    }
+});
+
+// APLICAR CUPÓN
+document.getElementById("btnAplicarCupon").onclick = async () => {
+    const cupon = document.getElementById("cupon-input").value.trim();
+    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
+
+    if (!cupon) {
+        Swal.fire("Error", "Ingresa un cupón", "warning");
+        return;
+    }
+
+    if (!token) {
+        Swal.fire("Error", "Debes iniciar sesión", "warning");
+        return;
+    }
+
+    try {
+        const res = await fetch(`${API_URL}/cupon/verificar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ cupon, userId })
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+            Swal.fire("Cupón inválido", data.message, "error");
+            document.getElementById("cupon-info").style.display = "none";
+            return;
+        }
+
+        // Mostrar cupón aplicado
+        const cuponInfo = document.getElementById("cupon-info");
+        cuponInfo.style.display = "block";
+        cuponInfo.innerHTML = `Cupón aplicado: <strong>-${data.descuento || 10}% de descuento</strong>`;
+        
+        localStorage.setItem("cuponAplicado", cupon);
+        Swal.fire("¡Cupón válido!", `Se aplicará un ${data.descuento || 10}% de descuento`, "success");
+
+    } catch (err) {
+        console.error('[CUPON] Error:', err);
+        Swal.fire("Error", "No se pudo verificar el cupón", "error");
+    }
+};
+
+// VALIDAR DATOS DE TARJETA
+function validarTarjeta() {
+    const numero = document.getElementById("tarjeta-num").value.trim();
+    const titular = document.getElementById("tarjeta-titular").value.trim();
+    const fecha = document.getElementById("tarjeta-fecha").value.trim();
+    const cvv = document.getElementById("tarjeta-cvv").value.trim();
+
+    if (!numero || numero.length !== 16 || !/^\d{16}$/.test(numero)) {
+        Swal.fire("Error", "Número de tarjeta inválido (16 dígitos)", "error");
+        return false;
+    }
+
+    if (!titular) {
+        Swal.fire("Error", "Ingresa el nombre del titular", "error");
+        return false;
+    }
+
+    if (!fecha || !/^\d{2}\/\d{2}$/.test(fecha)) {
+        Swal.fire("Error", "Fecha inválida (MM/AA)", "error");
+        return false;
+    }
+
+    if (!cvv || cvv.length !== 3 || !/^\d{3}$/.test(cvv)) {
+        Swal.fire("Error", "CVV inválido (3 dígitos)", "error");
+        return false;
+    }
+
+    return true;
+}
+
+// CONFIRMAR COMPRA
+document.getElementById("btnConfirmarCompra").onclick = async () => {
+    // Obtener datos del formulario
+    const envio = {
+        nombre: document.getElementById("env-nombre").value.trim(),
+        direccion: document.getElementById("env-direccion").value.trim(),
+        ciudad: document.getElementById("env-ciudad").value.trim(),
+        cp: document.getElementById("env-cp").value.trim(),
+        pais: document.getElementById("env-pais").value.trim(),
+        telefono: document.getElementById("env-telefono").value.trim()
+    };
+
+    const metodoPago = document.getElementById("pago-metodo").value;
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    const cupon = document.getElementById("cupon-input").value.trim() || null;
+    const token = localStorage.getItem('token');
+
+    // VALIDACIONES
+    
+    // Validar que el usuario esté logueado
+    if (!token) {
+        Swal.fire("Error", "Debes iniciar sesión para comprar", "error");
+        return;
+    }
+
+    // Validar carrito
+    if (carrito.length === 0) {
+        Swal.fire("Error", "El carrito está vacío", "error");
+        return;
+    }
+
+    // Validar datos de envío
+    if (Object.values(envio).some(v => !v)) {
+        Swal.fire("Error", "Completa todos los datos de envío", "error");
+        return;
+    }
+
+    // Validar método de pago
+    if (!metodoPago) {
+        Swal.fire("Error", "Selecciona un método de pago", "error");
+        return;
+    }
+
+    // Validar datos específicos del método de pago
+    if (metodoPago === "tarjeta") {
+        if (!validarTarjeta()) return;
+    } else if (metodoPago === "transferencia") {
+        const titular = document.getElementById("trans-comprobante").value.trim();
+        if (!titular) {
+            Swal.fire("Error", "Ingresa el nombre del titular", "error");
+            return;
+        }
+    }
+
+    // ENVIAR SOLICITUD
+    const body = { envio, metodoPago, carrito, cupon };
+
+    Swal.fire({
+        title: "Procesando compra...",
+        html: "Por favor espera mientras procesamos tu pedido",
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+    });
+
+    try {
+        const res = await fetch(`${API_URL}/checkout/finalizar`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+
+        if (!data.success) {
+            Swal.fire("Error", data.message || 'No se pudo procesar la compra', "error");
+            return;
+        }
+
+        // COMPRA EXITOSA
+        Swal.fire({
+            icon: "success",
+            title: "¡Compra finalizada!",
+            html: `
+                <p>Tu pedido ha sido procesado exitosamente.</p>
+                <p><strong>Total: $${data.total.toFixed(2)}</strong></p>
+                <p>La nota de compra se envió a tu correo electrónico.</p>
+            `,
+            confirmButtonText: "Entendido"
+        });
+
+        // Limpiar carrito y cerrar modal
+        localStorage.removeItem('carrito');
+        localStorage.removeItem('cuponAplicado');
+        renderCarrito(); // Función para actualizar el carrito en la UI
+        document.getElementById("checkoutModal").style.display = "none";
+
+        // Limpiar formulario
+        document.getElementById("env-nombre").value = "";
+        document.getElementById("env-direccion").value = "";
+        document.getElementById("env-ciudad").value = "";
+        document.getElementById("env-cp").value = "";
+        document.getElementById("env-pais").value = "";
+        document.getElementById("env-telefono").value = "";
+        document.getElementById("pago-metodo").value = "";
+        document.getElementById("cupon-input").value = "";
+        document.getElementById("cupon-info").style.display = "none";
+
+    } catch (err) {
+        console.error('[CHECKOUT] Error', err);
+        Swal.fire("Error", "No se pudo conectar con el servidor", "error");
+    }
+};

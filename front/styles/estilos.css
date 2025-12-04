@@ -993,3 +993,67 @@ p, span, a, li, button {
     margin: 0 6px;
     filter: brightness(0) invert(1);
 }
+
+
+/* Modal para pago*/
+.modal-checkout {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.65);
+}
+
+.modal-content-checkout {
+    background: #fff;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 650px;
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+.checkout-section input,
+.metodo input,
+#pago-metodo,
+#cupon-input {
+    width: 100%;
+    margin: 6px 0;
+    padding: 10px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+}
+
+.metodo.oculto {
+    display: none !important;
+}
+
+.btn-confirmar,
+.btn-apply {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    background: #34495e;
+    color: white;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.btn-confirmar:hover {
+    background: #2c3e50;
+}
+
+.cupon-info {
+    padding: 10px;
+    background: #f1f8ff;
+    border-left: 3px solid #3498db;
+    margin-top: 10px;
+    display: none;
+}
