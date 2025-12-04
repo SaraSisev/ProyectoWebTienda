@@ -70,8 +70,8 @@ function mostrarProductos(productos) {
             
             <img src="${producto.imagen}" 
                  alt="${producto.nombre}"
-                 onerror="this.src='https://via.placeholder.com/200x200?text=Sin+Imagen'">
-            
+                 onerror="this.src='https://via.placeholder.com/200x200?text=Sin+Imagen'">                      
+              
             <h3>${producto.nombre}</h3>
             <p class="product-desc">${producto.descripcion.substring(0, 60)}...</p>
             <p class="product-id">Stock: ${producto.disponibilidad} unidades</p>
@@ -82,6 +82,12 @@ function mostrarProductos(productos) {
                 onclick="agregarAlCarrito(${producto.id})"
                 ${producto.disponibilidad === 0 ? 'disabled' : ''}>
                 ${producto.disponibilidad === 0 ? '❌ Agotado' : '🛒 Agregar al Carrito'}
+            </button>
+            <!-- Botón de Wishlist -->
+            <button class="btn-wishlist" 
+                    onclick="agregarAWishlist(${producto.id})"
+                    title="Agregar a lista de deseos">
+                ❤️
             </button>
         </div>
     `).join('');
