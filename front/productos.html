@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos - MiSitio</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">principal</a>
+            <a href="nosotros.html" class="nav-link active">nosotros</a>
+            <a href="preguntasFrecuentes.html" class="nav-link">preguntas frecuentes</a>
+            <a href="contactanos.html" class="nav-link">contactanos</a>
+        </div>
+
+        <div class="nav-right">
+            <span id="userName" class="user-name"></span>
+
+            <div id="auth-buttons">
+                <button id="loginBtn" class="icon-btn" title="Login"><span class="login-icon">👤</span></button>
+                <button id="registrarBtn" class="icon-btn" title="Registrarse"><span class="login-icon">👤➕</span></button>
+            </div>
+
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
+                <span class="login-icon">🚪</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+
+        <div class="main-container">
+
+            <div class="content-left">
+
+                <!-- FILTROS -->
+                <section class="filtros-section" style="background: white; padding: 20px 30px; border-radius: 10px; margin-bottom: 20px;">
+                    <h2>🔍 Filtrar Productos</h2>
+
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+                        
+                        <!-- Categoría -->
+                        <div>
+                            <label for="filtro-categoria" style="font-weight: bold;">Categoría:</label>
+                            <select id="filtro-categoria" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                <option value="todas">Todas</option>
+                                <option value="Technic">Technic</option>
+                                <option value="Ideas">Ideas</option>
+                                <option value="Marcas">Marcas</option>
+                            </select>
+                        </div>
+
+                        <!-- Precio -->
+                        <div>
+                            <label style="font-weight: bold;">Precio:</label>
+                            <input type="number" id="precio-min" placeholder="Min" style="width: 80px; padding: 8px;">
+                            <span>-</span>
+                            <input type="number" id="precio-max" placeholder="Max" style="width: 80px; padding: 8px;">
+                        </div>
+
+                        <!-- Disponibilidad -->
+                        <div>
+                            <label style="font-weight: bold;">
+                                <input type="checkbox" id="filtro-ofertas">
+                                Solo disponibles
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PRODUCTOS -->
+                <section class="novedades">
+                    <h2>Todos los Productos</h2>
+
+                    <div id="productos-container" class="products-grid">
+                        <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                            <p style="font-size: 18px; color: #666;">⏳ Cargando productos...</p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="productos.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
