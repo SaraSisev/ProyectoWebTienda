@@ -1,6 +1,4 @@
-/* ==================== ESTILOS ORIGINALES DEL NAVBAR Y MODALES ==================== */
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -159,110 +157,76 @@ body {
     background-color: #5a6268;
 }
 
-.container {
+/* Footer */
+.footer {
+    background-color: #0c5e7e;
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Novedades Section */
-.novedades {
+.footer-logo img {
+    width: 80px;
+    height: 80px;
     background: white;
-    padding: 30px;
-    border-radius: 10px;
-    margin-bottom: 30px;
+    border-radius: 50%;
+    padding: 5px;
 }
 
-.novedades h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
+.footer-nav {
+    display: flex;
+    gap: 25px;
 }
 
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+.footer-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.3s;
 }
 
-.product-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    text-align: center;
-    position: relative;
+.footer-nav a:hover {
+    opacity: 0.8;
+}
+
+.footer-info {
+    text-align: right;
+}
+
+.footer-info p {
+    margin-bottom: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.social-icons a {
     background: white;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.product-badge {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.lego-badge {
-    background-color: #e74c3c;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.exclusive-badge {
-    background-color: #333;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 3px;
-    font-size: 12px;
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.product-card h3 {
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.product-id, .product-desc {
-    font-size: 12px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.product-variants {
-    display: flex;
-    gap: 5px;
+    align-items: center;
     justify-content: center;
-    margin: 10px 0;
-}
-
-.product-variants img {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: border-color 0.3s;
-}
-
-.product-variants img:hover {
-    border-color: #e74c3c;
-}
-
-.price {
-    color: #e74c3c;
+    text-decoration: none;
     font-size: 18px;
-    font-weight: bold;
+    transition: transform 0.3s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
 }
 
 /* Responsive */
@@ -506,7 +470,6 @@ p, span, a, li, button {
     margin: 0 6px;
     filter: brightness(0) invert(1);
 }
-
 
 /* Animaciones del footer y el header */
 
