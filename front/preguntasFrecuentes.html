@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nostros | BlockWorld</title>
+    <link rel="icon" type="image/x-icon" href="imagenes/logo.ico">
+    <link rel="stylesheet" href="styles/estNosotros.css">
+    <style>
+        .barra-superior {
+            background: url("imagenes/fondoPest.jpeg") center/cover no-repeat;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            padding: 0 10px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+        <header class="header-red">
+        <div class="izq">
+            <a href="index.html">
+                <img src="imagenes/LogoBlockWorld.png" class="logo" alt="logo">
+            </a>
+
+            <div class="logo-texto">
+                <h1 class="titulo-tienda">BlockWorld</h1>
+                <p class="slogan-tienda">Construye sueños, pieza por pieza</p>
+            </div>
+        </div>
+
+        <div class="der">
+            <button class="btn-vender">Panel Admin</button>
+
+            <div class="grupo-fav">
+                <a href="wishlist.html">
+                    <img src="imagenes/libro.png" class="icono" alt="favoritos">
+                </a>
+            </div>
+
+            <div class="grupo-carrito">
+                <span id="cart-count" style="font-weight:bold; margin-left:4px;">0</span>
+                <a href="carrito.html">
+                    <img src="imagenes/bolsa.png" class="icono" alt="bolsa">
+                </a>
+            </div>
+
+            <div class="nav-right">
+            <span id="userName" class="user-name"></span>
+            
+            <!-- Botones cuando NO hay sesión -->
+            <div id="auth-buttons">
+                <button id="loginBtn" class="icon-btn" title="Login">
+                    <span class="login-icon">
+                        <img src="imagenes/gente.png" class="icono" alt="iniciar-sesion">
+                    </span>
+                </button>
+                <button id="registrarBtn" class="icon-btn" title="Registrarse" style="visibility: hidden;">
+                </button>
+
+            </div>
+            
+            <!-- Botón cuando SÍ hay sesión -->
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
+                <span class="login-icon">
+                    <img src="imagenes/perfil.png" class="icono" alt="cerrar-sesion">
+                </span>
+            </button>
+        </div>
+            
+        </div>
+    </header>
+
+    <nav class="menu-inferior">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="preguntasFrecuentes.html">Preguntas</a>
+        <a href="contactanos.html">Contáctanos</a>
+    </nav>
+
+    <main class="main-content">
+       
+    </main>
+
+    <footer class="footer">
+        <div class="footer-contenido">
+
+            <!-- Columna 1 -->
+            <div class="footer-col">
+                <h3>BlockWorld</h3>
+                <ul>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Vender un artículo</a></li>
+                    <li><a href="#">Trabaja con nosotros</a></li>
+                    <li><a href="#">Franquicias</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 2 -->
+            <div class="footer-col">
+                <h3>Ayuda</h3>
+                <ul>
+                    <li><a href="#">Sucursales</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
+                </ul>
+            </div>
+
+            <!-- Columna 3 -->
+            <div class="footer-col">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de cookies</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Configuración de cookies</a></li>
+                </ul>
+            </div>
+
+            <!-- Redes sociales + logo abajo -->
+            <div class="footer-social-logo">
+                <div class="footer-social">
+                    <a href="#"><img src="imagenes/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="imagenes/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="imagenes/pinterest.png" alt="Pinterest"></a>
+                </div>
+
+                <div class="footer-logo-abajo">
+                    <img src="imagenes/LogoBlockWorld.png" alt="Logo BlockWorld">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sección de pagos -->
+        <div class="footer-pagos">
+            <p>Pagos 100% seguros con</p>
+            <div class="footer-pagos-img">
+                <img src="imagenes/dinero.png" alt="PayPal">
+                <img src="imagenes/herramienta.png" alt="Mastercard">
+                <img src="imagenes/simbolos.png" alt="VISA">
+                <img src="imagenes/simbolo.png" alt="Apple Pay">
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL LOGIN (con CAPTCHA exactamente donde tú lo definiste) -->
+    <div id="loginModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+            <span class="close" id="closeModalLogin" title="Cerrar">&times;</span>
+            <h2 id="loginTitle">Iniciar Sesión</h2>
+
+            <form id="formLogin">
+                <input type="text" id="login" placeholder="Usuario o Email" required autocomplete="username">
+                <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password">
+
+                <!--CAPTCHA-->
+                <div class="captcha-container">
+                    <label id="captchaQuestion" class="captcha-question">Cargando CAPTCHA...</label>
+                    <div id="captchaGrid" class="captcha-grid"></div>
+                    <button type="button" id="refreshCaptcha" class="refresh-btn" title="Recargar CAPTCHA">🔄 Nuevo CAPTCHA</button>
+                </div>
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+
+            <p class="modal-footer">
+                ¿No tienes cuenta? <a href="#" id="linkRegistro">Regístrate aquí</a><br>
+                <a href="#" id="linkOlvideContrasena">¿Olvidaste tu contraseña?</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- MODAL REGISTRO -->
+    <div id="registroModal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="regTitle">
+            <span class="close" id="closeModalRegistro" title="Cerrar">&times;</span>
+            <h2 id="regTitle">Crear Cuenta Nueva</h2>
+
+            <form id="formRegistro">
+                <input type="text" id="regNombre" placeholder="Nombre completo" required>
+                <input type="text" id="regNombreCuenta" placeholder="Nombre de usuario" required>
+                <input type="email" id="regCorreo" placeholder="Correo electrónico" required>
+                <input type="password" id="regContrasena" placeholder="Contraseña (mínimo 6 caracteres)" required>
+                <input type="password" id="regContrasena2" placeholder="Confirmar contraseña" required>
+
+                <select id="regPais" required>
+                    <option value="">Selecciona tu país</option>
+                    <option value="México">México</option>
+                    <option value="Estados Unidos">Estados Unidos</option>
+                    <option value="España">España</option>
+                    <option value="Colombia">Colombia</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Chile">Chile</option>
+                    <option value="Perú">Perú</option>
+                </select>
+
+                <button type="submit">Registrarse</button>
+            </form>
+
+            <p class="modal-footer">
+                ¿Ya tienes cuenta? <a href="#" id="linkLogin">Inicia sesión aquí</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="productos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
