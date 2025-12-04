@@ -642,7 +642,7 @@ function updateUILoggedIn(userName) {
   // Mostrar botón de logout
   logoutBtn.style.display = 'inline-block';
   //actualizar contador de wishlist
-  if(typeof actualizarContadorCarrito == 'function'){
+  if(typeof actualizarContadorWishlist == 'function'){
     actualizarContadorWishlist();
   }
 }

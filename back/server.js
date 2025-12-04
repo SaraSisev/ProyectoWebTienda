@@ -10,6 +10,7 @@ dotenv.config();
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import wishlistRoutes from './routes/wishlistRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 // Rutas
 app.use('/api/auth', authRoutes);
 app.use('/api', productRoutes)
+app.use('/api/wishlist', wishlistRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
