@@ -51,60 +51,49 @@
         <!-- Main Container -->
         <div class="main-container">
             <div class="content-left">
-                <!-- Novedades Section -->
-                <section class="novedades">
-                    <h2>Novedades</h2>
-                    <div class="products-grid">
-                        <div class="product-card">
-                            <div class="product-badge">
-                                <span class="lego-badge">BlockWorld</span>
-                                <span class="exclusive-badge">Exclusivo</span>
-                            </div>
-                            <img src="product1.png" alt="Ferrari F1">
-                            <h3>Ferrari F1</h3>
-                            <p class="product-id">9302883</p>
-                            <div class="product-variants">
-                                <img src="variant1.png" alt="Vista 1">
-                                <img src="variant2.png" alt="Vista 2">
-                                <img src="variant3.png" alt="Vista 3">
-                            </div>
-                            <p class="price">€199.99</p>
+                <!-- Filtros Section -->
+                <section class="filtros-section" style="background: white; padding: 20px 30px; border-radius: 10px; margin-bottom: 20px;">
+                    <h2 style="margin-bottom: 15px;">🔍 Filtrar Productos</h2>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+                        <div>
+                            <label for="filtro-categoria" style="font-weight: bold; margin-right: 10px;">Categoría:</label>
+                            <select id="filtro-categoria" style="padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                                <option value="todas">Todas</option>
+                                <option value="Technic">Technic</option>
+                                <option value="Ideas">Ideas</option>
+                                <option value="Marcas">Marcas</option>
+                            </select>
                         </div>
-
-                        <div class="product-card">
-                            <div class="product-badge">
-                                <span class="lego-badge">BlockWorld</span>
-                                <span class="exclusive-badge">Exclusivo</span>
-                            </div>
-                            <img src="product2.png" alt="Caja de Bloques">
-                            <h3>Caja de Bloques</h3>
-                            <p class="product-id">2K9092erl</p>
-                            <p class="price">€199.99</p>
+                        
+                        <div>
+                            <label style="font-weight: bold; margin-right: 10px;">Precio:</label>
+                            <input type="number" id="precio-min" placeholder="Min" 
+                                style="width: 80px; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                            <span style="margin: 0 5px;">-</span>
+                            <input type="number" id="precio-max" placeholder="Max" 
+                                style="width: 80px; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
                         </div>
-
-                        <div class="product-card">
-                            <div class="product-badge">
-                                <span class="lego-badge">BlockWorld</span>
-                                <span class="exclusive-badge">Exclusivo</span>
-                            </div>
-                            <img src="product3.png" alt="Halcón Milenario">
-                            <h3>Halcón Milenario Star Wars</h3>
-                            <p class="product-desc">6,500 pies</p>
-                            <p class="price">€199.99</p>
-                        </div>
-
-                        <div class="product-card">
-                            <div class="product-badge">
-                                <span class="lego-badge">BlockWorld</span>
-                                <span class="exclusive-badge">Exclusivo</span>
-                            </div>
-                            <img src="product4.png" alt="Barco One Piece">
-                            <h3>Barco One Piece</h3>
-                            <p class="product-desc">Legendario</p>
-                            <p class="price">€199.99</p>
+                        
+                        <div>
+                            <label style="font-weight: bold;">
+                                <input type="checkbox" id="filtro-ofertas" style="margin-right: 5px;">
+                                Solo disponibles
+                            </label>
                         </div>
                     </div>
                 </section>
+
+                <!-- Productos Section -->
+                <section class="novedades">
+                    <h2>Todos los Productos</h2>
+                    <div id="productos-container" class="products-grid">
+                        <!-- Los productos se cargarán aquí dinámicamente -->
+                        <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                            <p style="font-size: 18px; color: #666;">⏳ Cargando productos...</p>
+                        </div>
+                    </div>
+                </section>
+                
 
                 <!-- Categorías Section -->
                 <section class="categorias">
@@ -300,6 +289,7 @@
         </div>
     </div>
 
+    <script src="productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>
 </body>
