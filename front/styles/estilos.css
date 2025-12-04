@@ -73,20 +73,6 @@ body {
     gap: 10px;
 }
 
-.icon-btn {
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    color: white;
-}
-
-.icon-btn:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
 .login-icon {
     font-size: 20px;
 }
@@ -825,32 +811,185 @@ body {
     }
 }
 
-/* Botón Agregar al Carrito */
-.btn-add-to-cart {
-    width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
+/* Header */
+.header-red {
+    background: #D1052A;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.izq { display:flex; align-items:center; gap:12px; }
+.logo { height: 135px; margin-top: -17px; margin-bottom: -53px; }
+
+.der { display:flex; align-items:center; gap:22px; color:white; }
+.icono { height:26px; cursor:pointer; }
+.btn-vender { background:white; border:none; border-radius:25px; padding:10px 20px; cursor:pointer; }
+
+.menu-inferior { background:#D1052A; display:flex; justify-content:center; gap:25px; padding:8px 0 15px; }
+.menu-inferior a { color:white; text-decoration:none; font-size:14px; }
+
+#loginBtn,
+#logoutBtn {
+    all: unset ;
     cursor: pointer;
-    transition: all 0.3s;
+    display: flex;
+    align-items: center !important;
+}
+
+#loginBtn .login-icon,
+#logoutBtn .login-icon {
+    all: unset !important;
+    display: inline-block !important;
+}
+
+#loginBtn .login-icon img,
+#logoutBtn .login-icon img {
+    display: block !important;
+    height: 26px !important;
+}
+
+.logo-texto {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.titulo-tienda {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    margin: 0;
     margin-top: 10px;
 }
 
-.btn-add-to-cart:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+.slogan-tienda {
+    font-size: 14px;
+    color: #ffe6e6;
+    margin: 0;
 }
 
-.btn-add-to-cart:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
+@font-face {
+    font-family: "BackToSchool";
+    src: url("fonts/Milk Days.otf") format("truetype");
 }
 
-.btn-add-to-cart:disabled:hover {
-    box-shadow: none;
+@font-face {
+    font-family: "GoodBakwan";
+    src: url("fonts/Good Bakwan.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "BlinkyStar";
+    src: url("fonts/Blinky Star.otf") format("truetype");
+}
+
+h1, h2, h3 {
+    font-family: "BackToSchool";
+}
+
+h4, h5, .price, .product-badge, .product-desc {
+    font-family: "GoodBakwan";
+}
+
+p, span, a, li, button {
+    font-family: "BlinkyStar";
+}
+
+
+/* ===========================
+        FOOTER
+=========================== */
+
+.footer {
+    background-color: #D1052A;
+    padding: 40px 20px;
+    color: white;
+    margin-top: 40px;
+}
+
+.footer-contenido {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 30px;
+}
+
+.footer-col {
+    width: 200px;
+}
+
+.footer-col h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+    color: #ffe6e6;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: white;
+}
+
+/* Redes + Logo */
+.footer-social-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-social img {
+    width: 35px;
+    height: 35px;
+    transition: 0.3s;
+}
+
+.footer-social img:hover {
+    transform: scale(1.1);
+}
+
+.footer-logo-abajo img {
+    width: 150px;
+    opacity: 0.95;
+}
+
+/* Pagos */
+.footer-pagos {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.footer-pagos p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.footer-pagos-img img {
+    width: 50px;
+    margin: 0 6px;
+    filter: brightness(0) invert(1);
 }

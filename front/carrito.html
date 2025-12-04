@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - MiSitio</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo">principal</a>
+            <a href="nosotros.html" class="nav-link active">nosotros</a>
+            <a href="preguntasFrecuentes.html" class="nav-link">preguntas frecuentes</a>
+            <a href="contactanos.html" class="nav-link">contactanos</a>
+        </div>
+
+        <div class="nav-right">
+            <span id="userName" class="user-name"></span>
+
+            <div id="auth-buttons">
+                <button id="loginBtn" class="icon-btn" title="Login"><span class="login-icon">👤</span></button>
+                <button id="registrarBtn" class="icon-btn" title="Registrarse"><span class="login-icon">👤➕</span></button>
+            </div>
+
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
+                <span class="login-icon">🚪</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- CARRITO -->
+    <main>
+        <aside class="sidebar">
+            <div class="order-summary">
+                <h3>Carrito de Compras</h3>
+
+                <div id="carrito-contenedor">
+                    <p style="text-align:center; color:#777;">Tu carrito está vacío</p>
+                </div>
+
+                <hr style="margin:15px 0;">
+
+                <div class="summary-total">
+                    <span>Total:</span>
+                    <span id="carrito-total">€0.00</span>
+                </div>
+
+                <button class="btn-checkout" id="btnCheckout" disabled>Finalizar Compra</button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src="logo.png" alt="BlockWorld">
+            </div>
+            <nav class="footer-nav">
+                <a href="#">Sobre Nosotros</a>
+                <a href="#">Preguntas</a>
+                <a href="#">Frecuentes</a>
+                <a href="#">Contacto</a>
+                <a href="#">Política de Privacidad</a>
+            </nav>
+            <div class="footer-info">
+                <p>BlockWorld Store</p>
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📷</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
