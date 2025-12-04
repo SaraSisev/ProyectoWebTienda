@@ -21,23 +21,38 @@ const query = (sql, params) => {
   });
 };
 
+// ✅ FUNCIÓN SIMPLE: Solo asegurar que haya una imagen
+function asegurarImagen(productos) {
+  return productos.map(producto => {
+    if (!producto.imagen || producto.imagen === '') {
+      producto.imagen = 'https://via.placeholder.com/400x400?text=Sin+Imagen';
+    }
+    return producto;
+  });
+}
+
 // Obtener todos los productos
 export const getAllProducts = async () => {
   const sql = 'SELECT * FROM productos ORDER BY id DESC';
-  return await query(sql, []);
+  const results = await query(sql, []);
+  return asegurarImagen(results);
 };
 
 // Obtener productos por categoría
 export const getProductsByCategory = async (categoria) => {
   const sql = 'SELECT * FROM productos WHERE categoria = ? ORDER BY id DESC';
-  return await query(sql, [categoria]);
+  const results = await query(sql, [categoria]);
+  return asegurarImagen(results);
 };
 
 // Obtener un producto por ID
 export const getProductById = async (id) => {
   const sql = 'SELECT * FROM productos WHERE id = ?';
   const results = await query(sql, [id]);
-  return results[0];
+  if (results.length === 0) return null;
+  
+  const productos = asegurarImagen(results);
+  return productos[0];
 };
 
 // Crear nuevo producto

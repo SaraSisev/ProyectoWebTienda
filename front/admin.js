@@ -257,48 +257,35 @@ function cerrarModalProducto() {
     document.getElementById('formProducto').reset();
     editandoProductoId = null;
 }
-//funcion para convertir la url a base 64
-async function urlToBase64(url){
-    console.log("→ ENVIANDO PRODUCTO...");
-
-    const response = await fetch(url);
-    const blob = await response.blob();
-
-    return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onloadend = () => resolve(reader.result);
-        reader.readAsDataURL(blob);
-    });
+// NUEVA FUNCIÓN: Solo validar que la URL sea válida
+async function validarImagenUrl(url) {
+    if (!url || url.trim() === '') {
+        return 'https://via.placeholder.com/400x400?text=Sin+Imagen';
+    }
+    
+    // Validar que sea una URL válida
+    try {
+        new URL(url);
+        return url;
+    } catch {
+        console.warn('URL inválida, usando placeholder');
+        return 'https://via.placeholder.com/400x400?text=Sin+Imagen';
+    }
 }
 
 async function guardarProducto(e) {
     e.preventDefault();
 
-    //parte para convertir la URL ingresada a base64 requisito para pasar a blob
-    let imagenBase64 = null;
     const imagenUrl = document.getElementById('productoImagen').value.trim();
-
-    if (imagenUrl) {
-        try {
-            imagenBase64 = await urlToBase64(imagenUrl);
-        } catch (err) {
-            console.error("Error convirtiendo imagen:", err);
-            Swal.fire({
-                icon: "error",
-                title: "Error al procesar imagen",
-                text: "La URL de la imagen no permite descargarla",
-            });
-            return;
-        }
-    }
+    const imagenValida = await validarImagenUrl(imagenUrl);
     
     const productoData = {
         nombre: document.getElementById('productoNombre').value.trim(),
         descripcion: document.getElementById('productoDescripcion').value.trim(),
         precio: parseFloat(document.getElementById('productoPrecio').value),
         disponibilidad: parseInt(document.getElementById('productoDisponibilidad').value),
-        categoria: document.getElementById('productoCategoria').value, 
-        imagen: imagenBase64 //armar la imagen en base 64
+        categoria: document.getElementById('productoCategoria').value,
+        imagen: imagenValida  
     };
     
     console.log('[GUARDAR PRODUCTO] Datos:', productoData);
