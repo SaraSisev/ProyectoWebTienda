@@ -40,10 +40,6 @@
             <div class="container">
                 <div class="hero-content">
                     <h1 class="hero-title">Construye aventuras,<br>Colecciona momentos.</h1>
-                    <button class="btn-primary">Comprar Ahora</button>
-                </div>
-                <div class="hero-image">
-                    <img src="castle.png" alt="Castillo de Hogwarts - Harry Potter">
                 </div>
             </div>
         </section>
@@ -93,118 +89,32 @@
                         </div>
                     </div>
                 </section>
-                
-
-                <!-- Categorías Section -->
-                <section class="categorias">
-                    <h2>Explora por Categoría</h2>
-                    <div class="categories-grid">
-                        <div class="category-item">
-                            <div class="category-icon technics">🚗</div>
-                            <p>Technics</p>
-                        </div>
-                        <div class="category-item">
-                            <div class="category-icon bloques">🧱</div>
-                            <p>Bloques</p>
-                        </div>
-                        <div class="category-item">
-                            <div class="category-icon marcas">🌟</div>
-                            <p>Marcas</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Cart Items -->
-                <section class="cart-items">
-                    <div class="cart-item">
-                        <img src="cart-item1.png" alt="Gran Castlo Medieval">
-                        <div class="cart-item-details">
-                            <h4>Gran Castlo Medieval</h4>
-                            <p class="price">€199.99</p>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="qty-btn">-</button>
-                            <input type="number" value="1" class="qty-input">
-                            <button class="qty-btn">+</button>
-                        </div>
-                        <button class="remove-btn">🗑️</button>
-                    </div>
-
-                    <div class="cart-item">
-                        <img src="cart-item2.png" alt="Nave Spacio Exploriora">
-                        <div class="cart-item-details">
-                            <h4>Nave Spacio Exploriora</h4>
-                            <p class="price">€799.92</p>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="qty-btn">-</button>
-                            <input type="number" value="1" class="qty-input">
-                            <button class="qty-btn">+</button>
-                        </div>
-                        <button class="remove-btn">🗑️</button>
-                    </div>
-
-                    <div class="cart-item">
-                        <img src="cart-item3.png" alt="Nave Spacio Exploriora">
-                        <div class="cart-item-details">
-                            <h4>Nave Spacio Exploriora</h4>
-                            <p class="price">€799.92</p>
-                        </div>
-                        <div class="quantity-controls">
-                            <button class="qty-btn">-</button>
-                            <input type="number" value="1" class="qty-input">
-                            <button class="qty-btn">+</button>
-                        </div>
-                        <button class="remove-btn">🗑️</button>
-                    </div>
-                </section>
             </div>
 
             <!-- Sidebar Right -->
             <aside class="sidebar">
-                <div class="product-detail">
-                    <h2>Gran Castlo Medieval</h2>
-                    <p class="detail-price">€199.99</p>
-                    <p class="detail-desc">¡Construye el reino de tus sueños con este set de 3,500 piezas! Incluye dragón y figuras.</p>
-                    
-                    <div class="quantity-selector">
-                        <button class="qty-btn">+</button>
-                        <input type="number" value="1" class="qty-input-large">
-                        <button class="qty-btn">-</button>
-                    </div>
-
-                    <button class="btn-add-cart">Añadir al Carrito 🛒</button>
-
-                    <div class="product-features">
-                        <h3>Características del Set</h3>
-                    </div>
-                </div>
 
                 <div class="order-summary">
-                    <h3>Resumen de Pedido</h3>
-                    <div class="summary-line">
-                        <span>Subtotal:</span>
-                        <span>€349.98</span>
+                    <h3>Carrito de Compras</h3>
+
+                    <div id="carrito-contenedor">
+                        <p style="text-align:center; color:#777;">
+                            Tu carrito está vacío
+                        </p>
                     </div>
-                    <div class="summary-line">
-                        <span>Envío Estimado:</span>
-                        <span>15.00</span>
-                    </div>
-                    <div class="summary-line">
-                        <span>Impuestos:</span>
-                        <span>35.00</span>
-                    </div>
+
+                    <hr style="margin:15px 0;">
+
                     <div class="summary-total">
                         <span>Total:</span>
-                        <span class="total-amount">3399.98</span>
+                        <span id="carrito-total">€0.00</span>
                     </div>
-                    <button class="btn-checkout">Finalizar Compra</button>
+
+                    <button class="btn-checkout" id="btnCheckout" disabled>
+                        Finalizar Compra
+                    </button>
                 </div>
 
-                <div class="instructions">
-                    <h3>Instrucciones de Montaje</h3>
-                    <p>Instrucciones de Montaje disponibles</p>
-                </div>
             </aside>
         </div>
     </main>

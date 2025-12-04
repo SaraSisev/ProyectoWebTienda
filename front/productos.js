@@ -185,6 +185,7 @@ function agregarAlCarrito(productoId) {
     
     // Actualizar contador del carrito (si existe)
     actualizarContadorCarrito();
+    renderCarrito();
     
     Swal.fire({
         icon: 'success',
@@ -208,3 +209,87 @@ function actualizarContadorCarrito() {
         contador.style.display = total > 0 ? 'inline' : 'none';
     }
 }
+
+// ============================================
+// CARGAR CARRITO EN SIDEBAR
+// ============================================
+function renderCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const cont = document.getElementById('carrito-contenedor');
+    const totalTag = document.getElementById('carrito-total');
+    const btnCheckout = document.getElementById('btnCheckout');
+
+    if (carrito.length === 0) {
+        cont.innerHTML = `<p style="text-align:center; color:#777;">Tu carrito está vacío</p>`;
+        totalTag.textContent = "€0.00";
+        btnCheckout.disabled = true;
+        return;
+    }
+
+    let html = "";
+    let total = 0;
+
+    carrito.forEach(item => {
+        const subtotal = item.precio * item.cantidad;
+        total += subtotal;
+
+        html += `
+            <div class="cart-item">
+                <img src="${item.imagen}" alt="${item.nombre}">
+                
+                <div class="cart-item-details">
+                    <h4>${item.nombre}</h4>
+                    <p class="price">€${item.precio.toFixed(2)}</p>
+                </div>
+
+                <div class="quantity-controls">
+                    <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                    <input type="number" class="qty-input" value="${item.cantidad}" readonly>
+                    <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                </div>
+
+                <button class="remove-btn" onclick="eliminarDelCarrito(${item.id})">
+                    🗑️
+                </button>
+            </div>
+        `;
+    });
+
+    cont.innerHTML = html;
+    totalTag.textContent = `€${total.toFixed(2)}`;
+    btnCheckout.disabled = false;
+}
+
+// ============================================
+// CAMBIAR CANTIDAD
+// ============================================
+function cambiarCantidad(id, delta) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    carrito = carrito.map(item => {
+        if (item.id === id) {
+            item.cantidad = Math.max(1, item.cantidad + delta);
+        }
+        return item;
+    });
+
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    renderCarrito();
+    actualizarContadorCarrito();
+}
+
+// ============================================
+// ELIMINAR PRODUCTO DEL CARRITO
+// ============================================
+function eliminarDelCarrito(id) {
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito = carrito.filter(item => item.id !== id);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    renderCarrito();
+    actualizarContadorCarrito();
+}
+
+// ============================================
+// MOSTRAR CARRITO AL CARGAR
+// ============================================
+document.addEventListener('DOMContentLoaded', renderCarrito);
