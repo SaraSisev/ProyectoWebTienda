@@ -74,6 +74,8 @@ function setupMenuNavigation() {
                 // Cargar datos según la sección
                 if (sectionName === 'inventario') {
                     cargarInventario();
+                }else if(sectionName === 'ventas'){
+                    cargarReporteVentas();
                 }
             }
         });
@@ -514,4 +516,205 @@ html += `
 `;
 
 container.innerHTML = html;
+}
+// ============================================
+// REPORTES DE VENTAS
+// ============================================
+async function cargarReporteVentas() {
+    const container = document.getElementById('ventasContainer');
+    container.innerHTML = '<div class="loading">⏳ Cargando reportes de ventas...</div>';
+
+    try {
+        const [ventasRes, totalesRes] = await Promise.all([
+            fetch(`${API_URL}/ventas/por-categoria`),
+            fetch(`${API_URL}/ventas/total`)
+        ]);
+        
+        const ventasData = await ventasRes.json();
+        const totalesData = await totalesRes.json();
+        
+        if (ventasData.success && totalesData.success) {
+            mostrarReporteVentas(ventasData.data, totalesData.data);
+        } else {
+            throw new Error('Error al cargar datos de ventas');
+        }
+    } catch (error) {
+        console.error('[ERROR] Cargar ventas:', error);
+        container.innerHTML = `
+            <div class="error">
+                <p>❌ Error al cargar el reporte de ventas</p>
+                <small>${error.message}</small>
+            </div>
+        `;
+    }
+}
+
+function mostrarReporteVentas(ventasPorCategoria, totales) {
+    const container = document.getElementById('ventasContainer');
+    
+    // Si no hay ventas
+    if (ventasPorCategoria.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <span class="icon" style="font-size:64px;">📊</span>
+                <h3>No hay ventas registradas</h3>
+                <p>Las estadísticas aparecerán cuando se realicen ventas</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = `
+        <!-- Tarjetas de Estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card stat-card-primary">
+                <div class="stat-icon">💰</div>
+                <h3>Ingresos Totales</h3>
+                <div class="stat-value">$${parseFloat(totales.ingresos_totales || 0).toFixed(2)}</div>
+                <div class="stat-label">desde el inicio</div>
+            </div>
+            
+            <div class="stat-card stat-card-success">
+                <div class="stat-icon">📦</div>
+                <h3>Productos Vendidos</h3>
+                <div class="stat-value">${totales.total_productos_vendidos || 0}</div>
+                <div class="stat-label">unidades totales</div>
+            </div>
+            
+            <div class="stat-card stat-card-info">
+                <div class="stat-icon">🛒</div>
+                <h3>Órdenes Completadas</h3>
+                <div class="stat-value">${totales.total_ordenes || 0}</div>
+                <div class="stat-label">transacciones</div>
+            </div>
+        </div>
+
+        <!-- Gráfica de Barras -->
+        <div class="chart-container" style="margin-top: 40px;">
+            <h3>📊 Ventas por Categoría</h3>
+            <div class="chart-wrapper">
+                <canvas id="ventasChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- Tabla Detallada -->
+        <div style="margin-top: 40px;">
+            <h3>📋 Detalle por Categoría</h3>
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Total Ventas</th>
+                        <th>Unidades Vendidas</th>
+                        <th>Ingresos</th>
+                        <th>Promedio por Venta</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+    
+    ventasPorCategoria.forEach(cat => {
+        const promedio = cat.total_ventas > 0 ? (cat.total_ingresos / cat.total_ventas) : 0;
+        
+        html += `
+            <tr>
+                <td><strong>${cat.categoria}</strong></td>
+                <td>${cat.total_ventas}</td>
+                <td>${cat.unidades_vendidas}</td>
+                <td>$${parseFloat(cat.total_ingresos).toFixed(2)}</td>
+                <td>$${promedio.toFixed(2)}</td>
+            </tr>
+        `;
+    });
+    
+    html += `
+                </tbody>
+            </table>
+        </div>
+    `;
+    
+    container.innerHTML = html;
+    
+    // Crear la gráfica
+    crearGraficaVentas(ventasPorCategoria);
+}
+
+function crearGraficaVentas(ventasPorCategoria) {
+    const ctx = document.getElementById('ventasChart');
+    
+    if (!ctx) {
+        console.error('Canvas no encontrado');
+        return;
+    }
+    
+    // Extraer datos para la gráfica
+    const categorias = ventasPorCategoria.map(v => v.categoria);
+    const ingresos = ventasPorCategoria.map(v => parseFloat(v.total_ingresos));
+    
+    // Colores para cada categoría
+    const colores = {
+        'Technic': '#667eea',
+        'Ideas': '#f093fb',
+        'Marcas': '#4facfe'
+    };
+    
+    const backgroundColors = categorias.map(cat => colores[cat] || '#6c757d');
+    
+    // Crear gráfica con Chart.js
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: categorias,
+            datasets: [{
+                label: 'Ingresos ($)',
+                data: ingresos,
+                backgroundColor: backgroundColors,
+                borderColor: backgroundColors.map(c => c),
+                borderWidth: 2,
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Ingresos por Categoría',
+                    font: {
+                        size: 16,
+                        weight: 'bold'
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return 'Ingresos: $' + context.parsed.y.toFixed(2);
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value.toFixed(0);
+                        }
+                    },
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
 }

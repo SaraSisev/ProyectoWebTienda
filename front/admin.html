@@ -6,6 +6,7 @@
     <title>Panel de Administrador</title>
     <link rel="stylesheet" href="/front/styles/estilos.css">
     <link rel="stylesheet" href="/front/styles/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -60,11 +61,9 @@
             <h2>📊 Reportes de Ventas</h2>
             <p class="section-description">Visualiza las estadísticas de ventas</p>
             
-            <div class="coming-soon">
-                <span class="icon">🚧</span>
-                <h3>Funcionalidad en desarrollo</h3>
-                <p>Esta sección estará disponible cuando implementes el sistema de órdenes</p>
-            </div>
+            <div id="ventasContainer">
+                <!-- Aquí se cargarán las estadísticas de ventas -->
+            </div>      
         </div>
 
         <!-- Sección: Inventario -->
