@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Preguntas | BlockWorld</title>
     <link rel="icon" type="image/x-icon" href="imagenes/logo.ico">
-    <link rel="stylesheet" href="styles/estNosotros.css">
+    <link rel="stylesheet" href="styles/estPreguntas.css">
     <style>
         .barra-superior {
             background: url("imagenes/fondoPest.jpeg") center/cover no-repeat;
@@ -100,7 +100,50 @@
     </nav>
 
     <main class="main-content">
-       
+       <section class="faq">
+        <h2>Preguntas Frecuentes</h2>
+        <p class="faq__intro">¿Tienes dudas? Aquí respondemos las más comunes sobre tus pedidos y nuestra tienda.</p>
+
+        <div class="faq__item">
+            <button class="faq__question">¿En cuántos días hábiles llega mi pedido?</button>
+            <div class="faq__answer">Generalmente entre 7 y 14 días hábiles, dependiendo de tu ubicación.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Qué pasa si mi pedido llega incompleto o dañado?</button>
+            <div class="faq__answer">Puedes reportarlo y te enviaremos las piezas faltantes o un reemplazo.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Qué métodos de pago aceptan?</button>
+            <div class="faq__answer">Tarjetas de crédito/débito.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Es seguro comprar en este sitio?</button>
+            <div class="faq__answer">Sí, usamos certificados SSL y pasarelas de pago confiables para proteger tus datos.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Puedo pagar a meses sin intereses?</button>
+            <div class="faq__answer">Sí, en compras mayores a cierto monto con tarjetas participantes.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Los sets son originales?</button>
+            <div class="faq__answer">Sí, todos nuestros productos cuentan con garantía de autenticidad.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Cada cuánto se actualizan los productos disponibles?</button>
+            <div class="faq__answer">Todas las semanas añadimos nuevos sets y piezas destacadas.</div>
+        </div>
+
+        <div class="faq__item">
+            <button class="faq__question">¿Dónde puedo comunicarme si tengo dudas?</button>
+            <div class="faq__answer">En la sección Contacto encontrarás correo, chat y teléfono de atención al cliente.</div>
+        </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -226,10 +269,22 @@
         </div>
     </div>
 
+    <script>
+        const items = document.querySelectorAll('.faq__item');
+
+        items.forEach(item => {
+            const question = item.querySelector('.faq__question');
+            question.addEventListener('click', () => {
+            item.classList.toggle('active');
+            });
+        });
+    </script>
+
     <script src="productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>
     <script src="wishlist.js"></script>
+
 
 </body>
 </html>
