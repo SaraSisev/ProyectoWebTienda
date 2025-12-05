@@ -3,14 +3,16 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-// Cargar variables de entorno
 dotenv.config();
 
 // Importar rutas
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
-import wishlistRoutes from './routes/wishlistRoutes.js';
+
+import checkoutRoutes from './routes/checkoutRoutes.js';  
+import cuponRoutes from './routes/cuponRoutes.js';        
+import wishlistRoutes from './routes/wishlistRoutes.js';  
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,8 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/auth', authRoutes);
-app.use('/api', productRoutes)
-app.use('/api/wishlist', wishlistRoutes);
+
+app.use('/api', productRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/checkout', checkoutRoutes);   
+app.use('/api/cupon', cuponRoutes);         
+app.use('/api/wishlist', wishlistRoutes);   
 
 // Ruta de prueba
 app.get('/', (req, res) => {
@@ -32,10 +38,6 @@ app.get('/', (req, res) => {
     port: PORT 
   });
 });
-
-//Ruta contacto
-console.log("🔧 MONTANDO RUTA CONTACTO");
-app.use('/api/contact', contactRoutes);
 
 // Iniciar servidor
 app.listen(PORT, () => {

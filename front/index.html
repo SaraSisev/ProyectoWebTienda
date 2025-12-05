@@ -6,7 +6,6 @@
     <title>BlockWorld: Todo en legos</title>
     <link rel="icon" type="image/x-icon" href="imagenes/logo.ico">
     <link rel="stylesheet" href="styles/estilos.css">
-    
     <style>
         .barra-superior {
             background: url("imagenes/fondoPest.jpeg") center/cover no-repeat;
@@ -19,7 +18,6 @@
             padding: 0 10px;
             font-family: Arial, sans-serif;
         }
-
     </style>
 </head>
 <body>
@@ -34,7 +32,6 @@
                 <img src="imagenes/LogoBlockWorld.png" class="logo" alt="logo">
             </a>
 
-            <!-- 🔥 Texto agregado junto al logo -->
             <div class="logo-texto">
                 <h1 class="titulo-tienda">BlockWorld</h1>
                 <p class="slogan-tienda">Construye sueños, pieza por pieza</p>
@@ -65,11 +62,13 @@
                     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
                 ">0</span>
             </a>
-            
+           
 
             <div class="grupo-carrito">
                 <span id="cart-count" style="font-weight:bold; margin-left:4px;">0</span>
-                <img src="imagenes/bolsa.png" class="icono" alt="bolsa">
+                <a href="carrito.html">
+                    <img src="imagenes/bolsa.png" class="icono" alt="bolsa">
+                </a>
             </div>
 
             <div class="nav-right">
@@ -229,7 +228,7 @@
                     <option value="Perú">Perú</option>
                 </select>
 
-                <button type="submit">👤➕ Registrarse</button>
+                <button type="submit">Registrarse</button>
             </form>
 
             <p class="modal-footer">
@@ -238,7 +237,6 @@
         </div>
     </div>
 
-    <!-- SCRIPTS: no añadí ningún script nuevo; tu script del CAPTCHA debe funcionar aquí -->
     <script src="productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>

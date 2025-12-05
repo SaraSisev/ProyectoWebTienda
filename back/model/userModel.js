@@ -72,8 +72,6 @@ export const blockUser = async (userId, blockedUntil) => {
   await query(sql, [blockedUntil, userId]);
 };
 
-export default pool;
-
 // Guardar código de recuperación
 export const saveRecoveryCode = async (email, code, expirationDate) => {
   const sql = 'UPDATE usuarios SET codigo_recuperacion = ?, codigo_expiracion = ? WHERE correo = ?';
@@ -92,3 +90,25 @@ export const updatePasswordAndClearCode = async (userId, newPassword) => {
   const sql = 'UPDATE usuarios SET contrasena = ?, codigo_recuperacion = NULL, codigo_expiracion = NULL WHERE id = ?';
   await query(sql, [newPassword, userId]);
 };
+
+// Buscar usuario por ID
+export const findUserById = async (userId) => {
+  const sql = 'SELECT * FROM usuarios WHERE id = ?';
+  const results = await query(sql, [userId]);
+  return results[0];
+};
+
+// Buscar usuario por cupón
+export const findUserByCupon = async (cupon) => {
+  const sql = 'SELECT * FROM usuarios WHERE cupon = ?';
+  const results = await query(sql, [cupon]);
+  return results[0];
+};
+
+// Eliminar cupón del usuario
+export const removeUserCoupon = async (userId) => {
+  const sql = 'UPDATE usuarios SET cupon = NULL WHERE id = ?';
+  await query(sql, [userId]);
+};
+
+export default pool;
