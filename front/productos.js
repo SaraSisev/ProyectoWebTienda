@@ -225,10 +225,19 @@ function renderCarrito() {
     const totalTag = document.getElementById('carrito-total');
     const btnCheckout = document.getElementById('btnCheckout');
 
+    console.log('[CARRITO] Renderizando carrito:', carrito.length, 'items');
+    console.log('[CARRITO] Botón checkout encontrado:', !!btnCheckout);
+
+    if (!cont || !totalTag || !btnCheckout) {
+        console.error('[CARRITO] Error: No se encontraron elementos del DOM');
+        return;
+    }
+
     if (carrito.length === 0) {
         cont.innerHTML = `<p style="text-align:center; color:#777;">Tu carrito está vacío</p>`;
         totalTag.textContent = "€0.00";
         btnCheckout.disabled = true;
+        console.log('[CARRITO] Carrito vacío, botón deshabilitado');
         return;
     }
 
@@ -263,7 +272,9 @@ function renderCarrito() {
 
     cont.innerHTML = html;
     totalTag.textContent = `€${total.toFixed(2)}`;
-    btnCheckout.disabled = false;
+    btnCheckout.disabled = false; // ✅ HABILITAR EL BOTÓN
+    
+    console.log('[CARRITO] Total:', total, '- Botón habilitado');
 }
 
 // ============================================
@@ -299,3 +310,18 @@ function eliminarDelCarrito(id) {
 // MOSTRAR CARRITO AL CARGAR
 // ============================================
 document.addEventListener('DOMContentLoaded', renderCarrito);
+
+// ============================================
+// INICIALIZAR AL CARGAR PÁGINA
+// ============================================
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log('[INIT] Página cargada, inicializando carrito');
+        renderCarrito();
+        actualizarContadorCarrito();
+    });
+} else {
+    console.log('[INIT] Página ya cargada, inicializando carrito inmediatamente');
+    renderCarrito();
+    actualizarContadorCarrito();
+}
