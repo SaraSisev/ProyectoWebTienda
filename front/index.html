@@ -21,7 +21,7 @@
     </style> 
 </head>
 <body>
-
+    
     <div class="barra-superior">
         <p>Envíos gratuitos en cada artículo con un valor superior a $1200</p>
     </div>
@@ -63,7 +63,6 @@
                 ">0</span>
             </a>
            
-
             <div class="grupo-carrito">
                 <span id="cart-count" style="font-weight:bold; margin-left:4px;">0</span>
                 <a href="carrito.html">
@@ -105,19 +104,195 @@
     </nav>
 
     <main class="main-content" style="padding:40px; font-family:Arial; text-align:center;">
-        <h1>Construye aventuras,<br>Colecciona momentos.</h1>
+        <div class="carousel-container">
+            <!-- Slides -->
+            <div class="carousel-slides">
+                <!-- Slide 1 -->
+                <div class="carousel-slide">
+                    <img src="imagenes/promo1.png" alt="Banner 1">
+                </div>
 
-        <div id="productos-container" class="products-grid" style="margin-top:30px;">
-            <div style="grid-column:1/-1; text-align:center; padding:40px;">
-                <p style="font-size:18px;color:#666;">Cargando productos...</p>
+                <!-- Slide 2 -->
+                <div class="carousel-slide">
+                    <img src="imagenes/promo2.png" alt="Banner 2">
+                </div>
+
+
+                <!-- Slide 3 -->
+                <div class="carousel-slide">
+                    <img src="imagenes/promo3.png" alt="Banner 3">
+                </div>
+            </div>
+
+            <!-- Flechas de navegación -->
+            <button class="carousel-arrow left" onclick="moveSlide(-1)">❮</button>
+            <button class="carousel-arrow right" onclick="moveSlide(1)">❯</button>
+
+            <!-- Indicadores -->
+            <div class="carousel-indicators">
+                <span class="indicator active" onclick="goToSlide(0)"></span>
+                <span class="indicator" onclick="goToSlide(1)"></span>
+                <span class="indicator" onclick="goToSlide(2)"></span>
             </div>
         </div>
+
+        <script>
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const totalSlides = slides.length;
+            const carouselSlides = document.querySelector('.carousel-slides');
+            const container = document.querySelector('.carousel-container');
+            let autoplayInterval;
+
+            // Función para mostrar el slide
+            function showSlide(index) {
+                if (index >= totalSlides) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = totalSlides - 1;
+                } else {
+                    currentSlide = index;
+                }
+
+                const offset = -currentSlide * 100;
+                carouselSlides.style.transform = `translateX(${offset}%)`;
+
+                // Actualizar indicadores
+                indicators.forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentSlide);
+                });
+            }
+
+            // Mover slide
+            function moveSlide(direction) {
+                showSlide(currentSlide + direction);
+                resetAutoplay();
+            }
+
+            // Ir a slide específico
+            function goToSlide(index) {
+                showSlide(index);
+                resetAutoplay();
+            }
+
+            // Autoplay
+            function startAutoplay() {
+                autoplayInterval = setInterval(() => {
+                    showSlide(currentSlide + 1);
+                }, 6000); // Cambia cada 6 segundos
+            }
+
+            function stopAutoplay() {
+                clearInterval(autoplayInterval);
+            }
+
+            function resetAutoplay() {
+                stopAutoplay();
+                startAutoplay();
+            }
+
+            // Pausar al pasar el mouse
+            container.addEventListener('mouseenter', stopAutoplay);
+            container.addEventListener('mouseleave', startAutoplay);
+
+            // Soporte para touch en móviles
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                stopAutoplay();
+            });
+
+            container.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+                startAutoplay();
+            });
+
+            function handleSwipe() {
+                if (touchStartX - touchEndX > 50) {
+                    moveSlide(1);
+                } else if (touchEndX - touchStartX > 50) {
+                    moveSlide(-1);
+                }
+            }
+
+            // Iniciar autoplay al cargar
+            startAutoplay();
+
+            // Navegación con teclado
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    moveSlide(-1);
+                } else if (e.key === 'ArrowRight') {
+                    moveSlide(1);
+                }
+            });
+        </script>
+
+        <h1>Explora nuestra colección de sets LEGO:<br>desde novedades hasta piezas difíciles de encontrar.</h1>
+
+        <!-- Sección de Productos Más Baratos -->
+        <section class="seccion-productos-baratos">
+            <h4 class="titulo-seccion-baratos">Productos Más Económicos</h4>
+            
+            <!-- Contenedor con flechas -->
+            <div class="carrusel-baratos-wrapper">
+                <!-- Flecha izquierda -->
+                <button class="barato-arrow barato-arrow-left" id="barato-arrow-left">
+                    ❮
+                </button>
+                
+                <!-- Grid de productos con scroll horizontal -->
+                <div id="productos-baratos-container" class="productos-baratos-grid">
+                    <div style="text-align: center; padding: 40px;">
+                        <p style="font-size: 18px; color: #666;">Cargando productos...</p>
+                    </div>
+                </div>
+                
+                <!-- Flecha derecha -->
+                <button class="barato-arrow barato-arrow-right" id="barato-arrow-right">
+                    ❯
+                </button>
+            </div>
+        </section>
+
+        <section class="seccion-marcas">
+            <h2 class="titulo-marcas">Productos Originales y de Calidad</h2>
+            <p class="subtitulo-marcas">Descubre las marcas colaboradoras de lego y más!!!</p>
+
+            <div class="marcas-carousel-container">
+                <div class="marcas-carousel-track" id="marcas-track">
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion-bienvenida">
+            <div class="bienvenida-texto" id="bienvenida-texto">
+                Te damos la bienvenida a <strong>BlockWorld</strong>, un proyecto escolar creado para simular una tienda especializada en 
+                sets LEGO importados y ofrecidos al mejor precio. Aquí podrás explorar una amplia variedad de 
+                construcciones, colecciones y modelos pensados para fans de todas las edades: desde quienes apenas 
+                comienzan a armar sus primeros sets, hasta coleccionistas que buscan piezas especiales o difíciles 
+                de encontrar.
+                <br><br>
+                Nuestro objetivo es mostrar cómo sería una experiencia de compra completa, visual y organizada para quienes 
+                disfrutan de construir, coleccionar y expresar su creatividad con LEGO. Aunque esta página forma parte de un 
+                proyecto académico y no realiza ventas reales, está diseñada para presentar de forma clara y atractiva los 
+                productos, tal y como lo haría una tienda profesional.
+                <br><br>
+                Explora nuestras categorías, descubre sets emblemáticos y conoce las líneas más populares, todo dentro de un 
+                entorno creado únicamente con fines educativos.
+            </div>
+            <button class="mostrar-menos-btn" id="toggle-btn" onclick="toggleTexto()">Mostrar Menos</button>
+        </section>
+
     </main>
 
     <footer class="footer">
         <div class="footer-contenido">
 
-            <!-- Columna 1 -->
             <div class="footer-col">
                 <h3>BlockWorld</h3>
                 <ul>
@@ -153,9 +328,9 @@
             <!-- Redes sociales + logo abajo -->
             <div class="footer-social-logo">
                 <div class="footer-social">
-                    <a href="#"><img src="imagenes/instagram.png" alt="Instagram"></a>
-                    <a href="#"><img src="imagenes/facebook.png" alt="Facebook"></a>
-                    <a href="#"><img src="imagenes/pinterest.png" alt="Pinterest"></a>
+                    <a href="https://www.instagram.com/blockworld14?igsh=MXF5bXo0Mm9uNDhm" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.facebook.com/profile.php?id=61584811431929" target="_blank"><img src="imagenes/facebook.png" alt="Facebook"></a>
+                    <a href="https://pin.it/5NZEzK4X0" target="_blank"><img src="imagenes/pinterest.png" alt="Pinterest"></a>
                 </div>
 
                 <div class="footer-logo-abajo">

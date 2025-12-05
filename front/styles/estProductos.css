@@ -1132,3 +1132,190 @@ p, span, a, li, button, label {
     transform: scale(1.2);
     font-weight: bolder;
 }
+
+
+.productos-baratos-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera */
+}
+
+.producto-barato-card {
+    min-width: 220px;
+    max-width: 220px;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}
+
+.producto-barato-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Flechas de navegación */
+.barato-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #D1052A;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+    color: #D1052A;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.barato-arrow:hover {
+    background: #D1052A;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.barato-arrow-left {
+    left: -15px;
+}
+
+.barato-arrow-right {
+    right: -15px;
+}
+
+/* Botón de wishlist en esquina */
+.wishlist-heart-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    z-index: 5;
+}
+
+.wishlist-heart-btn:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+/* Imagen del producto */
+.producto-barato-img {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.producto-barato-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Categoría */
+.producto-barato-categoria {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Nombre del producto */
+.producto-barato-nombre {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+    min-height: 40px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+/* Footer con precio y botón */
+.producto-barato-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.producto-barato-precio {
+    font-size: 20px;
+    font-weight: bold;
+    color: #D1052A;
+}
+
+.producto-barato-btn {
+    background: #FDECDA;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px #FEC022;
+}
+
+.producto-barato-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px #FB951F;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .barato-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
+    }
+    
+    .barato-arrow-left {
+        left: -10px;
+    }
+    
+    .barato-arrow-right {
+        right: -10px;
+    }
+    
+    .producto-barato-card {
+        min-width: 180px;
+        max-width: 180px;
+    }
+    
+    .producto-barato-img {
+        height: 150px;
+    }
+}
+
+
+.btn-icon-prods {
+    width: 28px !important;
+    height: 28px !important;
+    background: none !important;
+}
