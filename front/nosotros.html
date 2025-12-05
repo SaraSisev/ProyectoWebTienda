@@ -98,12 +98,57 @@
         <a href="preguntasFrecuentes.html">Preguntas</a>
         <a href="contactanos.html">Contáctanos</a>
     </nav>
-    
+    <!-- BARRA DE ACCESIBILIDAD -->
+    <div class="accessibility-bar">
+        <div class="accessibility-bar-container">
+            <!-- Toggle Modo Claro/Oscuro -->
+            <div class="accessibility-control">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="toggle-slider">
+                        <span class="toggle-icon sun">☀️</span>
+                        <span class="toggle-icon moon">🌙</span>
+                    </span>
+                </label>
+            </div>
+
+            <!-- Separador -->
+            <div class="accessibility-separator"></div>
+
+            <!-- Listbox Espaciado -->
+            <div class="accessibility-control">
+                <label class="control-label">Espaciado</label>
+                <select id="spacingSelect" class="accessibility-select">
+                    <option value="narrow">Estrecho</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="wide">Amplio</option>
+                </select>
+            </div>
+
+            <!-- Separador -->
+            <div class="accessibility-separator"></div>
+
+            <!-- Listbox Tamaño de Texto -->
+            <div class="accessibility-control">
+                <label class="control-label">Tamaño de Texto</label>
+                <select id="fontSizeSelect" class="accessibility-select">
+                    <option value="small">Chico</option>
+                    <option value="medium" selected>Mediano</option>
+                    <option value="large">Grande</option>
+                </select>
+            </div>
+
+            <!-- Botón Reset -->
+            <button id="resetAllAccessibility" class="reset-accessibility-btn" title="Restablecer todo">
+                🔄
+            </button>
+        </div>
+    </div>
     <section class="hero">
         <h1>Sobre Nosotros</h1>
         <p>Construyendo sueños, creando historias, inspirando creatividad</p>
     </section>
-
+    
     <main class="main-content">
        <section class="nosotros">
       <div class="nosotros__texto">
@@ -302,6 +347,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>
     <script src="wishlist.js"></script>
+    <script src="accesibilidad.js"></script>
 
 </body>
 </html>

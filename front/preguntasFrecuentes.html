@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preguntas | BlockWorld</title>
+    <title>Nostros | BlockWorld</title>
     <link rel="icon" type="image/x-icon" href="imagenes/logo.ico">
     <link rel="stylesheet" href="styles/estPreguntas.css">
     <style>
@@ -37,27 +37,11 @@
         <div class="der">
             <button class="btn-vender">Panel Admin</button>
 
-            <a href="wishlist.html" class="grupo-fav" style="cursor: pointer; position: relative; text-decoration: none;">
-                 <img src="imagenes/libro.png" class="icono" alt="favoritos" title="Lista de Deseos">
-                 <!-- Contador de wishlist-->
-                <span id="wishlist-count" style="
-                    position: absolute;
-                    top: -5px;
-                    right: -5px;
-                    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
-                    color: white;
-                    border-radius: 50%;
-                    min-width: 20px;
-                    height: 20px;
-                    display: none;
-                    align-items: center;
-                    justify-content: center;
-                    font-size: 11px;
-                    font-weight: bold;
-                    padding: 2px 5px;
-                    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-                ">0</span>
-            </a>
+            <div class="grupo-fav">
+                <a href="wishlist.html">
+                    <img src="imagenes/libro.png" class="icono" alt="favoritos">
+                </a>
+            </div>
 
             <div class="grupo-carrito">
                 <span id="cart-count" style="font-weight:bold; margin-left:4px;">0</span>
@@ -94,11 +78,56 @@
 
     <nav class="menu-inferior">
         <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
         <a href="nosotros.html">Nosotros</a>
+        <a href="preguntasFrecuentes.html">Preguntas</a>
         <a href="contactanos.html">Contáctanos</a>
     </nav>
+    <!-- BARRA DE ACCESIBILIDAD -->
+    <div class="accessibility-bar">
+        <div class="accessibility-bar-container">
+            <!-- Toggle Modo Claro/Oscuro -->
+            <div class="accessibility-control">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="toggle-slider">
+                        <span class="toggle-icon sun">☀️</span>
+                        <span class="toggle-icon moon">🌙</span>
+                    </span>
+                </label>
+            </div>
 
+            <!-- Separador -->
+            <div class="accessibility-separator"></div>
+
+            <!-- Listbox Espaciado -->
+            <div class="accessibility-control">
+                <label class="control-label">Espaciado</label>
+                <select id="spacingSelect" class="accessibility-select">
+                    <option value="narrow">Estrecho</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="wide">Amplio</option>
+                </select>
+            </div>
+
+            <!-- Separador -->
+            <div class="accessibility-separator"></div>
+
+            <!-- Listbox Tamaño de Texto -->
+            <div class="accessibility-control">
+                <label class="control-label">Tamaño de Texto</label>
+                <select id="fontSizeSelect" class="accessibility-select">
+                    <option value="small">Chico</option>
+                    <option value="medium" selected>Mediano</option>
+                    <option value="large">Grande</option>
+                </select>
+            </div>
+
+            <!-- Botón Reset -->
+            <button id="resetAllAccessibility" class="reset-accessibility-btn" title="Restablecer todo">
+                🔄
+            </button>
+        </div>
+    </div>
     <main class="main-content">
        <section class="faq">
         <h2>Preguntas Frecuentes</h2>
@@ -149,10 +178,15 @@
     <footer class="footer">
         <div class="footer-contenido">
 
+            <!-- Columna 1 -->
             <div class="footer-col">
                 <h3>BlockWorld</h3>
                 <ul>
-                    <li><a href="nosotros.html">Sobre nosotros</a></li>
+                    <li><a href="#">Sobre nosotros</a></li>
+                    <li><a href="#">Vender un artículo</a></li>
+                    <li><a href="#">Trabaja con nosotros</a></li>
+                    <li><a href="#">Franquicias</a></li>
+                    <li><a href="#">Blog</a></li>
                 </ul>
             </div>
 
@@ -160,27 +194,29 @@
             <div class="footer-col">
                 <h3>Ayuda</h3>
                 <ul>
-                    <li><a href="contactanos.html">Contacto</a></li>
-                    <li><a href="preguntasFrecuentes.html">Preguntas frecuentes</a></li>
+                    <li><a href="#">Sucursales</a></li>
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="#">Preguntas frecuentes</a></li>
                 </ul>
             </div>
 
             <!-- Columna 3 -->
             <div class="footer-col">
-                <h3>Usuarios</h3>
+                <h3>Legal</h3>
                 <ul>
-                    <li><a href="carrito.html">Carrito</a></li>
-                    <li><a href="productos.html">Productos</a></li>
-                    <li><a href="wishlist.html">Lista de deseos</a></li>
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de cookies</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Configuración de cookies</a></li>
                 </ul>
             </div>
 
             <!-- Redes sociales + logo abajo -->
             <div class="footer-social-logo">
                 <div class="footer-social">
-                    <a href="https://www.instagram.com/blockworld14?igsh=MXF5bXo0Mm9uNDhm" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a>
-                    <a href="https://www.facebook.com/profile.php?id=61584811431929" target="_blank"><img src="imagenes/facebook.png" alt="Facebook"></a>
-                    <a href="https://pin.it/5NZEzK4X0" target="_blank"><img src="imagenes/pinterest.png" alt="Pinterest"></a>
+                    <a href="#"><img src="imagenes/instagram.png" alt="Instagram"></a>
+                    <a href="#"><img src="imagenes/facebook.png" alt="Facebook"></a>
+                    <a href="#"><img src="imagenes/pinterest.png" alt="Pinterest"></a>
                 </div>
 
                 <div class="footer-logo-abajo">
@@ -276,7 +312,6 @@
     <script src="productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>
-    <script src="wishlist.js"></script>
-
+    <script src="accesibilidad.js"></script>
 </body>
 </html>
