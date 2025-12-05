@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nostros | BlockWorld</title>
+    <title>Preguntas | BlockWorld</title>
     <link rel="icon" type="image/x-icon" href="imagenes/logo.ico">
     <link rel="stylesheet" href="styles/estNosotros.css">
     <style>
@@ -37,11 +37,27 @@
         <div class="der">
             <button class="btn-vender">Panel Admin</button>
 
-            <div class="grupo-fav">
-                <a href="wishlist.html">
-                    <img src="imagenes/libro.png" class="icono" alt="favoritos">
-                </a>
-            </div>
+            <a href="wishlist.html" class="grupo-fav" style="cursor: pointer; position: relative; text-decoration: none;">
+                 <img src="imagenes/libro.png" class="icono" alt="favoritos" title="Lista de Deseos">
+                 <!-- Contador de wishlist-->
+                <span id="wishlist-count" style="
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    background: linear-gradient(135deg, #ff4757 0%, #ff6b81 100%);
+                    color: white;
+                    border-radius: 50%;
+                    min-width: 20px;
+                    height: 20px;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 11px;
+                    font-weight: bold;
+                    padding: 2px 5px;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                ">0</span>
+            </a>
 
             <div class="grupo-carrito">
                 <span id="cart-count" style="font-weight:bold; margin-left:4px;">0</span>
@@ -78,8 +94,8 @@
 
     <nav class="menu-inferior">
         <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
         <a href="nosotros.html">Nosotros</a>
-        <a href="preguntasFrecuentes.html">Preguntas</a>
         <a href="contactanos.html">Contáctanos</a>
     </nav>
 
@@ -213,6 +229,7 @@
     <script src="productos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="app.js"></script>
+    <script src="wishlist.js"></script>
 
 </body>
 </html>
