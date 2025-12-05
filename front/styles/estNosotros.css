@@ -592,14 +592,14 @@ p, span, a, li, button {
   --color-rojo: #D1052A;
   --color-azul: #205C76;
   --color-amarillo-palido: #F1E27C;
-  --color-rosa: #FEA09E;
-  --color-turquesa: #63D5D4;
+  --color-rosa: #FEC022;
+  --color-turquesa: #eef2f3;
   --color-gris: #56555A;
   --color-beige: #FAF9DA;
 
   --primary-color: #205C76; 
   --secondary-color: #FEC022;
-  --accent-color: #63D5D4;
+  --accent-color:   #FDECDA; 
   --text-dark: #000000;
   --text-light: #56555A;
   --bg-light: #F6F4F3;
@@ -619,8 +619,7 @@ body {
 /* ==================== HERO ==================== */
 .hero {
   background:
-    linear-gradient(180deg, rgba(0, 71, 171, 0.75), rgba(0, 87, 212, 0.75)),
-    url("/front/imagenes/lego.jpg");
+    url("/front/imagenes/portCont.jpg");
 
   background-size: cover;
   background-position: center;
@@ -669,8 +668,7 @@ body {
 /* ==================== SECCIÓN NOSOTROS ==================== */
 .nosotros {
   background:
-    linear-gradient(180deg, rgba(0, 71, 171, 0.75), rgba(0, 87, 212, 0.75)),
-    url("imagenes/nosotros-fondo.jpg");
+    linear-gradient(to top, #005c97, #363795);
 
   background-size: cover;
   background-position: center;
@@ -772,7 +770,7 @@ body {
   position: relative;
   overflow: hidden;
 
-  background: linear-gradient(135deg, #FEC022, #FFE488);
+  background: linear-gradient(135deg, #dbcfa3, #FFE488);
   border-radius: 20px;
   padding: 30px;
   text-align: center;
