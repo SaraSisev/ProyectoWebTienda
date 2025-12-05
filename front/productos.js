@@ -258,13 +258,17 @@ function renderCarrito() {
                 </div>
 
                 <div class="quantity-controls">
-                    <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                    <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">
+                        <img src="imagenes/menos.png" alt="+" class="btn-icon">
+                    </button>
                     <input type="number" class="qty-input" value="${item.cantidad}" readonly>
-                    <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                    <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">
+                        <img src="imagenes/compras.png" alt="-" class="btn-icon">
+                    </button>
                 </div>
 
                 <button class="remove-btn" onclick="eliminarDelCarrito(${item.id})">
-                    🗑️
+                    <img src="imagenes/borrar.png" alt="Eliminar" class="delete-icon">
                 </button>
             </div>
         `;
