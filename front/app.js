@@ -677,7 +677,7 @@ function updateUILoggedIn(userName) {
   if (logoutBtn) {
     logoutBtn.style.display = 'inline-block';
   }
-  
+
   if (typeof actualizarContadorWishlist === 'function') {
     actualizarContadorWishlist();
   }
@@ -956,3 +956,4 @@ return Swal.fire("Error", "Ingresa el nombre del titular", "error");
 });
 }
 }
+

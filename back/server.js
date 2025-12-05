@@ -9,6 +9,7 @@ dotenv.config();
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+
 import checkoutRoutes from './routes/checkoutRoutes.js';  
 import cuponRoutes from './routes/cuponRoutes.js';        
 import wishlistRoutes from './routes/wishlistRoutes.js';  
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/auth', authRoutes);
+
 app.use('/api', productRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/checkout', checkoutRoutes);   
