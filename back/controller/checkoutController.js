@@ -94,8 +94,28 @@ export const finalizarCompra = async (req, res) => {
       });
     }
 
-    const impuestos = subtotal * 0.16;
-    const envio = 150;
+     // 🌎 IMPUESTOS Y ENVÍO SEGÚN EL PAÍS
+    
+    const pais = datosEnvio.pais.trim();
+    let tasaImpuesto;
+    let costoEnvio;
+    let esMexico = false;
+    
+    if (pais.toLowerCase() === 'méxico' || pais.toLowerCase() === 'mexico') {
+      // 🇲🇽 México
+      tasaImpuesto = 0.16; // 16% IVA
+      costoEnvio = 150;
+      esMexico = true;
+      console.log('[CHECKOUT] País: México - IVA: 16%, Envío: $150');
+    } else {
+      // 🌍 Otros países
+      tasaImpuesto = 0.20; // 20% impuesto
+      costoEnvio = 400;
+      console.log(`[CHECKOUT] País: ${pais} - Impuesto: 20%, Envío: $400`);
+    }
+
+    const impuestos = subtotal * tasaImpuesto;
+    const envio = costoEnvio;
 
     if (cuponValido) {
       descuento = subtotal * 0.10; // 10%

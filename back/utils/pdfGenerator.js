@@ -12,7 +12,7 @@ export default function generatePdfBuffer(data) {
         // ENCABEZADO
         // ============================
         try {
-            doc.image("public/logo.png", 50, 30, { width: 80 }); 
+            doc.image("utils/LogoBlockWorld.png", 50, 30, { width: 80 }); 
         } catch (err) {
             console.log("Logo no encontrado, continuando sin logo");
         }
@@ -130,8 +130,21 @@ export default function generatePdfBuffer(data) {
             y += 18;
         };
 
+        let porcentajeImpuesto;
+        if (data.tasaImpuesto) {
+            porcentajeImpuesto = data.tasaImpuesto;
+        } else if (data.esMexico) {
+            //México
+            porcentajeImpuesto = 16;
+        } else {
+            // Por defecto, calcular desde los datos
+            porcentajeImpuesto = data.subtotal > 0 
+                ? Math.round((data.impuestos / data.subtotal) * 100) 
+                : 16;
+        }
+
         writeTotal("Subtotal:", data.subtotal);
-        writeTotal("Impuestos (16%):", data.impuestos);
+        writeTotal(`Impuestos (${porcentajeImpuesto}%):`, data.impuestos);
         writeTotal("Envío:", data.envio);
 
         if (data.descuento > 0) {
@@ -156,9 +169,9 @@ export default function generatePdfBuffer(data) {
             .text(`\nMétodo de pago: ${formatMetodoPago(data.metodoPago)}`, 50, y + 50);
 
         // ============================
-        // FOOTER (CORREGIDO - Sin posición Y fija)
+        // FOOTER
         // ============================
-        doc.moveDown(5); // Espacio vertical después del método de pago
+        doc.moveDown(5);
 
         doc.fontSize(9)
             .font("Helvetica-Oblique")
