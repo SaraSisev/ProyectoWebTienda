@@ -9,6 +9,7 @@ dotenv.config();
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
+import ventasRoutes from './routes/ventasRoutes.js';
 
 import checkoutRoutes from './routes/checkoutRoutes.js';  
 import cuponRoutes from './routes/cuponRoutes.js';        
@@ -29,7 +30,8 @@ app.use('/api', productRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/checkout', checkoutRoutes);   
 app.use('/api/cupon', cuponRoutes);         
-app.use('/api/wishlist', wishlistRoutes);   
+app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/ventas', ventasRoutes);   
 
 // Ruta de prueba
 app.get('/', (req, res) => {
