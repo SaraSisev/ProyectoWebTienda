@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
       }
     });
 
-    // 1️⃣ Correo a tu empresa
+    // Correo a tu empresa
     const mailToCompany = {
       from: `"${process.env.COMPANY_NAME}" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
@@ -40,14 +40,14 @@ router.post("/", async (req, res) => {
 
     await transporter.sendMail(mailToCompany);
 
-    // 2️⃣ Correo de confirmación al usuario
+    //Correo de confirmación al usuario
     const mailToUser = {
       from: `"${process.env.COMPANY_NAME}" <${process.env.EMAIL_USER}>`,
       to: correo,
       subject: `Recibimos tu mensaje`,
       html: `
         <div style="font-family: Arial, sans-serif; text-align:center;">
-          <img src="https://tuempresa.com/logo.png" alt="Logo" width="120" style="margin-bottom:20px;">
+          <img src="${process.env.COMPANY_LOGO}" alt="Logo" width="150" />
           <h2>¡Hola ${nombre}!</h2>
           <p>Gracias por contactarnos. En breve será atendido tu mensaje.</p>
           <p><strong>${process.env.COMPANY_NAME}</strong></p>
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
 
     return res.json({
       success: true,
-      message: "Tu mensaje ha sido enviado correctamente y se ha notificado al usuario"
+      message: "Tu mensaje ha sido enviado correctamente, espera una respuesta al correo"
     });
 
   } catch (error) {
