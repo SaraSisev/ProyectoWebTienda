@@ -4,6 +4,7 @@ import nodemailer from "nodemailer";
 
 import { findUserById, findUserByCupon, removeUserCoupon } from "../model/userModel.js";
 import { getProductById, updateProduct } from "../model/productModel.js";
+import { registrarVenta } from "../model/ventasModel.js";
 
 import generatePdfBuffer from "../utils/pdfGenerator.js";
 
@@ -88,14 +89,25 @@ export const finalizarCompra = async (req, res) => {
         });
       }
 
+      // ✅ Actualizar inventario
       await updateProduct(item.id, {
         ...productoBD,
         disponibilidad: nuevaCantidad
       });
+
+      // ✅ NUEVO: Registrar cada venta en la base de datos
+      await registrarVenta({
+        usuario_id: userId,
+        producto_id: item.id,
+        cantidad: item.cantidad,
+        precio_unitario: parseFloat(item.precio),
+        subtotal: parseFloat(item.precio) * item.cantidad
+      });
+
+      console.log(`✅ Venta registrada: ${item.nombre} x${item.cantidad}`);
     }
 
-     // 🌎 IMPUESTOS Y ENVÍO SEGÚN EL PAÍS
-    
+    // 🌎 IMPUESTOS Y ENVÍO SEGÚN EL PAÍS
     const pais = datosEnvio.pais.trim();
     let tasaImpuesto;
     let costoEnvio;
@@ -144,7 +156,6 @@ export const finalizarCompra = async (req, res) => {
     // ENVIAR EMAIL
     // ==========================
     try {
-      // Configurar transporter
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -153,10 +164,9 @@ export const finalizarCompra = async (req, res) => {
         },
       });
 
-      // Correo al usuario con PDF adjunto
       const mailOptions = {
         from: `"${process.env.COMPANY_NAME || 'BlockWorld'}" <${process.env.EMAIL_USER}>`,
-        to: userEmail, // ✅ CORREGIDO: usar userEmail directamente
+        to: userEmail,
         subject: "Gracias por tu compra - BlockWorld",
         html: `
           <div style="font-family: Arial, sans-serif; text-align:center; padding: 20px;">
@@ -182,8 +192,6 @@ export const finalizarCompra = async (req, res) => {
 
     } catch (emailError) {
       console.error("[EMAIL ERROR]", emailError);
-      // NO hacemos return aquí, solo registramos el error
-      // La compra se procesó correctamente aunque falle el email
     }
 
     // ==========================
@@ -197,6 +205,8 @@ export const finalizarCompra = async (req, res) => {
     // ==========================
     // RESPUESTA EXITOSA
     // ==========================
+    console.log(`✅ COMPRA FINALIZADA - Usuario: ${userName}, Total: $${total.toFixed(2)}, Productos: ${carrito.length}`);
+    
     return res.json({
       success: true,
       message: "Compra finalizada. La nota se envió a tu correo.",

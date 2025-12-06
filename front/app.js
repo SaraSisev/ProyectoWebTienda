@@ -22,6 +22,7 @@ const refreshCaptcha = document.getElementById('refreshCaptcha');
 const formContacto = document.getElementById('contactForm');
 const logoutBtn = document.getElementById('logoutBtn');
 const authButtons = document.getElementById('auth-buttons');
+const btnVender = document.querySelector('.btn-vender'); 
 
 // ============================================
 // CARGAR PÁGINA
@@ -45,7 +46,8 @@ function checkSession() {
   const userName = localStorage.getItem('userName');
   
   if (token && userName) {
-    updateUILoggedIn(userName);
+    const userRole = localStorage.getItem('userRole');
+    updateUILoggedIn(userName, userRole);
   } else {
     updateUILoggedOut();
   }
@@ -656,6 +658,10 @@ function updateUILoggedOut() {
   if (logoutBtn) {
     logoutBtn.style.display = 'none';
   }
+
+  if (btnVender) {
+    btnVender.style.display = 'none';
+  }
   
   const badge = document.getElementById('wishlist-count');
   if (badge) {
@@ -663,7 +669,8 @@ function updateUILoggedOut() {
   }
 }
 
-function updateUILoggedIn(userName) {
+// DESPUÉS:
+function updateUILoggedIn(userName, userRole) {
   const userNameEl = document.getElementById('userName');
   if (userNameEl) {
     userNameEl.textContent = `Hola, ${userName}`;
@@ -676,6 +683,18 @@ function updateUILoggedIn(userName) {
   
   if (logoutBtn) {
     logoutBtn.style.display = 'inline-block';
+  }
+
+  // ✅ Mostrar botón Panel Admin SOLO si es admin
+  if (btnVender) {
+    if (userRole === 'admin') {
+      btnVender.style.display = 'inline-block';
+      btnVender.onclick = () => {
+        window.location.href = 'admin.html';
+      };
+    } else {
+      btnVender.style.display = 'none';
+    }
   }
 
   if (typeof actualizarContadorWishlist === 'function') {
