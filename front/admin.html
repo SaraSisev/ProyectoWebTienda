@@ -4,84 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administrador</title>
+    <link rel="icon" type="image/x-icon" href="imagenes/logo3.ico">
     <link rel="stylesheet" href="/front/styles/estilos.css">
     <link rel="stylesheet" href="/front/styles/admin.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-left">
-            <a href="index.html" class="nav-logo">🏠 Volver a inicio</a>
-        </div>
-        <div class="nav-right">
-            <span id="userName" class="user-name"></span>
-            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión">
-                <span class="login-icon">🚪</span>
-            </button>
-        </div>
-    </nav>
+    <header class="header-red">
+        <div class="izq">
+            <a href="index.html">
+                <img src="imagenes/LogoBlockWorld.png" class="logo" alt="logo">
+            </a>
 
-    <!-- Contenido principal -->
-    <main class="admin-container">
-        <div class="admin-header">
-            <h1>🛠️ Panel de Administrador</h1>
-            <p>Bienvenido al panel de control</p>
-        </div>
-
-        <!-- Menú de opciones -->
-        <div class="admin-menu">
-            <button class="admin-menu-btn active" data-section="productos">
-                📦 Gestión de Productos
-            </button>
-            <button class="admin-menu-btn" data-section="ventas">
-                📊 Reportes de Ventas
-            </button>
-            <button class="admin-menu-btn" data-section="inventario">
-                📋 Inventario
-            </button>
-        </div>
-
-        <!-- Sección: Gestión de Productos -->
-        <div id="section-productos" class="admin-section active">
-            <h2>📦 Gestión de Productos</h2>
-            <p class="section-description">Administra el catálogo de productos de la tienda</p>
-            
-            <button id="btnNuevoProducto" class="btn btn-primary">
-                ➕ Agregar Nuevo Producto
-            </button>
-            
-            <div id="tablaProductosContainer" style="margin-top: 20px;">
-                <!-- Aquí se cargará la tabla de productos -->
+            <div class="logo-texto">
+                <h1 class="titulo-tienda">BlockWorld</h1>
+                <p class="slogan-tienda">Construye sueños, pieza por pieza</p>
             </div>
         </div>
 
-        <!-- Sección: Reportes de Ventas -->
+        <div class="der">
+            <div id="auth-buttons">
+                <span id="userName" class="user-name"></span>
+                <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión">
+                    <span class="login-icon"><img src="imagenes/perfil.png" class="icono" alt="cerrar-sesion"></span>
+                </button>           
+                <button id="registrarBtn" class="icon-btn" title="Registrarse" style="visibility: hidden;">
+                </button>
+            </div>
+            
+            <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
+                <span class="login-icon">
+                    <img src="imagenes/perfil.png" class="icono" alt="cerrar-sesion">
+                </span>
+            </button>
+        </div>
+            
+        </div>
+    </header>
+
+    <nav class="menu-inferior">
+        <a href="index.html">Volver a inicio</a>
+    </nav>
+
+    <nav class="navbar">
+        <div class="nav-right">
+            <span id="userName" class="user-name"></span>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <div class="admin-header">
+            <h1>Panel de Administrador</h1>
+            <p>Bienvenido al panel de control</p>
+        </div>
+
+        <div class="admin-menu">
+            <button class="admin-menu-btn active" data-section="productos">
+                Gestión de Productos
+            </button>
+            <button class="admin-menu-btn" data-section="ventas">
+                Reportes de Ventas
+            </button>
+            <button class="admin-menu-btn" data-section="inventario">
+                Inventario
+            </button>
+        </div>
+
+        <div id="section-productos" class="admin-section active">
+            <h2>Gestión de Productos</h2>
+            <p class="section-description">Administra el catálogo de productos de la tienda</p>
+            
+            <button id="btnNuevoProducto" class="btn btn-primary">
+                <img src="imagenes/mas.png" class="btn-icon-prods" alt="cerrar-sesion"> Agregar Nuevo Producto
+            </button>
+            
+            <div id="tablaProductosContainer" style="margin-top: 20px;">
+            </div>
+        </div>
+
         <div id="section-ventas" class="admin-section">
-            <h2>📊 Reportes de Ventas</h2>
+            <h2>Reportes de Ventas</h2>
             <p class="section-description">Visualiza las estadísticas de ventas</p>
             
             <div id="ventasContainer">
-                <!-- Aquí se cargarán las estadísticas de ventas -->
             </div>      
         </div>
 
-        <!-- Sección: Inventario -->
         <div id="section-inventario" class="admin-section">
-            <h2>📋 Inventario</h2>
+            <h2>Inventario</h2>
             <p class="section-description">Consulta el inventario disponible por categoría</p>
             
             <div id="inventarioContainer">
-                <!-- Aquí se cargarán las estadísticas del inventario -->
             </div>
         </div>
     </main>
 
-    <!-- Modal para Crear/Editar Producto -->
     <div id="modalProducto" class="modal">
         <div class="modal-content modal-large">
             <span class="close" id="closeModalProducto">&times;</span>
-            <h2 id="tituloModal">📦 Agregar Nuevo Producto</h2>
+            <h2 id="tituloModal">Agregar Nuevo Producto</h2>
             <form id="formProducto">
                 <input type="hidden" id="productoId">
                 
@@ -124,7 +145,7 @@
                 </div>
                 
                 <button type="submit" class="btn btn-primary">
-                    💾 Guardar Producto
+                    Guardar Producto
                 </button>
             </form>
         </div>

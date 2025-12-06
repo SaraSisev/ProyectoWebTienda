@@ -157,7 +157,7 @@ function mostrarTablaProductos() {
     if (productos.length === 0) {
         container.innerHTML = `
             <div class="empty-state">
-                <p>📦 No hay productos registrados</p>
+                <p>No hay productos registrados</p>
                 <p>Haz clic en "Agregar Nuevo Producto" para empezar</p>
             </div>
         `;
@@ -201,10 +201,10 @@ function mostrarTablaProductos() {
                 <td>
                     <div class="product-actions">
                         <button onclick="editarProducto(${producto.id})" class="icon-btn-small btn-primary" title="Editar">
-                            ✏️
+                            <img src="imagenes/lapiz.png" class="btn-icon-prods" alt="cerrar-sesion">
                         </button>
                         <button onclick="eliminarProducto(${producto.id})" class="icon-btn-small btn-danger" title="Eliminar">
-                            🗑️
+                            <img src="imagenes/borrar.png" class="btn-icon-prods" alt="cerrar-sesion">
                         </button>
                     </div>
                 </td>
@@ -367,7 +367,7 @@ if (!producto) {
 }
 
 editandoProductoId = id;
-document.getElementById('tituloModal').textContent = '✏️ Editar Producto';
+document.getElementById('tituloModal').textContent = 'Editar Producto';
 document.getElementById('productoId').value = id;
 document.getElementById('productoNombre').value = producto.nombre;
 document.getElementById('productoDescripcion').value = producto.descripcion;
@@ -443,7 +443,7 @@ try {
 // ============================================
 async function cargarInventario() {
 const container = document.getElementById('inventarioContainer');
-container.innerHTML = '<div class="loading">⏳ Cargando inventario...</div>';
+container.innerHTML = '<div class="loading">Cargando inventario...</div>';
 
 try {
     const [inventarioRes, statsRes] = await Promise.all([
@@ -461,7 +461,7 @@ try {
     }
 } catch (error) {
     console.error('[ERROR] Cargar inventario:', error);
-    container.innerHTML = '<div class="error">❌ Error al cargar el inventario</div>';
+    container.innerHTML = '<div class="error">Error al cargar el inventario</div>';
 }
 }
 function mostrarInventario(inventarioPorCategoria, estadisticas) {
@@ -487,7 +487,7 @@ let html = `
         </div>
     </div>
     
-    <h3 style="margin-top: 30px; margin-bottom: 15px;">📊 Inventario por Categoría</h3>
+    <h3 style="margin-top: 30px; margin-bottom: 15px;">Inventario por Categoría</h3>
     
     <table class="products-table">
         <thead>
@@ -522,7 +522,7 @@ container.innerHTML = html;
 // ============================================
 async function cargarReporteVentas() {
     const container = document.getElementById('ventasContainer');
-    container.innerHTML = '<div class="loading">⏳ Cargando reportes de ventas...</div>';
+    container.innerHTML = '<div class="loading">Cargando reportes de ventas...</div>';
 
     try {
         const [ventasRes, totalesRes] = await Promise.all([
@@ -542,7 +542,7 @@ async function cargarReporteVentas() {
         console.error('[ERROR] Cargar ventas:', error);
         container.innerHTML = `
             <div class="error">
-                <p>❌ Error al cargar el reporte de ventas</p>
+                <p>Error al cargar el reporte de ventas</p>
                 <small>${error.message}</small>
             </div>
         `;
@@ -568,21 +568,21 @@ function mostrarReporteVentas(ventasPorCategoria, totales) {
         <!-- Tarjetas de Estadísticas -->
         <div class="stats-grid">
             <div class="stat-card stat-card-primary">
-                <div class="stat-icon">💰</div>
+                <div class="stat-icon"><img src="imagenes/moneda.png" class="btn-icon-prods" alt="cerrar-sesion"></div>
                 <h3>Ingresos Totales</h3>
                 <div class="stat-value">$${parseFloat(totales.ingresos_totales || 0).toFixed(2)}</div>
                 <div class="stat-label">desde el inicio</div>
             </div>
             
             <div class="stat-card stat-card-success">
-                <div class="stat-icon">📦</div>
+                <div class="stat-icon"><img src="imagenes/paquete.png" class="btn-icon-prods" alt="cerrar-sesion"></div>
                 <h3>Productos Vendidos</h3>
                 <div class="stat-value">${totales.total_productos_vendidos || 0}</div>
                 <div class="stat-label">unidades totales</div>
             </div>
             
             <div class="stat-card stat-card-info">
-                <div class="stat-icon">🛒</div>
+                <div class="stat-icon"><img src="imagenes/carrito.png" class="btn-icon-prods" alt="cerrar-sesion"></div>
                 <h3>Órdenes Completadas</h3>
                 <div class="stat-value">${totales.total_ordenes || 0}</div>
                 <div class="stat-label">transacciones</div>
@@ -591,7 +591,7 @@ function mostrarReporteVentas(ventasPorCategoria, totales) {
 
         <!-- Gráfica de Barras -->
         <div class="chart-container" style="margin-top: 40px;">
-            <h3>📊 Ventas por Categoría</h3>
+            <h3>Ventas por Categoría</h3>
             <div class="chart-wrapper">
                 <canvas id="ventasChart" width="400" height="200"></canvas>
             </div>
@@ -599,7 +599,7 @@ function mostrarReporteVentas(ventasPorCategoria, totales) {
 
         <!-- Tabla Detallada -->
         <div style="margin-top: 40px;">
-            <h3>📋 Detalle por Categoría</h3>
+            <h3>Detalle por Categoría</h3>
             <table class="products-table">
                 <thead>
                     <tr>
