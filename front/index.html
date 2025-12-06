@@ -43,7 +43,6 @@
 
             <a href="wishlist.html" class="grupo-fav" style="cursor: pointer; position: relative; text-decoration: none;">
                  <img src="imagenes/libro.png" class="icono" alt="favoritos" title="Lista de Deseos">
-                 <!-- Contador de wishlist-->
                 <span id="wishlist-count" style="
                     position: absolute;
                     top: -5px;
@@ -73,7 +72,6 @@
             <div class="nav-right">
             <span id="userName" class="user-name"></span>
             
-            <!-- Botones cuando NO hay sesión -->
             <div id="auth-buttons">
                 <button id="loginBtn" class="icon-btn" title="Login">
                     <span class="login-icon">
@@ -85,7 +83,6 @@
 
             </div>
             
-            <!-- Botón cuando SÍ hay sesión -->
             <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
                 <span class="login-icon">
                     <img src="imagenes/perfil.png" class="icono" alt="cerrar-sesion">
@@ -102,10 +99,8 @@
         <a href="preguntasFrecuentes.html">Preguntas</a>
         <a href="contactanos.html">Contáctanos</a>
     </nav>
-    <!-- BARRA DE ACCESIBILIDAD -->
     <div class="accessibility-bar">
         <div class="accessibility-bar-container">
-            <!-- Toggle Modo Claro/Oscuro -->
             <div class="accessibility-control">
                 <label class="toggle-switch">
                     <input type="checkbox" id="themeToggle">
@@ -116,10 +111,8 @@
                 </label>
             </div>
 
-            <!-- Separador -->
             <div class="accessibility-separator"></div>
 
-            <!-- Listbox Espaciado -->
             <div class="accessibility-control">
                 <label class="control-label">Espaciado</label>
                 <select id="spacingSelect" class="accessibility-select">
@@ -129,10 +122,8 @@
                 </select>
             </div>
 
-            <!-- Separador -->
             <div class="accessibility-separator"></div>
 
-            <!-- Listbox Tamaño de Texto -->
             <div class="accessibility-control">
                 <label class="control-label">Tamaño de Texto</label>
                 <select id="fontSizeSelect" class="accessibility-select">
@@ -142,38 +133,30 @@
                 </select>
             </div>
 
-            <!-- Botón Reset -->
             <button id="resetAllAccessibility" class="reset-accessibility-btn" title="Restablecer todo">
-                🔄
+                <img src="imagenes/flechas.png" class="icono" alt="bolsa">
             </button>
         </div>
     </div>
     <main class="main-content" style="padding:40px; font-family:Arial; text-align:center;">
         <div class="carousel-container">
-            <!-- Slides -->
             <div class="carousel-slides">
-                <!-- Slide 1 -->
                 <div class="carousel-slide">
                     <img src="imagenes/promo1.png" alt="Banner 1">
                 </div>
 
-                <!-- Slide 2 -->
                 <div class="carousel-slide">
                     <img src="imagenes/promo2.png" alt="Banner 2">
                 </div>
 
-
-                <!-- Slide 3 -->
                 <div class="carousel-slide">
                     <img src="imagenes/promo3.png" alt="Banner 3">
                 </div>
             </div>
 
-            <!-- Flechas de navegación -->
             <button class="carousel-arrow left" onclick="moveSlide(-1)">❮</button>
             <button class="carousel-arrow right" onclick="moveSlide(1)">❯</button>
 
-            <!-- Indicadores -->
             <div class="carousel-indicators">
                 <span class="indicator active" onclick="goToSlide(0)"></span>
                 <span class="indicator" onclick="goToSlide(1)"></span>
@@ -190,7 +173,6 @@
             const container = document.querySelector('.carousel-container');
             let autoplayInterval;
 
-            // Función para mostrar el slide
             function showSlide(index) {
                 if (index >= totalSlides) {
                     currentSlide = 0;
@@ -203,29 +185,25 @@
                 const offset = -currentSlide * 100;
                 carouselSlides.style.transform = `translateX(${offset}%)`;
 
-                // Actualizar indicadores
                 indicators.forEach((indicator, i) => {
                     indicator.classList.toggle('active', i === currentSlide);
                 });
             }
 
-            // Mover slide
             function moveSlide(direction) {
                 showSlide(currentSlide + direction);
                 resetAutoplay();
             }
 
-            // Ir a slide específico
             function goToSlide(index) {
                 showSlide(index);
                 resetAutoplay();
             }
 
-            // Autoplay
             function startAutoplay() {
                 autoplayInterval = setInterval(() => {
                     showSlide(currentSlide + 1);
-                }, 6000); // Cambia cada 6 segundos
+                }, 6000); 
             }
 
             function stopAutoplay() {
@@ -237,11 +215,9 @@
                 startAutoplay();
             }
 
-            // Pausar al pasar el mouse
             container.addEventListener('mouseenter', stopAutoplay);
             container.addEventListener('mouseleave', startAutoplay);
 
-            // Soporte para touch en móviles
             let touchStartX = 0;
             let touchEndX = 0;
 
@@ -264,10 +240,8 @@
                 }
             }
 
-            // Iniciar autoplay al cargar
             startAutoplay();
 
-            // Navegación con teclado
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'ArrowLeft') {
                     moveSlide(-1);
@@ -279,25 +253,20 @@
 
         <h1>Explora nuestra colección de sets LEGO:<br>desde novedades hasta piezas difíciles de encontrar.</h1>
 
-        <!-- Sección de Productos Más Baratos -->
         <section class="seccion-productos-baratos">
             <h4 class="titulo-seccion-baratos">Productos Más Económicos</h4>
             
-            <!-- Contenedor con flechas -->
             <div class="carrusel-baratos-wrapper">
-                <!-- Flecha izquierda -->
                 <button class="barato-arrow barato-arrow-left" id="barato-arrow-left">
                     ❮
                 </button>
                 
-                <!-- Grid de productos con scroll horizontal -->
                 <div id="productos-baratos-container" class="productos-baratos-grid">
                     <div style="text-align: center; padding: 40px;">
                         <p style="font-size: 18px; color: #666;">Cargando productos...</p>
                     </div>
                 </div>
                 
-                <!-- Flecha derecha -->
                 <button class="barato-arrow barato-arrow-right" id="barato-arrow-right">
                     ❯
                 </button>
@@ -345,7 +314,6 @@
                 </ul>
             </div>
 
-            <!-- Columna 2 -->
             <div class="footer-col">
                 <h3>Ayuda</h3>
                 <ul>
@@ -354,7 +322,6 @@
                 </ul>
             </div>
 
-            <!-- Columna 3 -->
             <div class="footer-col">
                 <h3>Usuarios</h3>
                 <ul>
@@ -364,7 +331,6 @@
                 </ul>
             </div>
 
-            <!-- Redes sociales + logo abajo -->
             <div class="footer-social-logo">
                 <div class="footer-social">
                     <a href="https://www.instagram.com/blockworld14?igsh=MXF5bXo0Mm9uNDhm" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a>
@@ -379,7 +345,6 @@
 
         </div>
 
-        <!-- Sección de pagos -->
         <div class="footer-pagos">
             <p>Pagos 100% seguros con</p>
             <div class="footer-pagos-img">
@@ -391,7 +356,7 @@
         </div>
     </footer>
 
-    <!-- MODAL LOGIN (con CAPTCHA exactamente donde tú lo definiste) -->
+    <!-- MODAL LOGIN  -->
     <div id="loginModal" class="modal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
             <span class="close" id="closeModalLogin" title="Cerrar">&times;</span>

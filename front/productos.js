@@ -4,17 +4,13 @@
 let todosLosProductos = [];
 let productosFiltrados = [];
 
-// ============================================
 // CARGAR PRODUCTOS AL INICIAR
-// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductos();
     setupFiltros();
 });
 
-// ============================================
 // CARGAR PRODUCTOS DESDE LA API
-// ============================================
 async function cargarProductos() {
     try {
         const response = await fetch(`${API_URL}/productos`);
@@ -39,9 +35,7 @@ async function cargarProductos() {
     }
 }
 
-// ============================================
 // MOSTRAR PRODUCTOS EN LA PÁGINA
-// ============================================
 function mostrarProductos(productos) {
     const contenedor = document.getElementById('productos-container');
     
@@ -94,9 +88,7 @@ function mostrarProductos(productos) {
     `).join('');
 }
 
-// ============================================
 // FILTROS
-// ============================================
 function setupFiltros() {
     // Filtro por categoría
     const categoriaSelect = document.getElementById('filtro-categoria');
@@ -133,7 +125,7 @@ function aplicarFiltros() {
     const precioMax = parseFloat(document.getElementById('precio-max')?.value) || Infinity;
     resultados = resultados.filter(p => p.precio >= precioMin && p.precio <= precioMax);
     
-    // Filtro de ofertas (ejemplo: productos con disponibilidad > 0)
+    // Filtro de ofertas
     const soloOfertas = document.getElementById('filtro-ofertas')?.checked;
     if (soloOfertas) {
         resultados = resultados.filter(p => p.disponibilidad > 0);
@@ -145,9 +137,7 @@ function aplicarFiltros() {
     console.log(`🔍 Filtros aplicados: ${productosFiltrados.length} productos`);
 }
 
-// ============================================
-// AGREGAR AL CARRITO (temporal)
-// ============================================
+// AGREGAR AL CARRITO 
 function agregarAlCarrito(productoId) {
     const token = localStorage.getItem('token');
     
@@ -190,7 +180,7 @@ function agregarAlCarrito(productoId) {
     // Guardar en localStorage
     localStorage.setItem('carrito', JSON.stringify(carrito));
     
-    // Actualizar contador del carrito (si existe)
+    // Actualizar contador del carrito
     actualizarContadorCarrito();
     renderCarrito();
     
@@ -203,9 +193,7 @@ function agregarAlCarrito(productoId) {
     });
 }
 
-// ============================================
 // ACTUALIZAR CONTADOR DEL CARRITO
-// ============================================
 function actualizarContadorCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const total = carrito.reduce((sum, item) => sum + item.cantidad, 0);
@@ -217,9 +205,7 @@ function actualizarContadorCarrito() {
     }
 }
 
-// ============================================
 // CARGAR CARRITO EN SIDEBAR
-// ============================================
 function renderCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const cont = document.getElementById('carrito-contenedor');
@@ -277,14 +263,12 @@ function renderCarrito() {
 
     cont.innerHTML = html;
     totalTag.textContent = `€${total.toFixed(2)}`;
-    btnCheckout.disabled = false; // ✅ HABILITAR EL BOTÓN
+    btnCheckout.disabled = false; 
     
     console.log('[CARRITO] Total:', total, '- Botón habilitado');
 }
 
-// ============================================
 // CAMBIAR CANTIDAD
-// ============================================
 function cambiarCantidad(id, delta) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -300,9 +284,7 @@ function cambiarCantidad(id, delta) {
     actualizarContadorCarrito();
 }
 
-// ============================================
 // ELIMINAR PRODUCTO DEL CARRITO
-// ============================================
 function eliminarDelCarrito(id) {
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     carrito = carrito.filter(item => item.id !== id);
@@ -311,14 +293,10 @@ function eliminarDelCarrito(id) {
     actualizarContadorCarrito();
 }
 
-// ============================================
 // MOSTRAR CARRITO AL CARGAR
-// ============================================
 document.addEventListener('DOMContentLoaded', renderCarrito);
 
-// ============================================
 // INICIALIZAR AL CARGAR PÁGINA
-// ============================================
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         console.log('[INIT] Página cargada, inicializando carrito');
@@ -331,21 +309,17 @@ if (document.readyState === 'loading') {
     actualizarContadorCarrito();
 }
 
-// ============================================
-// MOSTRAR PRODUCTOS MÁS BARATOS (CARRUSEL)
-// ============================================
-
+// MOSTRAR PRODUCTOS MÁS BARATOS
 async function cargarProductosBaratos() {
     try {
         const response = await fetch(`${API_URL}/productos`);
         const data = await response.json();
         
         if (data.success) {
-            // Ordenar por precio de menor a mayor y tomar los primeros 10
             const productosBaratos = data.data
-                .filter(p => p.disponibilidad > 0) // Solo productos disponibles
+                .filter(p => p.disponibilidad > 0) 
                 .sort((a, b) => parseFloat(a.precio) - parseFloat(b.precio))
-                .slice(0, 10); // Tomar los 10 más baratos
+                .slice(0, 10); 
             
             mostrarProductosBaratos(productosBaratos);
             console.log(`✅ ${productosBaratos.length} productos baratos cargados`);
@@ -406,13 +380,10 @@ function mostrarProductosBaratos(productos) {
         </div>
     `).join('');
     
-    // Inicializar el carrusel después de cargar los productos
     inicializarCarruselBaratos();
 }
 
-// ============================================
 // CARRUSEL DE PRODUCTOS BARATOS
-// ============================================
 function inicializarCarruselBaratos() {
     const container = document.getElementById('productos-baratos-container');
     const btnLeft = document.getElementById('barato-arrow-left');
@@ -424,27 +395,24 @@ function inicializarCarruselBaratos() {
     }
     
     let scrollAmount = 0;
-    const cardWidth = 240; // ancho de cada card + gap
-    
+    const cardWidth = 240; 
     btnRight.addEventListener('click', () => {
         container.scrollBy({
-            left: cardWidth * 2, // Mover 2 productos a la vez
+            left: cardWidth * 2, 
             behavior: 'smooth'
         });
     });
     
     btnLeft.addEventListener('click', () => {
         container.scrollBy({
-            left: -cardWidth * 2, // Mover 2 productos a la vez
+            left: -cardWidth * 2, 
             behavior: 'smooth'
         });
     });
     
-    // Mostrar/ocultar flechas según el scroll
     container.addEventListener('scroll', () => {
         const maxScroll = container.scrollWidth - container.clientWidth;
         
-        // Ocultar flecha izquierda si está al inicio
         if (container.scrollLeft <= 0) {
             btnLeft.style.opacity = '0.3';
             btnLeft.style.cursor = 'default';
@@ -453,7 +421,6 @@ function inicializarCarruselBaratos() {
             btnLeft.style.cursor = 'pointer';
         }
         
-        // Ocultar flecha derecha si está al final
         if (container.scrollLeft >= maxScroll - 10) {
             btnRight.style.opacity = '0.3';
             btnRight.style.cursor = 'default';
@@ -464,9 +431,7 @@ function inicializarCarruselBaratos() {
     });
 }
 
-// ============================================
 // INICIALIZAR AL CARGAR LA PÁGINA
-// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     cargarProductosBaratos();
 });

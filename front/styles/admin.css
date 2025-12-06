@@ -1,6 +1,4 @@
-/*============================================
-   ADMIN PANEL - ESTILOS COMPLETOS
-  ============================================ */
+/*Admin Panel*/
 
 :root {
   --primary: #667eea;
@@ -127,7 +125,6 @@
   font-size: 16px;
 }
 
-/* Botones */
 .btn {
   padding: 12px 24px;
   border: none;
@@ -160,7 +157,6 @@
   background: #da190b;
 }
 
-/* Tabla de productos */
 .products-table {
   width: 100%;
   border-collapse: collapse;
@@ -242,7 +238,6 @@
   color: #856404;
 }
 
-/* Modal más grande */
 .modal-large {
   max-width: 700px;
 }
@@ -295,7 +290,6 @@
   gap: 20px;
 }
 
-/* Stats cards */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -336,7 +330,6 @@
   font-size: 14px;
 }
 
-/* Estados vacíos */
 .empty-state {
   text-align: center;
   padding: 60px 20px;
@@ -370,7 +363,6 @@
   }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .admin-menu {
     flex-direction: column;

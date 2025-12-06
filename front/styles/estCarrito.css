@@ -1,6 +1,5 @@
-/* ==================== ESTILOS ORIGINALES DEL NAVBAR Y MODALES ==================== */
+/*==================== Estilos Carrito====================*/
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +12,6 @@ body {
     color: #333;
 }
  
-/* Navbar */
 .navbar {
     background-color: #0c5e7e;
     padding: 15px 30px;
@@ -223,15 +221,12 @@ body {
     background-color: #5a6268;
 }
 
-/* ==================== ESTILOS DE LA TIENDA LEGO ==================== */
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Hero Section */
 .hero {
     background: white;
     padding: 40px 0;
@@ -283,7 +278,6 @@ body {
     height: auto;
 }
 
-/* Main Container */
 .main-content {
     background-color: #f5f5f5;
 }
@@ -305,7 +299,6 @@ body {
     min-width: 350px;
 }
 
-/* Novedades Section */
 .novedades {
     background: white;
     padding: 30px;
@@ -405,7 +398,6 @@ body {
     font-weight: bold;
 }
 
-/* Categorías */
 .categorias {
     background: white;
     padding: 30px;
@@ -462,7 +454,6 @@ body {
     background-color: #ffd93d;
 }
 
-/* Cart Items */
 .cart-items {
     background: white;
     padding: 20px;
@@ -542,7 +533,6 @@ body {
     transform: scale(1.2);
 }
 
-/* Sidebar */
 .product-detail {
     background: white;
     padding: 25px;
@@ -612,7 +602,6 @@ body {
     border-radius: 5px;
 }
 
-/* Order Summary */
 .order-summary {
     background: #fffbf0;
     border: 3px solid #f1c40f;
@@ -667,7 +656,6 @@ body {
     background-color: #094a61;
 }
 
-/* Instructions */
 .instructions {
     background: white;
     padding: 20px;
@@ -680,7 +668,6 @@ body {
     color: #666;
 }
 
-/* Footer */
 .footer {
     background-color: #0c5e7e;
     color: white;
@@ -752,7 +739,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -811,7 +797,6 @@ body {
     }
 }
 
-/* Header */
 .header-red {
     background: #D1052A;
     padding: 10px 20px;
@@ -821,6 +806,7 @@ body {
     font-family: Arial, sans-serif;
 }
 
+/*Header*/
 .izq { display:flex; align-items:center; gap:12px; }
 .logo { height: 135px; margin-top: -17px; margin-bottom: -53px; }
 
@@ -899,9 +885,7 @@ p, span, a, li, button {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
+/* footer */
 
 .footer {
     background-color: #D1052A;
@@ -949,7 +933,6 @@ p, span, a, li, button {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -977,7 +960,6 @@ p, span, a, li, button {
     opacity: 0.95;
 }
 
-/* Pagos */
 .footer-pagos {
     text-align: center;
     margin-top: 20px;
@@ -994,16 +976,6 @@ p, span, a, li, button {
     filter: brightness(0) invert(1);
 }
 
-
-
-
-
-
-
-
-/* ==================== ESTILOS ORIGINALES DEL NAVBAR Y MODALES ==================== */
-
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -1016,7 +988,6 @@ body {
     color: #333;
 }
 
-/* Navbar */
 .navbar {
     background-color: #0c5e7e;
     padding: 15px 30px;
@@ -1080,7 +1051,6 @@ body {
     font-size: 20px;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -1226,15 +1196,12 @@ body {
     background-color: #5a6268;
 }
 
-/* ==================== ESTILOS DE LA TIENDA LEGO ==================== */
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Hero Section */
 .hero {
     background: white;
     padding: 40px 0;
@@ -1286,7 +1253,6 @@ body {
     height: auto;
 }
 
-/* Main Container */
 .main-content {
     background-color: #f5f5f5;
 }
@@ -1465,7 +1431,6 @@ body {
     background-color: #ffd93d;
 }
 
-/* Cart Items */
 .cart-items {
     background: white;
     padding: 20px;
@@ -1545,7 +1510,6 @@ body {
     transform: scale(1.2);
 }
 
-/* Sidebar */
 .product-detail {
     background: white;
     padding: 25px;
@@ -1615,7 +1579,6 @@ body {
     border-radius: 5px;
 }
 
-/* Order Summary */
 .order-summary {
     background: #fffbf0;
     border: 3px solid #5A70EA;
@@ -1625,7 +1588,6 @@ body {
 }
 
 
-/* Instructions */
 .instructions {
     background: white;
     padding: 20px;
@@ -1710,7 +1672,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -1857,10 +1818,7 @@ p, span, a, li, button {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
-
+/* footer */
 .footer {
     background-color: #D1052A;
     padding: 40px 20px;
@@ -1907,7 +1865,6 @@ p, span, a, li, button {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -1951,8 +1908,6 @@ p, span, a, li, button {
     margin: 0 6px;
     filter: brightness(0) invert(1);
 }
-
-/* Animaciones del footer y el header */
 
 .icono {
     transition: transform 0.3s ease, filter 0.3s ease;
@@ -2066,10 +2021,6 @@ p, span, a, li, button {
     font-weight: bolder;
 }
 
-/* ===========================
-   CARRITO DE COMPRAS
-=========================== */
-
 .cart-main {
     background-color: #f5f5f5;
     min-height: calc(100vh - 200px);
@@ -2086,7 +2037,6 @@ p, span, a, li, button {
     align-items: start;
 }
 
-/* Lado izquierdo - Items del carrito */
 .cart-left {
     background: white;
     border-radius: 12px;
@@ -2108,7 +2058,6 @@ p, span, a, li, button {
     gap: 20px;
 }
 
-/* Item individual del carrito */
 .cart-item {
     display: grid;
     grid-template-columns: 120px 1fr auto auto;
@@ -2148,7 +2097,6 @@ p, span, a, li, button {
     margin: 0;
 }
 
-/* Controles de cantidad */
 .quantity-controls {
     display: flex;
     align-items: center;
@@ -2190,7 +2138,6 @@ p, span, a, li, button {
     color: #333;
 }
 
-/* Precio total del item */
 .cart-item-total {
     font-size: 20px;
     font-weight: bold;
@@ -2199,7 +2146,6 @@ p, span, a, li, button {
     text-align: right;
 }
 
-/* Botón eliminar */
 .remove-btn {
     background: none;
     border: none;
@@ -2215,7 +2161,6 @@ p, span, a, li, button {
     transform: scale(1.2);
 }
 
-/* Sidebar - Resumen del pedido */
 .sidebar {
     position: sticky;
     top: 20px;
@@ -2294,7 +2239,6 @@ p, span, a, li, button {
     cursor: not-allowed;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .cart-container {
         grid-template-columns: 1fr;
@@ -2376,7 +2320,7 @@ body.wide-spacing {
 }
 
 
-/* ==================== APLICAR ESCALADO DE FUENTE ==================== */
+/*  APLICAR ESCALADO DE FUENTE  */
 body {
     font-size: calc(16px * var(--font-scale));
     line-height: var(--line-height);
@@ -2392,7 +2336,7 @@ h4 { font-size: calc(1.5rem * var(--font-scale)); }
 h5 { font-size: calc(1.25rem * var(--font-scale)); }
 p, span, a, li { font-size: calc(1rem * var(--font-scale)); }
 
-/* ==================== MODO OSCURO ==================== */
+/*  MODO OSCURO  */
 body.dark-mode {
     --bg-primary: #1a1a1a;
     --bg-secondary: #242424;
@@ -2405,7 +2349,6 @@ body.dark-mode {
     --shadow: rgba(0, 0, 0, 0.5);
 }
 
-/* Aplicar colores del modo oscuro a elementos específicos */
 body.dark-mode .header-red {
     background: #8B0A1F;
 }
@@ -2503,7 +2446,6 @@ body.dark-mode .footer-col ul li a:hover {
     color: #FEC022;
 }
 
-/* ==================== ESPACIADO ESTRECHO ==================== */
 body.narrow-spacing {
     --line-height: 1.2;
 }
@@ -2518,7 +2460,7 @@ body.narrow-spacing .modal-content form {
     gap: 10px;
 }
 
-/* ==================== ESPACIADO AMPLIO ==================== */
+/*SPACIADO AMPLIO */
 body.wide-spacing {
     --line-height: 2;
 }
@@ -2535,7 +2477,7 @@ body.wide-spacing .modal-content form {
 
 
 
-/* ==================== BARRA DE ACCESIBILIDAD ==================== */
+/*BARRA DE ACCESIBILIDAD*/
 .accessibility-bar {
     background: #D1052A;
     padding: 12px 0;
@@ -2603,7 +2545,7 @@ body.dark-mode .accessibility-bar {
     background: rgba(255, 255, 255, 0.3);
 }
 
-/* ==================== TOGGLE SWITCH ==================== */
+/*  TOGGLE SWITCH  */
 .toggle-switch {
     position: relative;
     display: inline-block;
@@ -2690,7 +2632,7 @@ body.dark-mode .accessibility-bar {
     transform: scale(1);
 }
 
-/* ==================== BOTÓN RESET ==================== */
+/*  BOTÓN RESET  */
 .reset-accessibility-btn {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.3);
@@ -2712,7 +2654,7 @@ body.dark-mode .accessibility-bar {
     transform: rotate(180deg) scale(1.1);
 }
 
-/* ==================== ANIMACIONES DE NOTIFICACIÓN ==================== */
+/*  ANIMACIONES DE NOTIFICACIÓN  */
 @keyframes slideIn {
     from {
         transform: translateX(400px);
