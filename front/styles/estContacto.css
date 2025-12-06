@@ -11,7 +11,6 @@ body {
     color: #333;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -229,7 +228,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -376,9 +374,7 @@ p, span, a, li, button, label {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
+/* FOOTER */
 
 .footer {
     background-color: #D1052A;
@@ -426,7 +422,6 @@ p, span, a, li, button, label {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -585,10 +580,6 @@ p, span, a, li, button, label {
     font-weight: bolder;
 }
 
-/* Contenedor principal con imagen de fondo */
-
-
-/* Texto de la izquierda */
 .contact-container h1 {
     font-size: 48px;
     color: #F6F4F3;
@@ -613,7 +604,6 @@ p, span, a, li, button, label {
     font-weight: bold;
 }
 
-/* Formulario de la derecha con recuadro blanco */
 #contactForm {
     background: white;
     padding: 40px;
@@ -664,7 +654,6 @@ p, span, a, li, button, label {
     min-height: 100px;
 }
 
-/* Checkbox */
 .checkbox-group {
     display: flex;
     align-items: center;
@@ -696,7 +685,6 @@ p, span, a, li, button, label {
     text-decoration: underline;
 }
 
-/* Botón de enviar */
 #contactForm button[type="submit"] {
     width: 100%;
     background: linear-gradient(135deg, #FDB913 0%, #F9A825 100%);
@@ -722,7 +710,6 @@ p, span, a, li, button, label {
     transform: translateY(0);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .contact-container {
         flex-direction: column;
@@ -761,7 +748,7 @@ p, span, a, li, button, label {
 }
 
 
-/* ==================== VARIABLES CSS PARA ACCESIBILIDAD ==================== */
+/*  VARIABLES CSS PARA ACCESIBILIDAD  */
 
 
 /* Modo Oscuro */

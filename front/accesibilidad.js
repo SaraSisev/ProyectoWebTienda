@@ -1,4 +1,4 @@
-// ==================== SISTEMA DE ACCESIBILIDAD ====================
+// SISTEMA DE ACCESIBILIDAD
 
 // Mapeo de tamaños de fuente
 const fontSizes = {
@@ -14,7 +14,7 @@ const spacings = {
     wide: 2
 };
 
-// ==================== INICIALIZACIÓN ====================
+//  INICIALIZACIÓN 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Iniciando sistema de accesibilidad...');
     initializeAccessibility();
@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Sistema de accesibilidad cargado');
 });
 
-// ==================== FUNCIONES DE INICIALIZACIÓN ====================
+//  FUNCIONES DE INICIALIZACIÓN 
 function initializeAccessibility() {
-    // ==================== TOGGLE DE TEMA ====================
+    //  TOGGLE DE TEMA 
     const themeToggle = document.getElementById('themeToggle');
     
     if (themeToggle) {
@@ -40,7 +40,7 @@ function initializeAccessibility() {
         console.error('❌ No se encontró el elemento themeToggle');
     }
     
-    // ==================== SELECT DE ESPACIADO ====================
+    // SELECT DE ESPACIADO 
     const spacingSelect = document.getElementById('spacingSelect');
     
     if (spacingSelect) {
@@ -52,7 +52,7 @@ function initializeAccessibility() {
         console.error('❌ No se encontró el elemento spacingSelect');
     }
     
-    // ==================== SELECT DE TAMAÑO DE FUENTE ====================
+    //  SELECT DE TAMAÑO DE FUENTE 
     const fontSizeSelect = document.getElementById('fontSizeSelect');
     
     if (fontSizeSelect) {
@@ -64,7 +64,7 @@ function initializeAccessibility() {
         console.error('❌ No se encontró el elemento fontSizeSelect');
     }
     
-    // ==================== BOTÓN DE RESET ====================
+    //  BOTÓN DE RESET 
     const resetAllBtn = document.getElementById('resetAllAccessibility');
     
     if (resetAllBtn) {
@@ -77,7 +77,7 @@ function initializeAccessibility() {
     }
 }
 
-// ==================== FUNCIONES DE TEMA ====================
+//  FUNCIONES DE TEMA 
 function setTheme(theme) {
     const body = document.body;
     const themeToggle = document.getElementById('themeToggle');
@@ -99,7 +99,7 @@ function setTheme(theme) {
     showAccessibilityNotification(`${theme === 'dark' ? '🌙 Modo Oscuro' : '☀️ Modo Claro'} activado`);
 }
 
-// ==================== FUNCIONES DE TAMAÑO DE FUENTE ====================
+//  FUNCIONES DE TAMAÑO DE FUENTE 
 function setFontSize(size) {
     const fontScale = fontSizes[size];
     
@@ -126,7 +126,7 @@ function setFontSize(size) {
     showAccessibilityNotification(`🔤 Tamaño de texto: ${sizeNames[size]}`);
 }
 
-// ==================== FUNCIONES DE ESPACIADO ====================
+// FUNCIONES DE ESPACIADO
 function setSpacing(spacing) {
     const body = document.body;
     
@@ -142,7 +142,6 @@ function setSpacing(spacing) {
         body.classList.add('wide-spacing');
     }
     
-    // Aplicar el line-height a la variable CSS
     const lineHeight = spacings[spacing];
     document.documentElement.style.setProperty('--line-height', lineHeight);
     
@@ -164,7 +163,7 @@ function setSpacing(spacing) {
     showAccessibilityNotification(`📏 Espaciado: ${spacingNames[spacing]}`);
 }
 
-// ==================== RESET GENERAL ====================
+// RESET GENERAL
 function resetAllAccessibilitySettings() {
     console.log('🔄 Reseteando todas las configuraciones...');
     
@@ -184,7 +183,7 @@ function resetAllAccessibilitySettings() {
     showAccessibilityNotification('✅ Todas las preferencias restablecidas');
 }
 
-// ==================== PERSISTENCIA EN LOCALSTORAGE ====================
+// PERSISTENCIA EN LOCALSTORAGE
 function saveAccessibilityPreference(key, value) {
     try {
         let preferences = JSON.parse(localStorage.getItem('accessibilityPreferences')) || {};
@@ -226,7 +225,7 @@ function loadAccessibilityPreferences() {
     }
 }
 
-// ==================== NOTIFICACIONES ====================
+// NOTIFICACIONES
 function showAccessibilityNotification(message) {
     // Crear elemento de notificación
     const notification = document.createElement('div');
@@ -258,7 +257,7 @@ function showAccessibilityNotification(message) {
     }, 2000);
 }
 
-// ==================== INTEGRACIÓN CON EL SISTEMA DE LOGIN ====================
+// INTEGRACIÓN CON EL SISTEMA DE LOGIN
 function onUserLogin() {
     loadAccessibilityPreferences();
     console.log('👤 Preferencias de accesibilidad cargadas para el usuario');

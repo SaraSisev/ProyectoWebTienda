@@ -1,6 +1,5 @@
-/* ==================== ESTILOS ORIGINALES DEL NAVBAR Y MODALES ==================== */
+/*Index*/
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +12,6 @@ body {
     color: #333;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -165,7 +163,6 @@ body {
     padding: 0 20px;
 }
 
-/* Novedades Section */
 .novedades {
     background: white;
     padding: 30px;
@@ -265,7 +262,6 @@ body {
     font-weight: bold;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -412,9 +408,7 @@ p, span, a, li, button {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
+/* FOOTER */
 
 .footer {
     background-color: #D1052A;
@@ -462,7 +456,6 @@ p, span, a, li, button {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -509,7 +502,6 @@ p, span, a, li, button {
 
 
 /* Animaciones del footer y el header */
-
 .icono {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -621,7 +613,7 @@ p, span, a, li, button {
     transform: scale(1.2);
     font-weight: bolder;
 }
-/* Modal para pago*/
+
 .modal-checkout {
     display: none;
     position: fixed;
@@ -694,7 +686,6 @@ p, span, a, li, button {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* Slides */
 .carousel-slides {
     display: flex;
     transition: transform 0.6s ease-in-out;
@@ -713,7 +704,6 @@ p, span, a, li, button {
     display: block;
 }
 
-/* Flechas de navegación */
 .carousel-arrow {
     position: absolute;
     top: 50%;
@@ -747,7 +737,6 @@ p, span, a, li, button {
     right: 20px;
 }
 
-/* Indicadores (puntos) */
 .carousel-indicators {
     position: absolute;
     bottom: 20px;
@@ -778,7 +767,6 @@ p, span, a, li, button {
     background: rgba(255, 255, 255, 0.8);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .carousel-slide {
         height: 350px;
@@ -799,7 +787,7 @@ p, span, a, li, button {
     }
 }
 
-/* ==================== PRODUCTOS MÁS BARATOS (CARRUSEL) ==================== */
+/* PRODUCTOS MÁS BARATOS CARRUSEL */
 
 .seccion-productos-baratos {
     max-width: 1200px;
@@ -814,26 +802,23 @@ p, span, a, li, button {
     text-align: left;
 }
 
-/* Wrapper del carrusel con flechas */
 .carrusel-baratos-wrapper {
     position: relative;
     width: 100%;
 }
 
-/* Grid horizontal con scroll */
 .productos-baratos-grid {
     display: flex;
     gap: 20px;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 20px 5px;
-    /* Ocultar scrollbar */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE y Edge */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
 .productos-baratos-grid::-webkit-scrollbar {
-    display: none; /* Chrome, Safari y Opera */
+    display: none; 
 }
 
 .producto-barato-card {
@@ -853,7 +838,6 @@ p, span, a, li, button {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Flechas de navegación */
 .barato-arrow {
     position: absolute;
     top: 50%;
@@ -889,7 +873,7 @@ p, span, a, li, button {
     right: -15px;
 }
 
-/* Botón de wishlist en esquina */
+/* Botón de wishlist */
 .wishlist-heart-btn {
     position: absolute;
     top: 10px;
@@ -985,7 +969,6 @@ p, span, a, li, button {
     box-shadow: 0 4px 12px #FB951F;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .barato-arrow {
         width: 35px;
@@ -1018,7 +1001,6 @@ p, span, a, li, button {
     background: none !important;
 }
 
-/* Sección de Marcas */
 .seccion-marcas {
     width: 100vw;
     margin: 60px 0;
@@ -1047,7 +1029,6 @@ p, span, a, li, button {
     margin-bottom: 50px;
 }
 
-/* Contenedor del carrusel */
 .marcas-carousel-container {
     position: relative;
     width: 100%;
@@ -1055,7 +1036,6 @@ p, span, a, li, button {
     padding: 40px 0;
 }
 
-/* Gradientes laterales para efecto fade */
 .marcas-carousel-container::before,
 .marcas-carousel-container::after {
     content: '';
@@ -1077,7 +1057,6 @@ p, span, a, li, button {
     background: linear-gradient(to left, #2a5298, transparent);
 }
 
-/* Track del carrusel */
 .marcas-carousel-track {
     display: flex;
     width: max-content;
@@ -1093,7 +1072,6 @@ p, span, a, li, button {
     }
 }
 
-/* Item individual de marca */
 .marca-item {
     flex: 0 0 350px;
     height: 140px;
@@ -1124,7 +1102,6 @@ p, span, a, li, button {
     transform: scale(1.05);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .titulo-marcas {
         font-size: 28px;
@@ -1151,7 +1128,6 @@ p, span, a, li, button {
     }
 }
 
-/* Indicador de scroll */
 .scroll-indicator {
     text-align: center;
     margin-top: 20px;
@@ -1160,7 +1136,6 @@ p, span, a, li, button {
     font-style: italic;
 }
 
-/* Sección de Bienvenida */
 .seccion-bienvenida {
     max-width: 1200px;
     margin: 60px auto 20px;
@@ -1207,7 +1182,6 @@ p, span, a, li, button {
     text-decoration: underline;
 }
 
-/* Versión expandida/colapsada */
 .bienvenida-texto.collapsed {
     max-height: 100px;
     overflow: hidden;
@@ -1224,7 +1198,6 @@ p, span, a, li, button {
     background: linear-gradient(to bottom, transparent, white);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .seccion-bienvenida {
         margin: 40px 20px;
