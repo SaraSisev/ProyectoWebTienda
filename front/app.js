@@ -5,9 +5,7 @@ const API_URL = 'http://localhost:5000/api';
 let currentCaptchaId = null;
 let selectedImages = [];
 
-// ============================================
 // ELEMENTOS DEL DOM
-// ============================================
 const loginModal = document.getElementById('loginModal');
 const registroModal = document.getElementById('registroModal');
 const loginBtn = document.getElementById('loginBtn');
@@ -24,9 +22,7 @@ const logoutBtn = document.getElementById('logoutBtn');
 const authButtons = document.getElementById('auth-buttons');
 const btnVender = document.querySelector('.btn-vender'); 
 
-// ============================================
 // CARGAR PÁGINA
-// ============================================
 document.addEventListener('DOMContentLoaded', () => {
   console.log('[INIT] DOMContentLoaded - Inicializando app');
   checkSession();
@@ -34,13 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const formContacto = document.getElementById('contactForm');
   contacto(formContacto);
   
-  // ✅ INICIALIZAR CHECKOUT AQUÍ
   inicializarCheckout();
 });
 
-// ============================================
 // VERIFICAR SESIÓN
-// ============================================
 function checkSession() {
   const token = localStorage.getItem('token');
   const userName = localStorage.getItem('userName');
@@ -53,10 +46,7 @@ function checkSession() {
   }
 }
 
-// ============================================
 // ABRIR Y CERRAR MODALES
-// ============================================
-
 if (loginBtn) {
   loginBtn.addEventListener('click', () => {
     loginModal.style.display = 'block';
@@ -112,10 +102,7 @@ window.addEventListener('click', (e) => {
   }
 });
 
-// ============================================
 // CAPTCHA
-// ============================================
-
 if (refreshCaptcha) {
   refreshCaptcha.addEventListener('click', () => {
     loadCaptcha();
@@ -142,7 +129,6 @@ async function loadCaptcha() {
     currentCaptchaId = data.captchaId;
     questionLabel.textContent = data.question;
     
-    // Crear la cuadrícula de imágenes
     gridContainer.innerHTML = '';
     data.images.forEach((imageUrl, index) => {
       const imgContainer = document.createElement('div');
@@ -213,10 +199,7 @@ function resetLoginForm() {
   if (questionLabel) questionLabel.textContent = "Cargando CAPTCHA...";
 }
 
-// ============================================
 // LOGIN
-// ============================================
-
 if (formLogin) {
   formLogin.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -246,7 +229,6 @@ if (formLogin) {
 
     console.log('[LOGIN] Enviando solicitud...');
 
-    // Mostrar loading
     Swal.fire({
       title: 'Iniciando sesión...',
       text: 'Por favor espera',
@@ -279,7 +261,6 @@ if (formLogin) {
         localStorage.setItem('userRole', data.usuario.rol);
         localStorage.setItem('userId', data.usuario.id);
 
-        // ✨ NUEVO: Verificar si es admin
         if (data.usuario.rol === 'admin') {
           Swal.fire({
             icon: 'success',
@@ -288,11 +269,9 @@ if (formLogin) {
             timer: 2000,
             showConfirmButton: false
           }).then(() => {
-            // Redirigir a panel de admin
             window.location.href = 'admin.html';
           });
         } else {
-          // Usuario normal
           Swal.fire({
             icon: 'success',
             title: '¡Bienvenido!',
@@ -306,7 +285,6 @@ if (formLogin) {
           resetLoginForm();
         }
       } else {
-        // Error en login
         console.log('[LOGIN] Error:', data);
 
         let errorMessage = data.message || data.error || 'Error desconocido';
@@ -334,10 +312,8 @@ if (formLogin) {
           });
         }
 
-        // Recargar CAPTCHA
         loadCaptcha();
         
-        // Limpiar contraseña
         document.getElementById("password").value = "";
       }
 
@@ -356,10 +332,7 @@ if (formLogin) {
   });
 }
 
-// ============================================
 // REGISTRO
-// ============================================
-
 if (formRegistro) {
   formRegistro.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -460,10 +433,7 @@ if (formRegistro) {
   });
 }
 
-// ============================================
 // LOGOUT
-// ============================================
-
 if (logoutBtn) {
   logoutBtn.addEventListener('click', () => {
     Swal.fire({
@@ -503,17 +473,14 @@ function logout() {
   updateUILoggedOut();
 }
 
-// ============================================
 // RECUPERACIÓN DE CONTRASEÑA
-// ============================================
-
 const linkOlvideContrasena = document.getElementById('linkOlvideContrasena');
 
 if (linkOlvideContrasena) {
   linkOlvideContrasena.addEventListener('click', async (e) => {
     e.preventDefault();
 
-    // Paso 1: Solicitar correo
+    // Solicitar correo
     const { value: correo } = await Swal.fire({
       title: '🔑 Recuperar Contraseña',
       text: 'Ingresa tu correo electrónico',
@@ -558,7 +525,7 @@ if (linkOlvideContrasena) {
         return;
       }
 
-      // Paso 2: Solicitar código y nueva contraseña
+      // Solicitar código y nueva contraseña
       const { value: formValues } = await Swal.fire({
         title: '📧 Código Enviado',
         html: `
@@ -597,7 +564,7 @@ if (linkOlvideContrasena) {
 
       if (!formValues) return;
 
-      // Paso 3: Enviar código y nueva contraseña
+      // Enviar código y nueva contraseña
       Swal.fire({
         title: 'Restableciendo...',
         allowOutsideClick: false,
@@ -640,10 +607,7 @@ if (linkOlvideContrasena) {
   });
 }
 
-// ============================================
 // UI - LOGGED IN / OUT
-// ============================================
-
 function updateUILoggedOut() {
   const userName = document.getElementById('userName');
   if (userName) {
@@ -669,7 +633,6 @@ function updateUILoggedOut() {
   }
 }
 
-// DESPUÉS:
 function updateUILoggedIn(userName, userRole) {
   const userNameEl = document.getElementById('userName');
   if (userNameEl) {
@@ -685,7 +648,6 @@ function updateUILoggedIn(userName, userRole) {
     logoutBtn.style.display = 'inline-block';
   }
 
-  // ✅ Mostrar botón Panel Admin SOLO si es admin
   if (btnVender) {
     if (userRole === 'admin') {
       btnVender.style.display = 'inline-block';
@@ -702,10 +664,7 @@ function updateUILoggedIn(userName, userRole) {
   }
 }
 
-// ============================================
 // CONTACTO
-// ============================================
-
 function contacto(formContacto) {
   if (formContacto) {
     formContacto.addEventListener('submit', async (e) => {
@@ -772,10 +731,7 @@ function contacto(formContacto) {
   }
 }
 
-// ============================================
 // VALIDAR DATOS DE TARJETA
-// ============================================
-
 function validarTarjeta() {
   const numero = document.getElementById("tarjeta-num").value.trim();
   const titular = document.getElementById("tarjeta-titular").value.trim();
@@ -805,14 +761,10 @@ function validarTarjeta() {
   return true;
 }
 
-// ============================================
 // INICIALIZAR CHECKOUT
-// ============================================
-
 function inicializarCheckout() {
   console.log('[CHECKOUT] Inicializando eventos de checkout');
   
-  // Abrir modal de checkout
   const btnCheckout = document.getElementById("btnCheckout");
   if (btnCheckout) {
     console.log('[CHECKOUT] Botón encontrado');

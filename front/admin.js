@@ -2,15 +2,11 @@
 
 const API_URL = 'http://localhost:5000/api';
 
-// ============================================
 // VARIABLES GLOBALES
-// ============================================
 let productos = [];
 let editandoProductoId = null;
 
-// ============================================
 // VERIFICAR AUTENTICACIÓN Y ROL
-// ============================================
 document.addEventListener('DOMContentLoaded', () => {
     checkAdminAuth();
     setupMenuNavigation();
@@ -52,9 +48,7 @@ function checkAdminAuth() {
     document.getElementById('userName').style.display = 'inline';
 }
 
-// ============================================
 // NAVEGACIÓN ENTRE SECCIONES
-// ============================================
 function setupMenuNavigation() {
     const menuButtons = document.querySelectorAll('.admin-menu-btn');
     const sections = document.querySelectorAll('.admin-section');
@@ -71,7 +65,6 @@ function setupMenuNavigation() {
             if (targetSection) {
                 targetSection.classList.add('active');
                 
-                // Cargar datos según la sección
                 if (sectionName === 'inventario') {
                     cargarInventario();
                 }else if(sectionName === 'ventas'){
@@ -82,9 +75,7 @@ function setupMenuNavigation() {
     });
 }
 
-// ============================================
 // LOGOUT
-// ============================================
 function setupLogout() {
     const logoutBtn = document.getElementById('logoutBtn');
     
@@ -125,10 +116,7 @@ function logout() {
     });
 }
 
-// ============================================
 // GESTIÓN DE PRODUCTOS
-// ============================================
-
 async function cargarProductos() {
     try {
         const response = await fetch(`${API_URL}/productos`);
@@ -220,9 +208,7 @@ function mostrarTablaProductos() {
     container.innerHTML = html;
 }
 
-// ============================================
 // MODAL DE PRODUCTO
-// ============================================
 function setupModalProducto() {
     const modal = document.getElementById('modalProducto');
     const btnNuevo = document.getElementById('btnNuevoProducto');
@@ -259,13 +245,11 @@ function cerrarModalProducto() {
     document.getElementById('formProducto').reset();
     editandoProductoId = null;
 }
-// NUEVA FUNCIÓN: Solo validar que la URL sea válida
 async function validarImagenUrl(url) {
     if (!url || url.trim() === '') {
         return 'https://via.placeholder.com/400x400?text=Sin+Imagen';
     }
     
-    // Validar que sea una URL válida
     try {
         new URL(url);
         return url;
@@ -438,9 +422,8 @@ try {
     });
 }
 }
-// ============================================
+
 // INVENTARIO
-// ============================================
 async function cargarInventario() {
 const container = document.getElementById('inventarioContainer');
 container.innerHTML = '<div class="loading">Cargando inventario...</div>';
@@ -517,9 +500,8 @@ html += `
 
 container.innerHTML = html;
 }
-// ============================================
+
 // REPORTES DE VENTAS
-// ============================================
 async function cargarReporteVentas() {
     const container = document.getElementById('ventasContainer');
     container.innerHTML = '<div class="loading">Cargando reportes de ventas...</div>';
@@ -635,7 +617,7 @@ function mostrarReporteVentas(ventasPorCategoria, totales) {
     
     container.innerHTML = html;
     
-    // Crear la gráfica
+    // gráfica
     crearGraficaVentas(ventasPorCategoria);
 }
 
@@ -651,7 +633,7 @@ function crearGraficaVentas(ventasPorCategoria) {
     const categorias = ventasPorCategoria.map(v => v.categoria);
     const ingresos = ventasPorCategoria.map(v => parseFloat(v.total_ingresos));
     
-    // Colores para cada categoría
+    // Colores actegoria
     const colores = {
         'Technic': '#667eea',
         'Ideas': '#f093fb',
@@ -660,7 +642,6 @@ function crearGraficaVentas(ventasPorCategoria) {
     
     const backgroundColors = categorias.map(cat => colores[cat] || '#6c757d');
     
-    // Crear gráfica con Chart.js
     new Chart(ctx, {
         type: 'bar',
         data: {

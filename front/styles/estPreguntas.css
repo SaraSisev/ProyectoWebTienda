@@ -11,7 +11,6 @@ body {
     color: #333;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -229,7 +228,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -376,9 +374,7 @@ p, span, a, li, button {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
+/* FOOTER */
 
 .footer {
     background-color: #D1052A;
@@ -426,7 +422,6 @@ p, span, a, li, button {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -472,7 +467,6 @@ p, span, a, li, button {
 }
 
 /* Animaciones del footer y el header */
-
 .icono {
     transition: transform 0.3s ease, filter 0.3s ease;
 }

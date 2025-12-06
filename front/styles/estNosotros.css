@@ -10,7 +10,6 @@ body {
     color: #333;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -228,7 +227,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -382,9 +380,7 @@ p, span, a, li, button {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
+/* FOOTEr */
 
 .footer {
     background-color: #D1052A;
@@ -432,7 +428,6 @@ p, span, a, li, button {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -478,7 +473,6 @@ p, span, a, li, button {
 }
 
 /* Animaciones del footer y el header */
-
 .icono {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -623,7 +617,6 @@ body {
   background-color: var(--bg-light);
 }
 
-/* ==================== HERO ==================== */
 .hero {
   background:
     url("/front/imagenes/portCont.jpg");
@@ -657,13 +650,11 @@ body {
   opacity:.95;
 }
 
-/* ==================== CONTENEDOR PRINCIPAL ==================== */
 .pagina {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* ==================== SECCIÓN NOSOTROS ==================== */
 .nosotros {
   background:
     linear-gradient(to top, #005c97, #363795);
@@ -730,7 +721,6 @@ body {
   border-radius: 17px;
 }
 
-/* ==================== SECCIÓN EQUIPO ==================== */
 .equipo {
   padding: 80px 40px;
   background: var(--bg-light);
@@ -762,7 +752,6 @@ body {
   gap: 40px;
 }
 
-/* ==================== TARJETAS EQUIPO ==================== */
 .miembro {
   width: 280px;
   position: relative;
@@ -790,7 +779,6 @@ body {
 }
 
 
-/* Contenido encima del patrón */
 .miembro *{
   position: relative;
   z-index: 2;
@@ -831,7 +819,6 @@ body {
   line-height: 1.6;
 }
 
-/* ==================== RESPONSIVE ==================== */
 @media (max-width: 900px) {
   .nosotros {
     grid-template-columns: 1fr;

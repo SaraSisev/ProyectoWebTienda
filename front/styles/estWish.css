@@ -11,7 +11,6 @@ body {
     color: #333;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -229,7 +228,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
     .main-container {
         flex-direction: column;
@@ -376,9 +374,7 @@ p, span, a, li, button {
 }
 
 
-/* ===========================
-        FOOTER
-=========================== */
+/* FOOTER */
 
 .footer {
     background-color: #D1052A;
@@ -426,7 +422,6 @@ p, span, a, li, button {
     color: white;
 }
 
-/* Redes + Logo */
 .footer-social-logo {
     display: flex;
     flex-direction: column;
@@ -472,7 +467,6 @@ p, span, a, li, button {
 }
 
 /* Animaciones del footer y el header */
-
 .icono {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -585,9 +579,7 @@ p, span, a, li, button {
     font-weight: bolder;
 }
 
-/* ===========================
-   WISHLIST / LISTA DE DESEOS
-=========================== */
+/* LISTA DE DESEOS */
 
 .wishlist-container {
     max-width: 1200px;
@@ -614,11 +606,11 @@ p, span, a, li, button {
     line-height: 1.6;
 }
 
-/* Lista de productos - ESPACIADO GRANDE */
+/* Lista de productos */
 .wishlist-items {
     display: flex;
     flex-direction: column;
-    gap: 60px !important; /* ESPACIADO MUY GRANDE ENTRE PRODUCTOS */
+    gap: 60px !important; 
 }
 
 .wishlist-item {
@@ -637,7 +629,6 @@ p, span, a, li, button {
     box-shadow: 0 6px 20px rgba(209, 5, 42, 0.2);
 }
 
-/* Imagen del producto A LA IZQUIERDA */
 .wishlist-item-image {
     width: 200px;
     height: 200px;
@@ -648,7 +639,6 @@ p, span, a, li, button {
     flex-shrink: 0;
 }
 
-/* Información del producto - TODO A LA DERECHA */
 .wishlist-item-info {
     flex: 1;
     display: flex;
@@ -677,7 +667,6 @@ p, span, a, li, button {
     margin: 8px 0;
 }
 
-/* Badge de disponibilidad - COLOR AZUL #5A70EA */
 .availability-badge,
 .wishlist-item-info > div:has(✓) {
     display: inline-flex !important;
@@ -692,7 +681,6 @@ p, span, a, li, button {
     width: fit-content;
 }
 
-/* Selector para el texto "Disponible" */
 .wishlist-item-info > *:contains("Disponible") {
     background: #5A70EA !important;
     color: white !important;
@@ -708,7 +696,6 @@ p, span, a, li, button {
     margin: 0;
 }
 
-/* Responsive */
 @media (max-width: 968px) {
     .wishlist-items {
         gap: 40px !important;
@@ -750,7 +737,6 @@ p, span, a, li, button {
     }
 }
 
-/* Espaciado EXTRA GRANDE entre productos */
 .wishlist-items {
     display: flex;
     flex-direction: column;

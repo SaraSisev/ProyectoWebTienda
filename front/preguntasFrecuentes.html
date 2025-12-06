@@ -53,7 +53,6 @@
             <div class="nav-right">
             <span id="userName" class="user-name"></span>
             
-            <!-- Botones cuando NO hay sesión -->
             <div id="auth-buttons">
                 <button id="loginBtn" class="icon-btn" title="Login">
                     <span class="login-icon">
@@ -65,7 +64,6 @@
 
             </div>
             
-            <!-- Botón cuando SÍ hay sesión -->
             <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
                 <span class="login-icon">
                     <img src="imagenes/perfil.png" class="icono" alt="cerrar-sesion">
@@ -82,10 +80,8 @@
         <a href="preguntasFrecuentes.html">Preguntas</a>
         <a href="contactanos.html">Contáctanos</a>
     </nav>
-    <!-- BARRA DE ACCESIBILIDAD -->
     <div class="accessibility-bar">
         <div class="accessibility-bar-container">
-            <!-- Toggle Modo Claro/Oscuro -->
             <div class="accessibility-control">
                 <label class="toggle-switch">
                     <input type="checkbox" id="themeToggle">
@@ -96,10 +92,8 @@
                 </label>
             </div>
 
-            <!-- Separador -->
             <div class="accessibility-separator"></div>
 
-            <!-- Listbox Espaciado -->
             <div class="accessibility-control">
                 <label class="control-label">Espaciado</label>
                 <select id="spacingSelect" class="accessibility-select">
@@ -109,10 +103,8 @@
                 </select>
             </div>
 
-            <!-- Separador -->
             <div class="accessibility-separator"></div>
 
-            <!-- Listbox Tamaño de Texto -->
             <div class="accessibility-control">
                 <label class="control-label">Tamaño de Texto</label>
                 <select id="fontSizeSelect" class="accessibility-select">
@@ -122,9 +114,8 @@
                 </select>
             </div>
 
-            <!-- Botón Reset -->
             <button id="resetAllAccessibility" class="reset-accessibility-btn" title="Restablecer todo">
-                🔄
+                <img src="imagenes/flechas.png" class="icono" alt="bolsa">
             </button>
         </div>
     </div>
@@ -178,40 +169,30 @@
     <footer class="footer">
         <div class="footer-contenido">
 
-            <!-- Columna 1 -->
             <div class="footer-col">
                 <h3>BlockWorld</h3>
                 <ul>
-                    <li><a href="#">Sobre nosotros</a></li>
-                    <li><a href="#">Vender un artículo</a></li>
-                    <li><a href="#">Trabaja con nosotros</a></li>
-                    <li><a href="#">Franquicias</a></li>
-                    <li><a href="#">Blog</a></li>
+                    <li><a href="nosotros.html">Sobre nosotros</a></li>
                 </ul>
             </div>
 
-            <!-- Columna 2 -->
             <div class="footer-col">
                 <h3>Ayuda</h3>
                 <ul>
-                    <li><a href="#">Sucursales</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="#">Preguntas frecuentes</a></li>
+                    <li><a href="contactanos.html">Contacto</a></li>
+                    <li><a href="preguntasFrecuentes.html">Preguntas frecuentes</a></li>
                 </ul>
             </div>
 
-            <!-- Columna 3 -->
             <div class="footer-col">
-                <h3>Legal</h3>
+                <h3>Usuarios</h3>
                 <ul>
-                    <li><a href="#">Términos y Condiciones</a></li>
-                    <li><a href="#">Política de cookies</a></li>
-                    <li><a href="#">Política de privacidad</a></li>
-                    <li><a href="#">Configuración de cookies</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="wishlist.html">Lista de deseos</a></li>
                 </ul>
             </div>
 
-            <!-- Redes sociales + logo abajo -->
             <div class="footer-social-logo">
                 <div class="footer-social">
                     <a href="#"><img src="imagenes/instagram.png" alt="Instagram"></a>
@@ -226,7 +207,6 @@
 
         </div>
 
-        <!-- Sección de pagos -->
         <div class="footer-pagos">
             <p>Pagos 100% seguros con</p>
             <div class="footer-pagos-img">
@@ -238,7 +218,7 @@
         </div>
     </footer>
 
-    <!-- MODAL LOGIN (con CAPTCHA exactamente donde tú lo definiste) -->
+    <!-- MODAL LOGIN -->
     <div id="loginModal" class="modal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
             <span class="close" id="closeModalLogin" title="Cerrar">&times;</span>

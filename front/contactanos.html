@@ -53,7 +53,6 @@
 
             <a href="wishlist.html" class="grupo-fav" style="cursor: pointer; position: relative; text-decoration: none;">
                  <img src="imagenes/libro.png" class="icono" alt="favoritos" title="Lista de Deseos">
-                 <!-- Contador de wishlist-->
                 <span id="wishlist-count" style="
                     position: absolute;
                     top: -5px;
@@ -83,7 +82,6 @@
             <div class="nav-right">
             <span id="userName" class="user-name"></span>
             
-            <!-- Botones cuando NO hay sesión -->
             <div id="auth-buttons">
                 <button id="loginBtn" class="icon-btn" title="Login">
                     <span class="login-icon">
@@ -95,7 +93,6 @@
 
             </div>
             
-            <!-- Botón cuando SÍ hay sesión -->
             <button id="logoutBtn" class="icon-btn" title="Cerrar Sesión" style="display: none;">
                 <span class="login-icon">
                     <img src="imagenes/perfil.png" class="icono" alt="cerrar-sesion">
@@ -112,10 +109,8 @@
         <a href="nosotros.html">Nosotros</a>
         <a href="preguntasFrecuentes.html">Preguntas</a>
     </nav>
-<!-- BARRA DE ACCESIBILIDAD -->
     <div class="accessibility-bar">
         <div class="accessibility-bar-container">
-            <!-- Toggle Modo Claro/Oscuro -->
             <div class="accessibility-control">
                 <label class="toggle-switch">
                     <input type="checkbox" id="themeToggle">
@@ -126,10 +121,8 @@
                 </label>
             </div>
 
-            <!-- Separador -->
             <div class="accessibility-separator"></div>
 
-            <!-- Listbox Espaciado -->
             <div class="accessibility-control">
                 <label class="control-label">Espaciado</label>
                 <select id="spacingSelect" class="accessibility-select">
@@ -139,10 +132,8 @@
                 </select>
             </div>
 
-            <!-- Separador -->
             <div class="accessibility-separator"></div>
 
-            <!-- Listbox Tamaño de Texto -->
             <div class="accessibility-control">
                 <label class="control-label">Tamaño de Texto</label>
                 <select id="fontSizeSelect" class="accessibility-select">
@@ -152,9 +143,8 @@
                 </select>
             </div>
 
-            <!-- Botón Reset -->
             <button id="resetAllAccessibility" class="reset-accessibility-btn" title="Restablecer todo">
-                🔄
+                <img src="imagenes/flechas.png" class="icono" alt="bolsa">
             </button>
         </div>
     </div>
@@ -200,7 +190,6 @@
                 </ul>
             </div>
 
-            <!-- Columna 2 -->
             <div class="footer-col">
                 <h3>Ayuda</h3>
                 <ul>
@@ -209,7 +198,6 @@
                 </ul>
             </div>
 
-            <!-- Columna 3 -->
             <div class="footer-col">
                 <h3>Usuarios</h3>
                 <ul>
@@ -219,7 +207,6 @@
                 </ul>
             </div>
 
-            <!-- Redes sociales + logo abajo -->
             <div class="footer-social-logo">
                 <div class="footer-social">
                     <a href="https://www.instagram.com/blockworld14?igsh=MXF5bXo0Mm9uNDhm" target="_blank"><img src="imagenes/instagram.png" alt="Instagram"></a>
@@ -246,7 +233,7 @@
         </div>
     </footer>
 
-    <!-- MODAL LOGIN (con CAPTCHA exactamente donde tú lo definiste) -->
+    <!-- MODAL LOGIN -->
     <div id="loginModal" class="modal" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
             <span class="close" id="closeModalLogin" title="Cerrar">&times;</span>
