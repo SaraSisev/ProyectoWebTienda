@@ -206,7 +206,7 @@ function actualizarContadorCarrito() {
 }
 
 // CARGAR CARRITO EN SIDEBAR
-function renderCarrito() {
+async function renderCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const cont = document.getElementById('carrito-contenedor');
     const btnCheckout = document.getElementById('btnCheckout');
