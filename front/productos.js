@@ -209,31 +209,34 @@ function actualizarContadorCarrito() {
 function renderCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
     const cont = document.getElementById('carrito-contenedor');
-    const totalTag = document.getElementById('carrito-total');
     const btnCheckout = document.getElementById('btnCheckout');
 
     console.log('[CARRITO] Renderizando carrito:', carrito.length, 'items');
-    console.log('[CARRITO] Botón checkout encontrado:', !!btnCheckout);
 
-    if (!cont || !totalTag || !btnCheckout) {
+    if (!cont || !btnCheckout) {
         console.error('[CARRITO] Error: No se encontraron elementos del DOM');
         return;
     }
 
     if (carrito.length === 0) {
-        cont.innerHTML = `<p style="text-align:center; color:#777;">Tu carrito está vacío</p>`;
-        totalTag.textContent = "€0.00";
+        cont.innerHTML = `<p style="text-align:center; color:#777; padding: 20px;">Tu carrito está vacío</p>`;
+        
+        // Actualizar resumen vacío
+        actualizarResumenPedido(0, 0, 0, 0);
         btnCheckout.disabled = true;
-        console.log('[CARRITO] Carrito vacío, botón deshabilitado');
+        
         return;
     }
 
+    // ============================================
+    // RENDERIZAR ITEMS DEL CARRITO
+    // ============================================
     let html = "";
-    let total = 0;
+    let subtotal = 0;
 
     carrito.forEach(item => {
-        const subtotal = item.precio * item.cantidad;
-        total += subtotal;
+        const subtotalItem = item.precio * item.cantidad;
+        subtotal += subtotalItem;
 
         html += `
             <div class="cart-item">
@@ -241,16 +244,16 @@ function renderCarrito() {
                 
                 <div class="cart-item-details">
                     <h4>${item.nombre}</h4>
-                    <p class="price">€${item.precio.toFixed(2)}</p>
+                    <p class="price">$${parseFloat(item.precio).toFixed(2)}</p>
                 </div>
 
                 <div class="quantity-controls">
                     <button class="qty-btn" onclick="cambiarCantidad(${item.id}, -1)">
-                        <img src="imagenes/menos.png" alt="+" class="btn-icon">
+                        <img src="imagenes/menos.png" alt="-" class="btn-icon">
                     </button>
                     <input type="number" class="qty-input" value="${item.cantidad}" readonly>
                     <button class="qty-btn" onclick="cambiarCantidad(${item.id}, 1)">
-                        <img src="imagenes/compras.png" alt="-" class="btn-icon">
+                        <img src="imagenes/compras.png" alt="+" class="btn-icon">
                     </button>
                 </div>
 
@@ -262,10 +265,57 @@ function renderCarrito() {
     });
 
     cont.innerHTML = html;
+
+    // ============================================
+    // OBTENER PAÍS DEL USUARIO
+    // ============================================
+    let paisUsuario = 'México'; // Por defecto
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+
+    if (token && userId) {
+        try {
+            const res = await fetch(`${API_URL}/usuarios/${userId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (data.success && data.usuario && data.usuario.pais) {
+                paisUsuario = data.usuario.pais;
+                console.log('[CARRITO] País del usuario:', paisUsuario);
+            }
+        } catch (error) {
+            console.log('[CARRITO] No se pudo obtener país, usando México por defecto');
+        }
+    }
+
+    // ============================================
+    // CALCULAR IMPUESTOS Y ENVÍO SEGÚN PAÍS
+    // ============================================
+    const esMexico = paisUsuario.toLowerCase() === 'méxico' || paisUsuario.toLowerCase() === 'mexico';
+    
+    const tasaImpuesto = esMexico ? 0.16 : 0.20;
+    const costoEnvio = esMexico ? 150 : 400;
+    
+    const impuestos = subtotal * tasaImpuesto;
+    const envio = costoEnvio;
+    const total = subtotal + impuestos + envio;
+
+    // ============================================
+    // ACTUALIZAR RESUMEN DEL PEDIDO
+    // ============================================
+    actualizarResumenPedido(subtotal, impuestos, envio, total, tasaImpuesto * 100, paisUsuario);
     totalTag.textContent = `€${total.toFixed(2)}`;
     btnCheckout.disabled = false; 
     
-    console.log('[CARRITO] Total:', total, '- Botón habilitado');
+    btnCheckout.disabled = false;
+    
+    console.log('[CARRITO] Desglose:', {
+        subtotal: subtotal.toFixed(2),
+        impuestos: impuestos.toFixed(2),
+        envio: envio.toFixed(2),
+        total: total.toFixed(2),
+        pais: paisUsuario
+    });
 }
 
 // CAMBIAR CANTIDAD
@@ -293,6 +343,70 @@ function eliminarDelCarrito(id) {
     actualizarContadorCarrito();
 }
 
+// ============================================
+// ACTUALIZAR RESUMEN DEL PEDIDO
+// ============================================
+function actualizarResumenPedido(subtotal, impuestos, envio, total, porcentajeImpuesto = 16, pais = 'México') {
+    const orderSummary = document.querySelector('.order-summary');
+    
+    if (!orderSummary) {
+        console.error('[CARRITO] No se encontró .order-summary');
+        return;
+    }
+
+    const resumenHTML = `
+        <h3>Resumen del pedido</h3>
+        
+        ${subtotal > 0 ? `
+        <div style="margin: 20px 0; padding: 15px; background: #f9f9f9; border-radius: 8px;">
+            <div class="summary-line">
+                <span>Subtotal:</span>
+                <span style="font-weight: 600;">$${subtotal.toFixed(2)}</span>
+            </div>
+            
+            <div class="summary-line" style="margin-top: 10px;">
+                <span>Impuestos (${porcentajeImpuesto}%):</span>
+                <span style="font-weight: 600;">$${impuestos.toFixed(2)}</span>
+            </div>
+            
+            <div class="summary-line" style="margin-top: 10px;">
+                <span>Envío a ${pais}:</span>
+                <span style="font-weight: 600;">$${envio.toFixed(2)}</span>
+            </div>
+            
+            <hr style="margin: 15px 0; border: none; border-top: 2px solid #ddd;">
+        </div>
+        ` : `
+        <div class="summary-line">
+            <span>Calcular envío</span>
+            <span></span>
+        </div>
+        `}
+
+        <div class="summary-total">
+            <span style="font-size: 18px; font-weight: bold;">Total</span>
+            <span id="carrito-total" style="font-size: 22px; font-weight: bold; color: #e74c3c;">$${total.toFixed(2)}</span>
+        </div>
+
+        <button class="btn-checkout" id="btnCheckout" ${subtotal === 0 ? 'disabled' : ''}>
+            Finalizar compra
+        </button>
+    `;
+
+    orderSummary.innerHTML = resumenHTML;
+    
+    // Re-asignar evento al botón
+    const nuevoBotonCheckout = document.getElementById('btnCheckout');
+    if (nuevoBotonCheckout && subtotal > 0) {
+        nuevoBotonCheckout.addEventListener('click', function(e) {
+            e.preventDefault();
+            const modal = document.getElementById("checkoutModal");
+            if (modal) modal.style.display = "block";
+        });
+    }
+}
+
+// ============================================
 // MOSTRAR CARRITO AL CARGAR
 document.addEventListener('DOMContentLoaded', renderCarrito);
 

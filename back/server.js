@@ -10,7 +10,7 @@ import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import ventasRoutes from './routes/ventasRoutes.js';
-
+import userRoutes from './routes/userRoutes.js';
 import checkoutRoutes from './routes/checkoutRoutes.js';  
 import cuponRoutes from './routes/cuponRoutes.js';        
 import wishlistRoutes from './routes/wishlistRoutes.js';  
@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Rutas
 app.use('/api/auth', authRoutes);
-
+app.use('/api/usuarios', userRoutes);
 app.use('/api', productRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/checkout', checkoutRoutes);   
